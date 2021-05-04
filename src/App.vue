@@ -1,10 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <b-navbar>
+      <template #brand>
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+          <span>Adopetme</span>
+        </b-navbar-item>
+      </template>
+      <template #start>
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+          Home
+        </b-navbar-item>
+        <b-navbar-item tag="router-link" :to="{ path: '/about' }">
+          About
+        </b-navbar-item>
+      </template>
+
+      <template #end>
+        <b-navbar-item tag="div">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Registrar</strong>
+            </a>
+          </div>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
+    <router-view />
   </div>
 </template>
 
