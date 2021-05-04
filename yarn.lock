@@ -1257,7 +1257,7 @@
   dependencies:
     "@vue/cli-shared-utils" "^4.5.12"
 
-"@vue/cli-plugin-vuex@^4.5.12":
+"@vue/cli-plugin-vuex@^4.5.12", "@vue/cli-plugin-vuex@~4.5.0":
   version "4.5.12"
   resolved "https://registry.nlark.com/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.5.12.tgz?cache=0&sync_timestamp=1619342786436&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcli-plugin-vuex%2Fdownload%2F%40vue%2Fcli-plugin-vuex-4.5.12.tgz#f7fbe177ee7176f055b546e9e74472f9d9177626"
   integrity sha1-9/vhd+5xdvBVtUbp50Ry+dkXdiY=
@@ -8230,6 +8230,11 @@ vue@^2.6.11:
   version "2.6.12"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha1-9evU+mvShpQD4pqJau1JBEVskSM=
+
+vuex@^3.4.0:
+  version "3.6.2"
+  resolved "https://registry.nlark.com/vuex/download/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
+  integrity sha1-I2vAhqhww655lG8QfxbeWdWJXnE=
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"
