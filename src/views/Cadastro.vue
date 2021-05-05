@@ -46,7 +46,7 @@
           </b-field>
         </b-field>
 
-      <b-field grouped group-multiline>
+      <b-field>
         <b-field label="Data do Nascimento">
         <b-datepicker
             placeholder="Click to select..."
@@ -55,10 +55,11 @@
         </b-datepicker>
         </b-field>
 
-        <b-field label="Peso">
-            <b-numberinput min="0" step="0.1" min-step="0.01" aria-plus-label="+" aria-minus-label="-">
-            </b-numberinput>
-        </b-field>
+      </b-field>
+      
+      <b-field label="Peso">
+            <b-slider step="0.1" :value="20">
+            </b-slider>
       </b-field>
 
         <b-field label="Descrição" class="descricao">
@@ -107,7 +108,7 @@ data() {
         width: 55%;
         justify-content: center;
         justify-items: center;
-        margin-top: 100px;
+        margin-top: 70px;
         display: flex;
         background-color: var(--color-background-light);
     }
@@ -125,4 +126,33 @@ data() {
     main{
         background-color: var(--color-background);
     }
+    @media (max-width: 575.98px) {
+    main{
+        height: 100%;
+    }
+    .card{
+        width: 100%;
+        margin-top: 20px;
+    }
+    b-field{
+        width: 1.5;
+    }
+    }
+
+    @media (min-width: 576px) and (max-width: 767.98px)  {
+    
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px){
+    
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+    
+    }
+
+    @media (min-width: 1200px) {
+    
+    }
+
 </style>
