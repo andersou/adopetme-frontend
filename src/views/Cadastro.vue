@@ -109,6 +109,7 @@ data() {
         justify-items: center;
         margin-top: 100px;
         display: flex;
+        background-color: var(--color-background-light);
     }
     .container{
         justify-content: center;
@@ -120,5 +121,8 @@ data() {
 
     .buttons{
         justify-content: right;
+    }
+    main{
+        background-color: var(--color-background);
     }
 </style>
