@@ -1,0 +1,41 @@
+/*Estilo padrão do aplicação,
+  basta dar o import na página desejada*/
+  
+:root {
+    --color-background: #00D1B2;
+    --color-text-light:#EDEDED;
+    --color-text-title:#c00391;
+    --color-text-dark:#3D3D3D;
+  }
+  
+  *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+  }
+  
+  html,
+  body{
+      background-color: var(--color-background);
+  }
+  
+  a{
+      text-decoration: none;
+      transition: 0.2s opacity;
+  }
+  
+  a:hover{
+      opacity: 0.8;
+  }
+  
+  .container{
+      width: 90%;
+  }
+  
+  main{
+      width: 100%;
+      height: calc(100vh - 120px);
+      display: flexbox;
+      flex-direction: column;
+  }
