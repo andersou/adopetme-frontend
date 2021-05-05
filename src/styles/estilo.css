@@ -3,7 +3,7 @@
   
 :root {
     --color-background: #00D1B2;
-    --color-text-light:#EDEDED;
+    --color-background-light:#fcfcfc;
     --color-text-title:#c00391;
     --color-text-dark:#3D3D3D;
   }
@@ -17,7 +17,7 @@
   
   html,
   body{
-      background-color: var(--color-background);
+      background-color: var(--color-background-light);
   }
   
   a{
@@ -35,7 +35,7 @@
   
   main{
       width: 100%;
-      height: calc(100vh - 120px);
+      height: 100vh;
       display: flexbox;
       flex-direction: column;
   }
