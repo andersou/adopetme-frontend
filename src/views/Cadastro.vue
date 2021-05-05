@@ -105,12 +105,15 @@ data() {
 
 <style scoped>
     .card{
-        width: 55%;
+        width: 90%;
         justify-content: center;
         justify-items: center;
         margin-top: 70px;
         display: flex;
         background-color: var(--color-background-light);
+    }
+    .card-content{
+        width: 80%;
     }
     .container{
         justify-content: center;
@@ -134,7 +137,7 @@ data() {
         width: 100%;
         margin-top: 20px;
     }
-    
+
     }
 
     @media (min-width: 576px) and (max-width: 767.98px)  {
