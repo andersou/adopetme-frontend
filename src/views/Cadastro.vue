@@ -134,9 +134,7 @@ data() {
         width: 100%;
         margin-top: 20px;
     }
-    b-field{
-        width: 1.5;
-    }
+    
     }
 
     @media (min-width: 576px) and (max-width: 767.98px)  {
