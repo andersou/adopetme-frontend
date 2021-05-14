@@ -112,7 +112,8 @@ export default {
 <style lang="scss" scoped>
 main {
   background-color: $primary;
-  height: 100vh;
+  //@include desktop {
+  min-height: calc(100vh - 52px);
+  //}
 }
-
 </style>
