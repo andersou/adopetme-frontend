@@ -16,7 +16,7 @@
       </template>
 
       <template #end>
-        <b-navbar-item tag="div">
+        <b-navbar-item tag="router-link" :to="{ path: '/registro' }" >
           <div class="buttons">
             <a class="button is-primary">
               <strong>Registrar</strong>
