@@ -112,70 +112,7 @@ export default {
 <style lang="scss" scoped>
 main {
   background-color: $primary;
+  height: 100vh;
 }
-// .card {
-//   width: 90%;
-//   justify-content: center;
-//   justify-items: center;
-//   display: flex;
-//   background-color: $light;
-// }
-// .card-content {
-//   width: 80%;
-// }
-// .container {
-//   justify-content: center;
-//   display: flex;
-// }
-// .descricao {
-//   margin-top: 20px;
-// }
 
-// .buttons {
-//   justify-content: right;
-// }
-
-// @include mobile {
-//   main {
-//     height: 100%;
-//   }
-//   .card {
-//     width: 100%;
-//     margin-top: 20px;
-//   }
-// }
-/*Estilo padrão do aplicação,
-  basta dar o import na página desejada*/
-
-// * {
-//   padding: 0;
-//   margin: 0;
-//   box-sizing: border-box;
-//   font-family: sans-serif;
-// }
-
-// html,
-// body {
-//   background-color: var(--color-background-light);
-// }
-
-// a {
-//   text-decoration: none;
-//   transition: 0.2s opacity;
-// }
-
-// a:hover {
-//   opacity: 0.8;
-// }
-
-// .container {
-//   width: 90%;
-// }
-
-// main {
-//   width: 100%;
-//   height: 100vh;
-//   display: flexbox;
-//   flex-direction: column;
-// }
 </style>
