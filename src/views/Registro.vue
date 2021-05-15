@@ -39,7 +39,9 @@
                 placeholder="Nome" 
                 v-model="firstName"
                 validation-message="Entre com um nome válido"
-                pattern="[A-z]*">
+                pattern="[A-z]*"
+                minlength="3"
+                maxlength="255">
                 </b-input>
               </b-field>
 
@@ -49,12 +51,25 @@
                 placeholder="Sobrenome" 
                 v-model="lastName"
                 validation-message="Entre com um sobrenome válido"
-                pattern="[A-z]*">
+                pattern="[A-z]*"
+                minlength="3"
+                maxlength="255">
                 </b-input>
               </b-field>
 
               <b-field label="CPF">
-                <b-input type="number" maxlength="11" placeholder="CPF" v-model="document"></b-input>
+                <b-input 
+                type="text" 
+                maxlength="11"
+                minlength="11" 
+                placeholder="CPF"
+                validation-message="Entre com um documento válido"
+                pattern="[0-9]*" 
+                v-model="document"></b-input>
+              </b-field>
+
+              <b-field label="Perfil do Facebook">
+                <b-input v-model = "facebookProfile" placeholder="URL" type="url"></b-input>
               </b-field>
 
               <b-field label="Data de nascimento">
@@ -71,7 +86,15 @@
               </b-field>
 
               <b-field label="Telefone">
-                <b-input type="number" placeholder="Fone" v-model="phone"></b-input>
+                <b-input 
+                type="text" 
+                maxlength="11"
+                minlength="11" 
+                placeholder="Fone"
+                validation-message="Entre com um telefone válido"
+                v-model="phone"
+                pattern="[0-9]*">
+                </b-input>
               </b-field>
 
               <b-field grouped>
