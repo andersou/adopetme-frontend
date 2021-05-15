@@ -99,7 +99,11 @@
 
               <b-field grouped>
                 <b-field label="Senha" class="">
-                  <password v-model="password"/>
+                  <password 
+                  v-model="password"
+                  secureLength="8"
+                  maxlength="60">
+                  </password>
                 </b-field>
 
                 <b-field label="Confirmação de senha">
