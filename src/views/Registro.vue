@@ -35,19 +35,44 @@
               <div class="columns">
                 <div class="column">
                   <b-field label="Nome">
-                    <b-input placeholder="Nome"></b-input>
+                    <b-input
+                      placeholder="Nome"
+                      type="text"
+                      v-model="firstName"
+                      validation-message="Entre com um nome válido"
+                      pattern="[A-z]*"
+                      minlength="3"
+                      maxlength="255"
+                      >></b-input
+                    >
                   </b-field>
                 </div>
                 <div class="column">
                   <b-field label="Sobrenome">
-                    <b-input placeholder="Sobrenome"></b-input>
+                    <b-input
+                      type="text"
+                      placeholder="Sobrenome"
+                      v-model="lastName"
+                      validation-message="Entre com um sobrenome válido"
+                      pattern="[A-z]*"
+                      minlength="3"
+                      maxlength="255"
+                    ></b-input>
                   </b-field>
                 </div>
               </div>
               <div class="columns">
                 <div class="column">
                   <b-field label="CPF">
-                    <b-input placeholder="CPF"></b-input>
+                    <b-input
+                      type="text"
+                      maxlength="11"
+                      minlength="11"
+                      placeholder="CPF"
+                      validation-message="Entre com um documento válido"
+                      pattern="[0-9]*"
+                      v-model="document"
+                    ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
@@ -85,6 +110,42 @@
                 </div>
               </div>
 
+              <b-field label="Perfil do Facebook">
+                <b-input
+                  v-model="facebookProfile"
+                  placeholder="URL"
+                  type="url"
+                ></b-input>
+              </b-field>
+
+              <b-field label="Data de nascimento">
+                <b-datepicker
+                  ref="datepicker"
+                  expanded
+                  placeholder="Select a date"
+                >
+                </b-datepicker>
+                <b-button
+                  @click="$refs.datepicker.toggle()"
+                  icon-left="calendar-today"
+                  type="is-primary"
+                  v-model="birthdayDate"
+                />
+              </b-field>
+
+              <b-field label="Telefone">
+                <b-input
+                  type="text"
+                  maxlength="11"
+                  minlength="11"
+                  placeholder="Fone"
+                  validation-message="Entre com um telefone válido"
+                  v-model="phone"
+                  pattern="[0-9]*"
+                >
+                </b-input>
+              </b-field>
+
               <div class="buttons">
                 <b-button type="is-primary" outlined>Registrar</b-button>
               </div>
@@ -97,13 +158,15 @@
 </template>
 
 <script>
+// import Password from "vue-password-strength-meter";
 export default {
   name: "Registro",
-  components: {},
+  // components: { Password },
 
   data() {
     return {
       avatar: {},
+      password: null,
     };
   },
   methods: {
