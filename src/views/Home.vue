@@ -28,12 +28,29 @@ export default {
   components: {},
 };
 </script>
-<style scoped>
-.home-image {
-  width: 50%;
-  transform: translateY(-10%);
-}
+<style scoped lang="scss">
 .card-login {
   margin-top: 7rem;
+}
+
+@include tablet {
+  .home {
+    height: calc(100vh - 56px);
+  }
+  .home-image {
+    width: 50%;
+    max-height: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+    /* transform: translateY(-10%); */
+  }
+}
+
+@include touch {
+  .home-image {
+    position: absolute;
+    max-height: 90%;
+    max-width: 90%;
+  }
 }
 </style>
