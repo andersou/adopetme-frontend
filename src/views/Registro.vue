@@ -136,7 +136,11 @@
               <div class="columns">
                 <div class="column">
                   <b-field label="Senha" class="">
-                    <b-input type="password" value=""> </b-input>
+                    <password 
+                    v-model="password"
+                    maxlength="60"
+                    secureLength="8"> 
+                    </password>
                   </b-field>
                 </div>
                 <div class="column">
@@ -157,10 +161,10 @@
 </template>
 
 <script>
-// import Password from "vue-password-strength-meter";
+import Password from "vue-password-strength-meter";
 export default {
   name: "Registro",
-  // components: { Password },
+  components: { Password },
 
   data() {
     return {
