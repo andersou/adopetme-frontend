@@ -80,17 +80,6 @@
                     </b-select>
                   </b-field>
                 </div>
-                <div class="column">
-                  <b-field label="Idade">
-                    <b-input
-                      placeholder="Idade"
-                      type="number"
-                      min="18"
-                      max="100"
-                    >
-                    </b-input>
-                  </b-field>
-                </div>
               </div>
 
               <b-field label="Perfil do Facebook">
