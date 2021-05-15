@@ -6,13 +6,13 @@
           <div class="card ">
             <div class="card-content">
               <b-field label="Foto Pessoal">
-                <b-upload v-model="dropFiles" multiple drag-drop>
+                <b-upload v-model="avatar" drag-drop>
                   <section class="section">
                     <div class="content has-text-centered">
                       <p>
                         <b-icon icon="upload" size="is-large"> </b-icon>
                       </p>
-                      <p>Drop your files here or click to upload</p>
+                      <p>Arraste a foto aqui</p>
                     </div>
                   </section>
                 </b-upload>
@@ -32,45 +32,61 @@
                   ></button>
                 </span>
               </div>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Nome">
+                    <b-input placeholder="Nome"></b-input>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Sobrenome">
+                    <b-input placeholder="Sobrenome"></b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="CPF">
+                    <b-input placeholder="CPF"></b-input>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Gênero">
+                    <b-select placeholder="Gênero" expanded>
+                      <option>Masculino</option>
+                      <option>Feminino</option>
+                      <option>Não binário</option>
+                    </b-select>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Idade">
+                    <b-input
+                      placeholder="Idade"
+                      type="number"
+                      min="18"
+                      max="100"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+              </div>
 
-              <b-field label="Nome">
-                <b-input placeholder="Nome"></b-input>
-              </b-field>
-
-              <b-field label="Sobrenome">
-                <b-input placeholder="Sobrenome"></b-input>
-              </b-field>
-
-              <b-field label="CPF">
-                <b-input placeholder="CPF"></b-input>
-              </b-field>
-
-              <b-field grouped>
-                <b-field label="Gênero">
-                  <b-select placeholder="Gênero">
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                    <option>Não binário</option>
-                  </b-select>
-                </b-field>
-                <b-field label="Idade">
-                  <b-input placeholder="Idade" type="number" min="18" max="100">
-                  </b-input>
-                </b-field>
-              </b-field>
-
-              <b-field grouped>
-                <b-field label="Senha" class="">
-                  <b-input type="password" value="" password-reveal> </b-input>
-                </b-field>
-
-                <b-field label="Confirmação de senha">
-                  <b-input type="password" value="" password-reveal> </b-input>
-                </b-field>
-              </b-field>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Senha" class="">
+                    <b-input type="password" value=""> </b-input>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Confirmação de senha">
+                    <b-input type="password" value=""> </b-input>
+                  </b-field>
+                </div>
+              </div>
 
               <div class="buttons">
-                <b-button type="is-primary" outlined>Enviar</b-button>
+                <b-button type="is-primary" outlined>Registrar</b-button>
               </div>
             </div>
           </div>
@@ -87,7 +103,7 @@ export default {
 
   data() {
     return {
-      dropFiles: [],
+      avatar: {},
     };
   },
   methods: {
@@ -101,6 +117,6 @@ export default {
 <style lang="scss" scoped>
 main {
   background-color: $primary;
-   min-height: calc(100vh - 52px);
+  min-height: calc(100vh - 52px);
 }
 </style>
