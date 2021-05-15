@@ -5,7 +5,8 @@
         <div class="column is-10 is-offset-1">
           <div class="card ">
             <div class="card-content">
-              <b-field label="Foto Pessoal">
+              <div class="hero-body">
+              <b-field label="Foto Pessoal" class="container has-text-centered">
                 <b-upload v-model="avatar" drag-drop>
                   <section class="section">
                     <div class="content has-text-centered">
@@ -17,6 +18,7 @@
                   </section>
                 </b-upload>
               </b-field>
+              </div>
 
               <div class="tags" v-if="file">
                 <span class="tag is-primary">
