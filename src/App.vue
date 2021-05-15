@@ -16,7 +16,7 @@
       </template>
 
       <template #end>
-        <b-navbar-item tag="router-link" :to="{ path: '/registro' }" >
+        <b-navbar-item tag="router-link" :to="{ path: '/registro' }">
           <div class="buttons">
             <a class="button is-primary">
               <strong>Registrar</strong>
@@ -30,24 +30,30 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@include touch {
+  .navbar-end .buttons .button {
+    left: 0;
+    // transform: translateX(-50%);
   }
 }
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+// }
+
+// #nav {
+//   padding: 30px;
+
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
 </style>
