@@ -89,6 +89,15 @@
                   type="url"
                 ></b-input>
               </b-field>
+
+              <b-field label="Email">
+                <b-input
+                  v-model="email"
+                  placeholder="Email"
+                  type="email"
+                ></b-input>
+              </b-field>
+
               <div class="columns">
                 <div class="column">
                   <b-field label="Data de nascimento">
@@ -122,6 +131,21 @@
                 </div>
               </div>
 
+              <div class="columns">
+                <div class="column">
+                  <b-field label="CEP">
+                    <b-input
+                    type="text"
+                    maxlength="8"
+                    minlength="8"
+                    placeholder="CEP"
+                    validation-message="Entre com um CEP válido"
+                    v-model="zipcode"
+                    pattern="[0-9]*">
+                    </b-input>
+                  </b-field>
+                </div>
+              </div>
               <div class="columns">
                 <div class="column">
                   <b-field label="Senha" class="">
