@@ -34,34 +34,49 @@
               </div>
 
               <b-field label="Nome">
-                <b-input placeholder="Nome"></b-input>
+                <b-input 
+                type="text" 
+                placeholder="Nome" 
+                v-model="firstName"
+                validation-message="Entre com um nome válido"
+                pattern="[A-z]*">
+                </b-input>
               </b-field>
 
               <b-field label="Sobrenome">
-                <b-input placeholder="Sobrenome"></b-input>
+                <b-input 
+                type="text" 
+                placeholder="Sobrenome" 
+                v-model="lastName"
+                validation-message="Entre com um sobrenome válido"
+                pattern="[A-z]*">
+                </b-input>
               </b-field>
 
               <b-field label="CPF">
-                <b-input placeholder="CPF"></b-input>
+                <b-input type="number" maxlength="11" placeholder="CPF" v-model="document"></b-input>
               </b-field>
 
-              <b-field grouped>
-                <b-field label="Gênero">
-                  <b-select placeholder="Gênero">
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                    <option>Não binário</option>
-                  </b-select>
-                </b-field>
-                <b-field label="Idade">
-                  <b-input placeholder="Idade" type="number" min="18" max="100">
-                  </b-input>
-                </b-field>
+              <b-field label="Data de nascimento">
+                <b-datepicker
+                ref="datepicker"
+                expanded
+                placeholder="Select a date">
+                </b-datepicker>
+                <b-button
+                @click="$refs.datepicker.toggle()"
+                icon-left="calendar-today"
+                type="is-primary"
+                v-model="birthdayDate" />
+              </b-field>
+
+              <b-field label="Telefone">
+                <b-input type="number" placeholder="Fone" v-model="phone"></b-input>
               </b-field>
 
               <b-field grouped>
                 <b-field label="Senha" class="">
-                  <b-input type="password" value="" password-reveal> </b-input>
+                  <password v-model="password"/>
                 </b-field>
 
                 <b-field label="Confirmação de senha">
@@ -70,7 +85,7 @@
               </b-field>
 
               <div class="buttons">
-                <b-button type="is-primary" outlined>Enviar</b-button>
+                <b-button type="is-primary" outlined>Registrar</b-button>
               </div>
             </div>
           </div>
@@ -81,13 +96,15 @@
 </template>
 
 <script>
+import Password from 'vue-password-strength-meter'
 export default {
   name: "Registro",
-  components: {},
+  components: {Password},
 
   data() {
     return {
       dropFiles: [],
+      password: null,
     };
   },
   methods: {
