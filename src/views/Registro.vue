@@ -18,17 +18,13 @@
                 </b-upload>
               </b-field>
 
-              <div class="tags">
-                <span
-                  v-for="(file, index) in dropFiles"
-                  :key="index"
-                  class="tag is-primary"
-                >
+              <div class="tags" v-if="file">
+                <span class="tag is-primary">
                   {{ file.name }}
                   <button
                     class="delete is-small"
                     type="button"
-                    @click="deleteDropFile(index)"
+                    @click="deleteDropFile()"
                   ></button>
                 </span>
               </div>
@@ -97,6 +93,46 @@
                 </div>
               </div>
 
+              <b-field label="Perfil do Facebook">
+                <b-input
+                  v-model="facebookProfile"
+                  placeholder="URL"
+                  type="url"
+                ></b-input>
+              </b-field>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Data de nascimento">
+                    <b-datepicker
+                      ref="datepicker"
+                      expanded
+                      placeholder="Select a date"
+                    >
+                    </b-datepicker>
+                    <b-button
+                      @click="$refs.datepicker.toggle()"
+                      icon-left="calendar-today"
+                      type="is-primary"
+                      v-model="birthdayDate"
+                    />
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Telefone">
+                    <b-input
+                      type="text"
+                      maxlength="11"
+                      minlength="11"
+                      placeholder="Fone"
+                      validation-message="Entre com um telefone válido"
+                      v-model="phone"
+                      pattern="[0-9]*"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+              </div>
+
               <div class="columns">
                 <div class="column">
                   <b-field label="Senha" class="">
@@ -109,43 +145,6 @@
                   </b-field>
                 </div>
               </div>
-
-              <b-field label="Perfil do Facebook">
-                <b-input
-                  v-model="facebookProfile"
-                  placeholder="URL"
-                  type="url"
-                ></b-input>
-              </b-field>
-
-              <b-field label="Data de nascimento">
-                <b-datepicker
-                  ref="datepicker"
-                  expanded
-                  placeholder="Select a date"
-                >
-                </b-datepicker>
-                <b-button
-                  @click="$refs.datepicker.toggle()"
-                  icon-left="calendar-today"
-                  type="is-primary"
-                  v-model="birthdayDate"
-                />
-              </b-field>
-
-              <b-field label="Telefone">
-                <b-input
-                  type="text"
-                  maxlength="11"
-                  minlength="11"
-                  placeholder="Fone"
-                  validation-message="Entre com um telefone válido"
-                  v-model="phone"
-                  pattern="[0-9]*"
-                >
-                </b-input>
-              </b-field>
-
               <div class="buttons">
                 <b-button type="is-primary" outlined>Registrar</b-button>
               </div>
@@ -170,8 +169,8 @@ export default {
     };
   },
   methods: {
-    deleteDropFile(index) {
-      this.dropFiles.splice(index, 1);
+    deleteDropFile() {
+      this.avatar = {};
     },
   },
 };
