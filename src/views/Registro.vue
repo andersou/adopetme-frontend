@@ -159,7 +159,7 @@
                     </b-input>
                   </b-field>
                 </div>
-                 <div class="column">
+                <div class="column">
                   <b-field label="Bairro">
                     <b-input
                       type="text"
@@ -178,13 +178,13 @@
                 <div class="column">
                   <b-field label="Rua">
                     <b-input
-                    type="text"
-                    maxlength="64"
-                    minlength="3"
-                    placeholder="Rua"
-                    validation-message="Entre com um nome de rua válido"
-                    v-model="register.address"
-                    pattern="[A-z]*"
+                      type="text"
+                      maxlength="64"
+                      minlength="3"
+                      placeholder="Rua"
+                      validation-message="Entre com um nome de rua válido"
+                      v-model="register.address"
+                      pattern="[A-z]*"
                     >
                     </b-input>
                   </b-field>
@@ -192,13 +192,13 @@
                 <div class="column">
                   <b-field label="Número">
                     <b-input
-                    type="text"
-                    maxlength="64"
-                    minlength="3"
-                    placeholder="Número"
-                    validation-message="Entre com um número"
-                    v-model="register.number"
-                    pattern="[0-9]*"
+                      type="text"
+                      maxlength="64"
+                      minlength="3"
+                      placeholder="Número"
+                      validation-message="Entre com um número"
+                      v-model="register.number"
+                      pattern="[0-9]*"
                     >
                     </b-input>
                   </b-field>
@@ -206,11 +206,11 @@
                 <div class="column">
                   <b-field label="Complemento (Opcional)">
                     <b-input
-                    type="text"
-                    maxlength="64"
-                    minlength="3"
-                    placeholder="Complemento"
-                    v-model="register.complement"
+                      type="text"
+                      maxlength="64"
+                      minlength="3"
+                      placeholder="Complemento"
+                      v-model="register.complement"
                     >
                     </b-input>
                   </b-field>
@@ -324,6 +324,6 @@ export default {
 }
 main {
   background-color: $primary;
-  min-height: calc(100vh - 52px);
+  min-height: calc(100vh - #{$adopetme-navbar-height});
 }
 </style>
