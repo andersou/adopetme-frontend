@@ -323,7 +323,10 @@ export default {
   }
 }
 main {
-  background-color: $primary;
+  background: url(../assets/capa.png),
+                url(../assets/ruido.png),
+                linear-gradient(50deg,#121758,#26a4f8);
+  background-attachment: fixed;
   min-height: calc(100vh - #{$adopetme-navbar-height});
 }
 </style>
