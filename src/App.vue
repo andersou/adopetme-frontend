@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <b-navbar>
+    <b-navbar class="navbar-adopetme">
       <template #brand>
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <span>Adopetme</span>
+          <span class="logo-adopetme">Adopetme</span>
         </b-navbar-item>
       </template>
       <template #start>
@@ -30,11 +30,20 @@
 </template>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 @include touch {
   .navbar-end .buttons .button {
     left: 0;
     // transform: translateX(-50%);
   }
+}
+.navbar-adopetme {
+  border-bottom: $primary 3px solid;
+}
+.logo-adopetme {
+  font-family: "Staatliches", cursive;
+  color: #8c67ef;
+  font-size: 1.5rem;
 }
 // #app {
 //   font-family: Avenir, Helvetica, Arial, sans-serif;

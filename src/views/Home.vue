@@ -35,7 +35,7 @@ export default {
 
 @include tablet {
   .home {
-    height: calc(100vh - 56px);
+    height: calc(100vh - #{$adopetme-navbar-height});
   }
   .home-image {
     width: 50%;
