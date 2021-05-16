@@ -159,6 +159,62 @@
                     </b-input>
                   </b-field>
                 </div>
+                 <div class="column">
+                  <b-field label="Bairro">
+                    <b-input
+                      type="text"
+                      maxlength="64"
+                      minlength="3"
+                      placeholder="Bairro"
+                      validation-message="Entre com um bairro válido"
+                      v-model="register.neighborhood"
+                      pattern="[A-z]*"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Rua">
+                    <b-input
+                    type="text"
+                    maxlength="64"
+                    minlength="3"
+                    placeholder="Rua"
+                    validation-message="Entre com um nome de rua válido"
+                    v-model="register.address"
+                    pattern="[A-z]*"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Número">
+                    <b-input
+                    type="text"
+                    maxlength="64"
+                    minlength="3"
+                    placeholder="Número"
+                    validation-message="Entre com um número"
+                    v-model="register.number"
+                    pattern="[0-9]*"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Complemento (Opcional)">
+                    <b-input
+                    type="text"
+                    maxlength="64"
+                    minlength="3"
+                    placeholder="Complemento"
+                    v-model="register.complement"
+                    >
+                    </b-input>
+                  </b-field>
+                </div>
               </div>
               <div class="columns">
                 <div class="column">
