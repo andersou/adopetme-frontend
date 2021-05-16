@@ -42,7 +42,7 @@
 }
 .logo-adopetme {
   font-family: "Staatliches", cursive;
-  color: #8c67ef;
+  color: $adopetme-logo-color;
   font-size: 1.5rem;
 }
 // #app {
