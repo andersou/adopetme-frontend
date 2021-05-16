@@ -5,9 +5,9 @@
         <div class="column is-10 is-offset-1">
           <div class="card ">
             <div class="card-content">
-              <div class="hero-body">
+              <div class="container">
                 <div
-                  class="is-flex is-flex-wrap-wrap is-justify-content-center"
+                  class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
                 >
                   <figure class="image ">
                     <img
