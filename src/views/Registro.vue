@@ -6,30 +6,37 @@
           <div class="card ">
             <div class="card-content">
               <div class="hero-body">
-              <b-field label="Foto Pessoal" class="container has-text-centered">
-                <b-upload v-model="avatar" drag-drop>
-                  <section class="section">
-                    <div class="content has-text-centered">
-                      <p>
-                        <b-icon icon="upload" size="is-large"> </b-icon>
-                      </p>
-                      <p>Arraste a foto aqui</p>
-                    </div>
-                  </section>
-                </b-upload>
-              </b-field>
+                <div
+                  class="is-flex is-flex-wrap-wrap is-justify-content-center"
+                >
+                  <figure class="image ">
+                    <img
+                      class="img-avatar is-rounded"
+                      v-if="imageData"
+                      :src="imageData"
+                      alt=""
+                    />
+                    <img
+                      v-else
+                      class="img-avatar"
+                      src="https://avataaars.io/?avatarStyle=Circle&topType=WinterHat4&accessoriesType=Blank&hatColor=PastelGreen&facialHairType=Blank&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+                    />
+                  </figure>
+                  <b-field label="Foto Pessoal" class=" has-text-centered">
+                    <b-upload v-model="avatar" drag-drop>
+                      <section class="section">
+                        <div class="content has-text-centered">
+                          <p>
+                            <b-icon icon="upload" size="is-large"> </b-icon>
+                          </p>
+                          <p>Arraste a foto aqui</p>
+                        </div>
+                      </section>
+                    </b-upload>
+                  </b-field>
+                </div>
               </div>
 
-              <div class="tags" v-if="file">
-                <span class="tag is-primary">
-                  {{ file.name }}
-                  <button
-                    class="delete is-small"
-                    type="button"
-                    @click="deleteDropFile()"
-                  ></button>
-                </span>
-              </div>
               <div class="columns">
                 <div class="column">
                   <b-field label="Nome">
@@ -137,13 +144,14 @@
                 <div class="column">
                   <b-field label="CEP">
                     <b-input
-                    type="text"
-                    maxlength="8"
-                    minlength="8"
-                    placeholder="CEP"
-                    validation-message="Entre com um CEP válido"
-                    v-model="zipcode"
-                    pattern="[0-9]*">
+                      type="text"
+                      maxlength="8"
+                      minlength="8"
+                      placeholder="CEP"
+                      validation-message="Entre com um CEP válido"
+                      v-model="zipcode"
+                      pattern="[0-9]*"
+                    >
                     </b-input>
                   </b-field>
                 </div>
@@ -151,10 +159,11 @@
               <div class="columns">
                 <div class="column">
                   <b-field label="Senha" class="">
-                    <password 
-                    v-model="password"
-                    maxlength="60"
-                    secureLength="8"> 
+                    <password
+                      v-model="password"
+                      maxlength="60"
+                      secureLength="8"
+                    >
                     </password>
                   </b-field>
                 </div>
@@ -183,19 +192,49 @@ export default {
 
   data() {
     return {
-      avatar: {},
+      avatar: null,
       password: null,
+      imageData: null,
     };
   },
   methods: {
     deleteDropFile() {
-      this.avatar = {};
+      this.avatar = null;
+    },
+    previewImage: function() {
+      if (this.avatar) {
+        // create a new FileReader to read this image and convert to base64 format
+        var reader = new FileReader();
+        // Define a callback function to run, when FileReader finishes its job
+        reader.onload = (e) => {
+          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+          // Read image as base64 and set to imageData
+          this.imageData = e.target.result;
+        };
+        // Start the reader job - read file as a data url (base64 format)
+        reader.readAsDataURL(this.avatar);
+      }
+    },
+  },
+  watch: {
+    avatar(newAvatar) {
+      if (newAvatar) {
+        this.previewImage();
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.img-avatar {
+  max-width: 280px;
+}
+@include tablet {
+  .img-avatar {
+    margin-right: 3rem;
+  }
+}
 main {
   background-color: $primary;
   min-height: calc(100vh - 52px);
