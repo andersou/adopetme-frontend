@@ -47,7 +47,7 @@
                     <b-input
                       placeholder="Nome"
                       type="text"
-                      v-model="firstName"
+                      v-model="register.firstName"
                       validation-message="Entre com um nome válido"
                       pattern="[A-z]*"
                       minlength="3"
@@ -61,7 +61,7 @@
                     <b-input
                       type="text"
                       placeholder="Sobrenome"
-                      v-model="lastName"
+                      v-model="register.lastName"
                       validation-message="Entre com um sobrenome válido"
                       pattern="[A-z]*"
                       minlength="3"
@@ -80,16 +80,16 @@
                       placeholder="CPF"
                       validation-message="Entre com um documento válido"
                       pattern="[0-9]*"
-                      v-model="document"
+                      v-model="register.document"
                     ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Gênero">
+                  <b-field label="Gênero" v-model="register.sex">
                     <b-select placeholder="Gênero" expanded>
-                      <option>Masculino</option>
-                      <option>Feminino</option>
-                      <option>Não binário</option>
+                      <option value="M">Masculino</option>
+                      <option value="F">Feminino</option>
+                      <option value="B">Não binário</option>
                     </b-select>
                   </b-field>
                 </div>
@@ -97,7 +97,7 @@
 
               <b-field label="Perfil do Facebook">
                 <b-input
-                  v-model="facebookProfile"
+                  v-model="register.facebookProfile"
                   placeholder="URL"
                   type="url"
                 ></b-input>
@@ -105,7 +105,7 @@
 
               <b-field label="Email">
                 <b-input
-                  v-model="email"
+                  v-model="register.email"
                   placeholder="Email"
                   type="email"
                 ></b-input>
@@ -124,7 +124,7 @@
                       @click="$refs.datepicker.toggle()"
                       icon-left="calendar-today"
                       type="is-primary"
-                      v-model="birthdayDate"
+                      v-model="register.birthdayDate"
                     />
                   </b-field>
                 </div>
@@ -136,7 +136,7 @@
                       minlength="11"
                       placeholder="Fone"
                       validation-message="Entre com um telefone válido"
-                      v-model="phone"
+                      v-model="register.phone"
                       pattern="[0-9]*"
                     >
                     </b-input>
@@ -153,7 +153,7 @@
                       minlength="8"
                       placeholder="CEP"
                       validation-message="Entre com um CEP válido"
-                      v-model="zipcode"
+                      v-model="register.zipcode"
                       pattern="[0-9]*"
                     >
                     </b-input>
@@ -164,7 +164,7 @@
                 <div class="column">
                   <b-field label="Senha" class="">
                     <password
-                      v-model="password"
+                      v-model="register.password"
                       maxlength="60"
                       secureLength="8"
                     >
@@ -173,12 +173,15 @@
                 </div>
                 <div class="column">
                   <b-field label="Confirmação de senha">
-                    <b-input type="password" value=""> </b-input>
+                    <b-input type="password" value="" v-model="passwordConfirm">
+                    </b-input>
                   </b-field>
                 </div>
               </div>
               <div class="buttons">
-                <b-button type="is-primary" outlined>Registrar</b-button>
+                <b-button type="is-primary" @click="doRegister" outlined
+                  >Registrar</b-button
+                >
               </div>
             </div>
           </div>
@@ -197,11 +200,35 @@ export default {
   data() {
     return {
       avatar: null,
-      password: null,
       imageData: null,
+      passwordConfirm: "",
+      register: {
+        firstName: "", //
+        lastName: "", //
+        birthdayDate: new Date(), //
+        phone: "", //
+        email: "", //
+        sex: "M", //
+        password: "", //
+        facebookProfile: "", //
+        document: "", //
+        address: "",
+        number: 0,
+        complement: "",
+        neighborhood: "",
+        city: "",
+        zipcode: "", //
+      },
     };
   },
   methods: {
+    doRegister() {
+      //validar confirmação senha
+      //instanciar formdata
+      //preencher formdata
+      //colocar a imagem
+      //enviar
+    },
     deleteDropFile() {
       this.avatar = null;
     },
