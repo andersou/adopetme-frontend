@@ -38,7 +38,7 @@
   }
 }
 .navbar-adopetme {
-  border-bottom: $primary 3px solid;
+  border-bottom: $primary $adopetme-navbar-border-height solid;
 }
 .logo-adopetme {
   font-family: "Staatliches", cursive;
