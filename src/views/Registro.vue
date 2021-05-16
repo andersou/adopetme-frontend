@@ -23,7 +23,11 @@
                     />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
-                    <b-upload v-model="avatar" drag-drop>
+                    <b-upload
+                      v-model="avatar"
+                      accept="image/png,  image/jpeg"
+                      drag-drop
+                    >
                       <section class="section">
                         <div class="content has-text-centered">
                           <p>
