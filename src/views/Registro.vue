@@ -43,7 +43,7 @@
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Nome">
+                  <b-field label="Nome *">
                     <b-input
                       placeholder="Nome"
                       type="text"
@@ -56,7 +56,7 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Sobrenome">
+                  <b-field label="Sobrenome *">
                     <b-input
                       type="text"
                       placeholder="Sobrenome"
@@ -71,7 +71,7 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="CPF">
+                  <b-field label="CPF *">
                     <b-input
                       type="text"
                       maxlength="11"
@@ -84,8 +84,8 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Gênero" v-model="register.sex">
-                    <b-select placeholder="Gênero" expanded>
+                  <b-field label="Gênero *" v-model="register.sex">
+                    <b-select placeholder="Selecione o gênero" expanded>
                       <option value="M">Masculino</option>
                       <option value="F">Feminino</option>
                       <option value="B">Não binário</option>
@@ -93,26 +93,32 @@
                   </b-field>
                 </div>
               </div>
-
-              <b-field label="Perfil do Facebook">
-                <b-input
-                  v-model="register.facebookProfile"
-                  placeholder="URL"
-                  type="url"
-                ></b-input>
-              </b-field>
-
-              <b-field label="Email">
-                <b-input
-                  v-model="register.email"
-                  placeholder="Email"
-                  type="email"
-                ></b-input>
-              </b-field>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Email *">
+                    <b-input
+                      v-model="register.email"
+                      placeholder="Email"
+                      type="email"
+                    ></b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Perfil do Facebook">
+                    <b-input
+                      v-model="register.facebookProfile"
+                      placeholder="URL"
+                      type="url"
+                    ></b-input>
+                  </b-field>
+                </div>
+              </div>
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Data de nascimento">
+                  <b-field label="Data de nascimento *">
                     <b-datepicker
                       ref="datepicker"
                       expanded
@@ -131,7 +137,6 @@
                   <b-field label="Telefone">
                     <b-input
                       type="text"
-                      maxlength="11"
                       minlength="11"
                       placeholder="Fone"
                       validation-message="Entre com um telefone válido"
@@ -173,7 +178,7 @@
                 </div>
               </div>
               <div class="columns">
-                <div class="column">
+                <div class="column is-6">
                   <b-field label="Rua">
                     <b-input
                       type="text"
@@ -202,7 +207,7 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Complemento (Opcional)">
+                  <b-field label="Complemento">
                     <b-input
                       type="text"
                       maxlength="64"
@@ -260,22 +265,39 @@
                     <password
                       v-model="register.password"
                       maxlength="60"
-                      secureLength="8"
+                      :secureLength="8"
                     >
                     </password>
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Confirmação de senha">
-                    <b-input type="" value="" v-model="passwordConfirm">
+                  <b-field
+                    label="Confirmação de senha"
+                    :type="{ 'is-danger': !errors.passwordConfirmed }"
+                    :message="{
+                      'Senha diferente da inserida anteriormente': !errors.passwordConfirmed,
+                    }"
+                  >
+                    <b-input
+                      type="password"
+                      v-model="passwordConfirm"
+                      @input="
+                        errors.passwordConfirmed =
+                          register.password == passwordConfirm
+                      "
+                    >
                     </b-input>
                   </b-field>
                 </div>
               </div>
-              <div class="buttons">
-                <b-button type="is-primary" @click="doRegister" outlined
-                  >Registrar</b-button
-                >
+              <div class="columns">
+                <div class="column">
+                  <div class="buttons">
+                    <b-button type="is-primary" @click="doRegister" outlined
+                      >Registrar</b-button
+                    >
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -288,6 +310,7 @@
 <script>
 import Password from "vue-password-strength-meter";
 import { getEstados, getMunicipios } from "../services/ibge";
+import { registerUser } from "../services/api";
 export default {
   name: "Registro",
   components: { Password },
@@ -297,6 +320,9 @@ export default {
       avatar: null,
       imageData: null,
       passwordConfirm: "",
+      errors: {
+        passwordConfirmed: true,
+      },
       estados: [],
       municipios: [],
       register: {
@@ -334,8 +360,33 @@ export default {
         );
       } else return [];
     },
+    validatePassword() {
+      // erro.passwordConfirmed = this.;
+    },
     doRegister() {
-      //validar confirmação senha
+      if (this.register.password != this.passwordConfirm) {
+        this.$buefy.toast.open({
+          message: "Senha não confere!",
+          type: "is-danger",
+        });
+        return;
+      }
+      let formData = new FormData();
+      for (let prop in this.register) {
+        if (this.register[prop]) formData.set(prop, this.register[prop]);
+      }
+      formData.set("avatar", this.avatar);
+      formData.set(
+        "birthdayDate",
+        this.register.birthdayDate
+          .toISOString()
+          .split("T")[0]
+          .replaceAll("-", "/")
+      );
+      console.log(formData);
+      registerUser(formData).then(() => {
+        this.$router.replace("/dashboard");
+      });
       //instanciar formdata
       //preencher formdata
       //colocar a imagem
