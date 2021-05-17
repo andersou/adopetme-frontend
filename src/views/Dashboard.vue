@@ -3,7 +3,7 @@
     <h1 class="is-size-2 is-uppercase has-text-weight-light mt-4">
       Bem vindo, $USUARIO
     </h1>
-    <h2 class="is-size-4 mb-2">O que deseja fazer?</h2>
+    <h2 class="is-size-4 mb-4">O que deseja fazer?</h2>
     <div class="columns">
       <div class="column is-half">
         <div class="card">
