@@ -267,7 +267,6 @@
                   </b-field>
                 </div>
                 <div class="column">
-
                   <b-field
                     label="Confirmação de senha"
                     :type="{ 'is-danger': !errors.passwordConfirmed }"
@@ -283,7 +282,6 @@
                           register.password == passwordConfirm
                       "
                     >
-
                     </b-input>
                   </b-field>
                 </div>
@@ -382,9 +380,16 @@ export default {
           .replaceAll("-", "/")
       );
       console.log(formData);
-      registerUser(formData).then(() => {
-        this.$router.replace("/dashboard");
-      });
+      registerUser(formData)
+        .then(() => {
+          this.$router.replace("/dashboard");
+        })
+        .catch(() => {
+          this.$buefy.toast.open({
+            message: "Ocorreu um erro ao efetuar o registro.",
+            type: "is-danger",
+          });
+        });
       //instanciar formdata
       //preencher formdata
       //colocar a imagem
