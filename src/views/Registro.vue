@@ -6,7 +6,9 @@
           <div class="card ">
             <div class="card-content">
               <div class="container">
-                <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
+                <div
+                  class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
+                >
                   <figure class="image ">
                     <img
                       class="img-avatar is-rounded"
@@ -50,7 +52,7 @@
                       pattern="[A-z]*"
                       minlength="3"
                       maxlength="255"
-                      ></b-input>
+                    ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
@@ -319,9 +321,8 @@ export default {
   }
 }
 main {
-  background: url(../assets/capa.png),
-                url(../assets/ruido.png),
-                linear-gradient(50deg,#121758,#26a4f8);
+  background: url(../assets/capa.png), url(../assets/ruido.png),
+    linear-gradient(50deg, $adopetme-logo-color, $primary);
   background-attachment: fixed;
   min-height: calc(100vh - #{$adopetme-navbar-height});
 }
