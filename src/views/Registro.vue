@@ -216,6 +216,46 @@
               </div>
               <div class="columns">
                 <div class="column">
+                  <b-field label="Estado">
+                    <b-select
+                      placeholder="Selecione o estado"
+                      @input="loadMunicipios"
+                      v-model="register.state"
+                      expanded
+                    >
+                      <option
+                        v-for="estado in estados"
+                        :key="estado.id"
+                        :value="estado.sigla"
+                        >{{ estado.nome }}</option
+                      >
+                    </b-select>
+                  </b-field>
+                </div>
+                <div class="column">
+                  <b-field label="Municipio">
+                    <b-select
+                      placeholder="Selecione o municipio"
+                      v-model="register.city"
+                      :disabled="!register.state"
+                      expanded
+                    >
+                      <option v-if="!register.state" value=""
+                        >Selecione o estado primeiro</option
+                      >
+                      <option
+                        v-else
+                        v-for="municipio in municipios"
+                        :key="municipio.id"
+                        :value="municipio.nome"
+                        >{{ municipio.nome }}</option
+                      >
+                    </b-select>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
                   <b-field label="Senha" class="">
                     <password
                       v-model="register.password"
@@ -247,6 +287,7 @@
 
 <script>
 import Password from "vue-password-strength-meter";
+import { getEstados, getMunicipios } from "../services/ibge";
 export default {
   name: "Registro",
   components: { Password },
@@ -256,6 +297,8 @@ export default {
       avatar: null,
       imageData: null,
       passwordConfirm: "",
+      estados: [],
+      municipios: [],
       register: {
         firstName: "", //
         lastName: "", //
@@ -266,16 +309,31 @@ export default {
         password: "", //
         facebookProfile: "", //
         document: "", //
-        address: "",
-        number: 0,
-        complement: "",
-        neighborhood: "",
-        city: "",
+        address: "", //
+        number: 0, //
+        complement: "", //
+        neighborhood: "", //
+        city: "", //
+        state: "", //
         zipcode: "", //
       },
     };
   },
+  mounted() {
+    getEstados().then((resp) => {
+      this.estados = resp.data;
+    });
+  },
+
   methods: {
+    loadMunicipios() {
+      console.log("Pegando cidades");
+      if (this.register.state) {
+        return getMunicipios(this.register.state).then(
+          (resp) => (this.municipios = resp.data)
+        );
+      } else return [];
+    },
     doRegister() {
       //validar confirmação senha
       //instanciar formdata
@@ -322,7 +380,7 @@ export default {
 }
 main {
   background: url(../assets/capa.png), url(../assets/ruido.png),
-  linear-gradient(110deg, $adopetme-logo-color, $primary);
+    linear-gradient(110deg, $adopetme-logo-color, $primary);
   background-attachment: fixed;
   min-height: calc(100vh - #{$adopetme-navbar-height});
 }
