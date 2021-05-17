@@ -167,7 +167,7 @@ export default {
 main {
   background:   url(../assets/capa.png),
                 url(../assets/ruido.png),
-                linear-gradient(50deg,#121758,#26a4f8);
+                linear-gradient(110deg, $adopetme-logo-color, $primary);
   background-attachment: fixed;
   //@include desktop {
   min-height: calc(100vh - 52px);
