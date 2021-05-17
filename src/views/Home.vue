@@ -6,16 +6,24 @@
         <div class="card-content">
           <div class="content">
             <b-field label="Email">
-              <b-input type="email" value="john@arbucle.com" maxlength="30">
+              <b-input
+                type="email"
+                placeholder="jon@arbuckle.com"
+                maxlength="30"
+              >
               </b-input>
             </b-field>
 
             <b-field label="Senha">
-              <b-input type="password" value="iwantmytreasure" password-reveal>
+              <b-input type="password" placeholder="********" password-reveal>
               </b-input>
             </b-field>
-            <b-button  tag="router-link" :to="{ path: '/dashboard' }"
-            type="is-primary is-light">Entrar</b-button>
+            <b-button
+              tag="router-link"
+              :to="{ path: '/dashboard' }"
+              type="is-primary is-light"
+              >Entrar</b-button
+            >
           </div>
         </div>
       </div>
