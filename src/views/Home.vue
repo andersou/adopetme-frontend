@@ -14,7 +14,8 @@
               <b-input type="password" value="iwantmytreasure" password-reveal>
               </b-input>
             </b-field>
-            <b-button type="is-primary is-light">Entrar</b-button>
+            <b-button  tag="router-link" :to="{ path: '/dashboard' }"
+            type="is-primary is-light">Entrar</b-button>
           </div>
         </div>
       </div>
