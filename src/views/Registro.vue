@@ -6,9 +6,7 @@
           <div class="card ">
             <div class="card-content">
               <div class="container">
-                <div
-                  class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
-                >
+                <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
                   <figure class="image ">
                     <img
                       class="img-avatar is-rounded"
@@ -52,8 +50,7 @@
                       pattern="[A-z]*"
                       minlength="3"
                       maxlength="255"
-                      >></b-input
-                    >
+                      ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
@@ -143,7 +140,6 @@
                   </b-field>
                 </div>
               </div>
-
               <div class="columns">
                 <div class="column">
                   <b-field label="CEP">
@@ -229,7 +225,7 @@
                 </div>
                 <div class="column">
                   <b-field label="Confirmação de senha">
-                    <b-input type="password" value="" v-model="passwordConfirm">
+                    <b-input type="" value="" v-model="passwordConfirm">
                     </b-input>
                   </b-field>
                 </div>
