@@ -65,7 +65,12 @@ export default {};
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+@include touch {
+  .container {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+}
 @include desktop {
   .column {
     padding-right: 3rem;
