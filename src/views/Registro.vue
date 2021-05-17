@@ -49,7 +49,7 @@
                       type="text"
                       v-model="register.firstName"
                       validation-message="Entre com um nome válido"
-                      pattern="[A-z]*"
+                      pattern="[A-ZA-z]*"
                       minlength="3"
                       maxlength="255"
                     ></b-input>
@@ -62,7 +62,7 @@
                       placeholder="Sobrenome"
                       v-model="register.lastName"
                       validation-message="Entre com um sobrenome válido"
-                      pattern="[A-z]*"
+                      pattern="[A-ZA-z ]*"
                       minlength="3"
                       maxlength="255"
                     ></b-input>
@@ -164,9 +164,7 @@
                       maxlength="64"
                       minlength="3"
                       placeholder="Bairro"
-                      validation-message="Entre com um bairro válido"
                       v-model="register.neighborhood"
-                      pattern="[A-z]*"
                     >
                     </b-input>
                   </b-field>
@@ -180,9 +178,7 @@
                       maxlength="64"
                       minlength="3"
                       placeholder="Rua"
-                      validation-message="Entre com um nome de rua válido"
                       v-model="register.address"
-                      pattern="[A-z]*"
                     >
                     </b-input>
                   </b-field>
@@ -267,7 +263,8 @@
                 </div>
                 <div class="column">
                   <b-field label="Confirmação de senha">
-                    <b-input type="" value="" v-model="passwordConfirm">
+                    <b-input type="password" value="" v-model="passwordConfirm">
+                  
                     </b-input>
                   </b-field>
                 </div>

@@ -39,32 +39,20 @@
                 </div>
               </div>
 
-              <b-field grouped>
-                <b-field label="Animal">
+                <b-field label="Nome" expanded>
+                  <b-input></b-input>
+                </b-field>
+
+              <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Animal" expanded>
                   <b-select>
                     <option>Gato</option>
                     <option>Cachorro</option>
                   </b-select>
                 </b-field>
-
-                <b-field label="Nome" expanded>
-                  <b-input></b-input>
-                </b-field>
-              </b-field>
-
-              <b-field>
-                <b-field label="Data do Nascimento">
-                  <b-datepicker
-                    placeholder="Click to select..."
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                  >
-                  </b-datepicker>
-                </b-field>
-              </b-field>
-
-
-              <div class="columns">
+                </div>
                 <div class="column">
                   <b-field label="Porte">
             <b-radio-button v-model="radioButton"
@@ -85,13 +73,26 @@
                 <span>Grande</span>
             </b-radio-button>
 
-        </b-field>
-        <p class="content">
-            <b>Escolha:</b>
-            {{ radioButton }}
-        </p>
+           </b-field>
+            <p class="content">
+                <b>Escolha:</b>
+                {{ radioButton }}
+            </p>
+                </div>
+              <div class="column">
+                <b-field label="Data do Nascimento">
+                  <b-datepicker
+                    placeholder="Click to select..."
+                    :min-date="minDate"
+                    :max-date="maxDate"
+                  >
+                  </b-datepicker>
+                </b-field>
                 </div>
               </div>
+              </div>
+
+              
 
               <b-field label="Descrição" class="descricao">
                 <b-input maxlength="200" type="textarea"></b-input>
