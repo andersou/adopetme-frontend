@@ -7,11 +7,15 @@
         </b-navbar-item>
       </template>
       <template #start>
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          Home
+        <b-navbar-item
+          class="has-background-primary-light"
+          tag="router-link"
+          :to="{ path: '/registro' }"
+        >
+          Adotar um Pet
         </b-navbar-item>
         <b-navbar-item tag="router-link" :to="{ path: '/about' }">
-          About
+          Sobre o projeto
         </b-navbar-item>
       </template>
 

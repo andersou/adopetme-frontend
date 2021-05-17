@@ -23,13 +23,19 @@ const routes = [
     path: "/cadastro-pet",
     name: "CadastroPet",
     component: () =>
-      import(/* webpackChunkName: "Cadastro" */ "../views/CadastroPet.vue"),
+      import(/* webpackChunkName: "CadastroPet" */ "../views/CadastroPet.vue"),
   },
   {
     path: "/registro",
     name: "Registro",
     component: () =>
-      import(/* webpackChunkName: "Cadastro" */ "../views/Registro.vue"),
+      import(/* webpackChunkName: "Registro" */ "../views/Registro.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () =>
+      import(/* webpackChunkName: "Dashboard" */ "../views/Dashboard.vue"),
   },
 ];
 
