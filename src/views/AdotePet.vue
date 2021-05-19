@@ -40,41 +40,41 @@ export default {
             test: 0,
             items: [
                 {
-                    title: 'Slide 1',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2020/06/25/21/03/dog-5340892_960_720.jpg',
                     rating: 4.4
                 },
                 {
-                    title: 'Slide 2',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2018/07/12/18/13/animal-3534084_960_720.jpg',
                     rating: 3.5
                 },
                 {
-                    title: 'Slide 3',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2017/05/09/23/02/dog-2299482_960_720.jpg',
                     rating: 5
                 },
                 {
-                    title: 'Slide 4',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2015/03/26/09/54/pug-690566_960_720.jpg'
                 },
                 {
-                    title: 'Slide 5',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2016/02/18/18/37/puppy-1207816_960_720.jpg',
                     rating: 5
                 },
                 {
-                    title: 'Slide 6',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2015/12/08/00/52/puppy-1082141_960_720.jpg',
                     rating: 4
                 },
                 {
-                    title: 'Slide 7',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_960_720.jpg',
                     rating: 2.7
                 },
                 {
-                    title: 'Slide 8',
+                    title: 'Nome',
                     image: 'https://cdn.pixabay.com/photo/2019/08/07/14/11/dog-4390885_960_720.jpg',
                     rating: 1.5
                 }
