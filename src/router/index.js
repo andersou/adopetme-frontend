@@ -37,6 +37,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Dashboard" */ "../views/Dashboard.vue"),
   },
+  {
+    path: "/adote-pet",
+    name: "AdotePet",
+    component: () =>
+      import(/* webpackChunkName: "AdotePet" */ "../views/AdotePet.vue"),
+  },
 ];
 
 const router = new VueRouter({
