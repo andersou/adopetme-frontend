@@ -29,6 +29,9 @@
          Sem falar que, ao adotar, você ajuda a reduzir o número de cães e gatos abandonados, motivação maior que essa não há! 
          Os animais de rua já passaram por muito sofrimento e tudo o que precisam é de um lar para serem felizes de verdade.
        </p>
+       <b-button class="mt-6" tag="router-link" :to="{ path: '/registro' }"
+            type="is-primary">CADASTRE-SE GRATUITAMENTE!
+       </b-button>
      </div>
      <div class="column">
       <b-carousel>
@@ -87,18 +90,118 @@
        das solicitadas no formulário de cadastro, lembrando que para registrar-se, necessitas apenas informar teus dados iniciais, porém, lembra-te, 
        quanto mais informações deres ao Protetor, maiores a chance de sua solicitação de adoção ser bem sucedida.
     </p>
-    </div> <!-- Fim container-->
-  </section><!-- Fim seção content -->
+    <h1 class="is-size-4 is-uppercase has-text-weight-bold mt-4">PERGUNTAS A SEREM FEITAS ANTES DE ADOTAR</h1>
+    <h1 class="is-size-6 is-uppercase has-text-weight-bold mt-4">O seu estilo de vida permite mudanças?</h1>
+    <p>
+      Esta é uma questão importante a ser considerada, só pense em adotar um pet se sua rotina lhe é flexível, pois acredite, seu estilo de vida mudará.
+      Portanto, antes de adotar um animal de estimação, pense sobre o tempo em que ele ficará sozinho em casa, qual a sua disposição para levá-lo para passear e se 
+      ele terá espaço para brincar e ficar livre.
+    </p>
+    <h1 class="is-size-6 is-uppercase has-text-weight-bold mt-4">Seu novo amigo é sustentável?</h1>
+    <p>
+      Lembre-se que pets adotados não estão livres de gastos, ali, na hora da adoção pet, a contribuição costuma ser apenas sentimental. 
+      Porém, ao levar o bichinho para casa, é preciso estar atento quanto aos cuidados fundamentais para mantê-los sempre saudáveis. 
+      E, portanto, alguns gastos com a alimentação, consultas ao médico-veterinário, medicamentos e banho e tosa, são inevitáveis.
+    </p>
+    <h1 class="is-size-6 is-uppercase has-text-weight-bold mt-4">Tenha certeza da sua decisão</h1>
+    <p>
+      Antes de escolher o bichinho, leve em consideração todas essas dicas e tenha 100% de certeza quanto a adquirir o cãozinho. Pode parecer estranho 
+      falar assim, mas, infelizmente, muitos tutores não avaliam bem os gastos e as necessidades que esses cãezinhos demandam e então acabam 
+      abandonando-os. Para que isso não aconteça com você, pense bastante antes de se apegar ao cachorrinho e levá-lo para casa. E, caso ainda esteja 
+      em dúvida quanto ao processo de adaptação, oferecemos a opção de ser um tutor temporário.
+    </p>
 
+
+     <h1 class="is-size-2 is-uppercase has-text-weight-bold is-justify-content-center is-flex is-flex-wrap-wrap mt-4 mb-4">
+       Time de desenvolvimento
+     </h1>
+       <div class="columns">
+         <div class="column">
+           <div class="card">
+             <div class="card-content">
+               <p class="title">Anderson Souza</p>
+               <p class="subtitle ellipsis">
+                 andersou
+               </p>
+               <figure class="image adopetme-figure">
+                <img src="../assets/ander-image.png" alt="" srcset="" />
+              </figure>
+             </div>
+           </div>
+         </div>
+         <div class="column">
+           <div class="card">
+             <div class="card-content">
+               <p class="title">Mathaus Huber</p>
+               <p class="subtitle ellipsis">
+                 HuberM1998
+               </p>
+               <figure class="image adopetme-figure">
+                <img src="../assets/mh-image.png" alt="" srcset="" />
+              </figure>
+             </div>
+           </div>
+         </div>
+         <div class="column">
+           <div class="card">
+             <div class="card-content">
+               <p class="title">Pedro Barros Machado</p>
+               <p class="subtitle ellipsis">
+                 pedrobarros05
+               </p>
+               <figure class="image adopetme-figure">
+                <img src="../assets/p-image.png" alt="" srcset="" />
+              </figure>
+             </div>
+           </div>
+         </div>
+         <div class="column">
+           <div class="card">
+             <div class="card-content">
+               <p class="title">Frederico Antunes</p>
+               <p class="subtitle ellipsis">
+                 hpfred
+               </p>
+               <figure class="image adopetme-figure">
+                <img src="../assets/hp-image.png" alt="" srcset="" />
+              </figure>
+             </div>
+           </div>
+         </div>
+         <div class="column">
+           <div class="card">
+             <div class="card-content">
+               <p class="title">Vitor Santos Borges</p>
+               <p class="subtitle ellipsis">
+                 VitorBorg
+               </p>
+               <figure class="image adopetme-figure">
+                <img src="../assets/v-image.png" alt="" srcset="" />
+              </figure>
+             </div>
+           </div>
+         </div>
+       </div>
+    </div> <!-- Fim container-->
+  </section>
   </main>
 </template>
 <style lang="scss" scoped>
-@include desktop {
-  #content{
+ #content{
     background-color: rgb(110, 16, 197);
     width: 100%;
     color: white;
   }
-  
-}
+  .adopetme-figure {
+  height: 250px;
+   }
+  .adopetme-figure img {
+  height: 100%;
+  }
+  .ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+
 </style>
