@@ -110,11 +110,14 @@
       abandonando-os. Para que isso não aconteça com você, pense bastante antes de se apegar ao cachorrinho e levá-lo para casa. E, caso ainda esteja 
       em dúvida quanto ao processo de adaptação, oferecemos a opção de ser um tutor temporário.
     </p>
+    </div> <!-- Fim container-->
+  </section>
 
-
+  <section id="devs">
      <h1 class="is-size-2 is-uppercase has-text-weight-bold is-justify-content-center is-flex is-flex-wrap-wrap mt-4 mb-4">
        Time de desenvolvimento
      </h1>
+      <div class="container">
        <div class="columns">
          <div class="column">
            <div class="card">
@@ -182,7 +185,7 @@
            </div>
          </div>
        </div>
-    </div> <!-- Fim container-->
+    </div>
   </section>
   </main>
 </template>
@@ -191,6 +194,14 @@
     background-color: rgb(110, 16, 197);
     width: 100%;
     color: white;
+    border-top-style: dashed;
+    border-bottom-style:dashed;
+  }
+  #devs{
+    /*background-color: $primary;*/
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
   .adopetme-figure {
   height: 250px;
