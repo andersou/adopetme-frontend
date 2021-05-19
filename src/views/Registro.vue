@@ -62,7 +62,7 @@
                       placeholder="Sobrenome"
                       v-model="register.lastName"
                       validation-message="Entre com um sobrenome válido"
-                      pattern="[A-ZA-z ]*"
+                      pattern="[A-ZA-z çâêîôûáéíóúàèìòùãẽĩõũ]*"
                       minlength="3"
                       maxlength="255"
                     ></b-input>
@@ -74,12 +74,10 @@
                   <b-field label="CPF *">
                     <b-input
                       type="text"
-                      maxlength="11"
-                      minlength="11"
                       placeholder="CPF"
                       validation-message="Entre com um documento válido"
-                      pattern="[0-9]*"
                       v-model="register.document"
+                      v-mask.raw="['###.###.###-##']"
                     ></b-input>
                   </b-field>
                 </div>
@@ -137,11 +135,11 @@
                   <b-field label="Telefone">
                     <b-input
                       type="text"
-                      minlength="11"
                       placeholder="Fone"
                       validation-message="Entre com um telefone válido"
                       v-model="register.phone"
-                      pattern="[0-9]*"
+                      
+                      v-mask.raw="['+55 (##) # ####-####']"
                     >
                     </b-input>
                   </b-field>
@@ -152,12 +150,10 @@
                   <b-field label="CEP">
                     <b-input
                       type="text"
-                      maxlength="8"
-                      minlength="8"
                       placeholder="CEP"
                       validation-message="Entre com um CEP válido"
                       v-model="register.zipcode"
-                      pattern="[0-9]*"
+                      v-mask="['#####-###']"
                     >
                     </b-input>
                   </b-field>
@@ -307,9 +303,15 @@
 import Password from "vue-password-strength-meter";
 import { getEstados, getMunicipios } from "../services/ibge";
 import { registerUser } from "../services/api";
+import {mask} from 'vue-the-mask';
 export default {
   name: "Registro",
   components: { Password },
+  directives: {
+    mask(el, binding) {
+      binding.value ? mask(el, binding) : (el.oninput = null)
+    }
+  },
 
   data() {
     return {
