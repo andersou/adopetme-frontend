@@ -20,7 +20,7 @@
           </div>
           <footer class="card-footer">
             <p class="card-footer-item">
-               <b-button  tag="router-link" :to="{ path: '/' }"
+               <b-button  tag="router-link" :to="{ path: '/adote-pet' }"
             type="is-primary">Clique aqui e vamos começar!</b-button>
             </p>
           </footer>
