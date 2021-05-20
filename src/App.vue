@@ -37,23 +37,25 @@
             Logged as <b>{{ user.firstName }} {{ user.lastName }}</b>
           </b-dropdown-item>
           <hr class="dropdown-divider" />
-          <b-dropdown-item has-link aria-role="menuitem">
-            <a href="https://google.com" target="_blank">
-              <b-icon icon="link"></b-icon>
-              Google (link)
-            </a>
+          <b-dropdown-item 
+          aria-role="menuitem">
+              <b-icon icon="dog"></b-icon>
+              Editar Pet
           </b-dropdown-item>
-          <b-dropdown-item value="home" aria-role="menuitem">
-            <b-icon icon="home"></b-icon>
-            Home
+          <b-dropdown-item 
+          tag="router-link" :to="{ path: '/about' }" 
+          value="home" aria-role="menuitem">
+            <b-icon icon="account-edit-outline"></b-icon>
+            Editar Perfil
           </b-dropdown-item>
-          <b-dropdown-item value="products" aria-role="menuitem">
-            <b-icon icon="cart"></b-icon>
-            Products
+          <b-dropdown-item
+          aria-role="menuitem">
+            <b-icon icon="dog-service"></b-icon>
+            Solicitações Enviadas
           </b-dropdown-item>
-          <b-dropdown-item value="blog" disabled aria-role="menuitem">
-            <b-icon icon="book-open"></b-icon>
-            Blog
+          <b-dropdown-item value="blog" aria-role="menuitem">
+            <b-icon icon="account-plus"></b-icon>
+            Solicitações Recebidas
           </b-dropdown-item>
           <hr class="dropdown-divider" aria-role="menuitem" />
           <b-dropdown-item value="settings">
