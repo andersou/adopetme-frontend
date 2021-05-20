@@ -1,9 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
+let middlewareAuth = function(to, from, next) {
+  if (store.state.user.id) {
+    next();
+  } else {
+    let token = window.sessionStorage.getItem("token");
+    if (token)
+      store
+        .dispatch("loginUserByToken", token)
+        .then(() => {
+          next();
+        })
+        .catch(() => {
+          window.sessionStorage.removeItem("token");
+          next({ path: "/" });
+        });
+  }
+  // let token = sessionStorage.getItem("token");
+  // if (token) {
+
+  // } else {
+  //   next({ path: "/" });
+  // }
+};
 const routes = [
   {
     path: "/",
@@ -34,6 +58,7 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(/* webpackChunkName: "Dashboard" */ "../views/Dashboard.vue"),
   },
@@ -44,16 +69,18 @@ const routes = [
       import(/* webpackChunkName: "AdotePet" */ "../views/AdotePet.vue"),
   },
   {
-    path: "/edite-pet",
-    name: "EditePet",
+    path: "/editar-pet",
+    name: "EditarPet",
     component: () =>
-      import(/* webpackChunkName: "AdotePet" */ "../views/EditePet.vue"),
+      import(/* webpackChunkName: "EditarPet" */ "../views/EditarPet.vue"),
   },
   {
-    path: "/edite-perfil",
-    name: "EditePet",
+    path: "/atualizar-perfil",
+    name: "AtualizarPerfil",
     component: () =>
-      import(/* webpackChunkName: "AdotePet" */ "../views/EditePerfil.vue"),
+      import(
+        /* webpackChunkName: "AtualizarPerfil" */ "../views/AtualizarPerfil.vue"
+      ),
   },
 ];
 

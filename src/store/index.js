@@ -17,7 +17,7 @@ export default new Vuex.Store({
     async loginUser({ dispatch }, { email, password }) {
       let token = (await loginUser(email, password)).data.token;
       sessionStorage.setItem("token", token);
-      dispatch("loginUserByToken, token");
+      dispatch("loginUserByToken", token);
     },
     async loginUserByToken({ commit }, token) {
       api.defaults.headers.common["X-ACCESS-TOKEN"] = token;

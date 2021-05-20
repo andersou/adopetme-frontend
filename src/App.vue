@@ -80,10 +80,6 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  created() {
-    let token = window.sessionStorage.getItem("token");
-    if (token) this.$store.dispatch("loginUserByToken", token);
-  },
   computed: {
     ...mapState(["user"]),
   },
