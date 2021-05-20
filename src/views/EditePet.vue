@@ -9,7 +9,7 @@
                 Olá, $USUARIO
               </h1>
               <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
-              Adicione seu peludinho para adoção.
+              Edite as informações do seu Pet.
               </h1>
                <div class="container">
                 <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
@@ -46,12 +46,12 @@
               </div>
 
                 <b-field label="Nome" expanded>
-                  <b-input></b-input>
+                  <b-input value="Nome do seu Pet"></b-input>
                 </b-field>
               <div class="columns">
-                <div class="column">
+                <div class="column is-two-fifths">
                   <b-field label="Animal" expanded>
-                  <b-select>
+                  <b-select placeholder="Não é possivel editar essa informação" disabled>
                     <option>Gato</option>
                     <option>Cachorro</option>
                   </b-select>
@@ -83,7 +83,7 @@
                 {{ radioButton }}
             </p>
                 </div>
-              <div class="column">
+              <div class="column ">
                 <b-field label="Sexo" expanded>
                   <b-select>
                     <option>Macho</option>
