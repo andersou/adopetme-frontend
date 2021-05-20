@@ -5,6 +5,12 @@
         <div class="column is-10 is-offset-1">
           <div class="card ">
             <div class="card-content">
+              <h1 class="is-size-3 is-uppercase has-text-weight-light">
+                Olá, $USUARIO
+              </h1>
+              <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
+              Adicione seu peludinho para adoção.
+              </h1>
                <div class="container">
                 <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
                   <figure class="image ">
@@ -42,8 +48,6 @@
                 <b-field label="Nome" expanded>
                   <b-input></b-input>
                 </b-field>
-
-              <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
               <div class="columns">
                 <div class="column">
                   <b-field label="Animal" expanded>
@@ -80,6 +84,16 @@
             </p>
                 </div>
               <div class="column">
+                <b-field label="Sexo" expanded>
+                  <b-select>
+                    <option>Macho</option>
+                    <option>Fêmea</option>
+                  </b-select>
+                </b-field>
+              </div>
+              </div>
+
+              <div class="column">
                 <b-field label="Data do Nascimento">
                   <b-datepicker
                     placeholder="Click to select..."
@@ -89,15 +103,11 @@
                   </b-datepicker>
                 </b-field>
                 </div>
-              </div>
-              </div>
-
-              
-
+              <div class="column">
               <b-field label="Descrição" class="descricao">
                 <b-input maxlength="200" type="textarea"></b-input>
               </b-field>
-
+              </div>
               <div class="buttons">
                 <b-button type="is-primary" outlined>Enviar</b-button>
               </div>
