@@ -6,7 +6,7 @@
           <div class="card ">
             <div class="card-content">
               <h1 class="is-size-3 is-uppercase has-text-weight-light">
-                Olá, $USUARIO
+                Olá, {{user.firstName}}
               </h1>
               <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
                 Edite as informações do seu perfil.
@@ -295,9 +295,13 @@ import Password from "vue-password-strength-meter";
 import { getEstados, getMunicipios } from "../services/ibge";
 import { registerUser } from "../services/api";
 import {mask} from 'vue-the-mask';
+import { mapState } from "vuex";
 export default {
   name: "Registro",
   components: { Password },
+  computed: {
+    ...mapState(["user"]),
+  },
   directives: {
     mask(el, binding) {
       binding.value ? mask(el, binding) : (el.oninput = null)
