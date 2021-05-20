@@ -20,7 +20,52 @@
       </template>
 
       <template #end>
-        <b-navbar-item tag="router-link" :to="{ path: '/registro' }">
+        <b-dropdown
+          v-if="user.id"
+          position="is-bottom-left"
+          append-to-body
+          aria-role="menu"
+        >
+          <template #trigger>
+            <a class="navbar-item" role="button">
+              <span>Menu</span>
+              <b-icon icon="menu-down"></b-icon>
+            </a>
+          </template>
+
+          <b-dropdown-item custom aria-role="menuitem">
+            Logged as <b>{{ user.firstName }} {{ user.lastName }}</b>
+          </b-dropdown-item>
+          <hr class="dropdown-divider" />
+          <b-dropdown-item has-link aria-role="menuitem">
+            <a href="https://google.com" target="_blank">
+              <b-icon icon="link"></b-icon>
+              Google (link)
+            </a>
+          </b-dropdown-item>
+          <b-dropdown-item value="home" aria-role="menuitem">
+            <b-icon icon="home"></b-icon>
+            Home
+          </b-dropdown-item>
+          <b-dropdown-item value="products" aria-role="menuitem">
+            <b-icon icon="cart"></b-icon>
+            Products
+          </b-dropdown-item>
+          <b-dropdown-item value="blog" disabled aria-role="menuitem">
+            <b-icon icon="book-open"></b-icon>
+            Blog
+          </b-dropdown-item>
+          <hr class="dropdown-divider" aria-role="menuitem" />
+          <b-dropdown-item value="settings">
+            <b-icon icon="settings"></b-icon>
+            Settings
+          </b-dropdown-item>
+          <b-dropdown-item value="logout" aria-role="menuitem">
+            <b-icon icon="logout"></b-icon>
+            Logout
+          </b-dropdown-item>
+        </b-dropdown>
+        <b-navbar-item v-else tag="router-link" :to="{ path: '/registro' }">
           <div class="buttons">
             <a class="button is-primary">
               <strong>Registrar</strong>
@@ -32,7 +77,18 @@
     <router-view />
   </div>
 </template>
-
+<script>
+import { mapState } from "vuex";
+export default {
+  created() {
+    let token = window.sessionStorage.getItem("token");
+    if (token) this.$store.dispatch("loginUserByToken", token);
+  },
+  computed: {
+    ...mapState(["user"]),
+  },
+};
+</script>
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 @include touch {

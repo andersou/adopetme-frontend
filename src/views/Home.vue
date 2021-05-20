@@ -5,23 +5,24 @@
       <div class="card card-login">
         <div class="card-content">
           <div class="content">
-            <b-field label="Email">
+            <b-field label="Email" :type="{ 'is-danger': error }">
               <b-input
                 type="email"
                 placeholder="jon@arbuckle.com"
-                maxlength="30"
+                v-model="email"
               >
               </b-input>
             </b-field>
 
-            <b-field label="Senha">
-              <b-input type="password" placeholder="********" password-reveal>
+            <b-field label="Senha" :type="{ 'is-danger': error }">
+              <b-input
+                type="password"
+                placeholder="********"
+                v-model="password"
+              >
               </b-input>
             </b-field>
-            <b-button
-              tag="router-link"
-              :to="{ path: '/dashboard' }"
-              type="is-primary is-light"
+            <b-button @click="login" type="is-primary is-light"
               >Entrar</b-button
             >
           </div>
@@ -32,9 +33,27 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Home",
   components: {},
+  data() {
+    return { email: "", password: "", error: false };
+  },
+  methods: {
+    ...mapActions(["loginUser"]),
+    login() {
+      this.loginUser({
+        email: this.email,
+        password: this.password,
+      })
+        .then(() => {
+          this.$router.push("/dashboard");
+        })
+        .catch(() => (this.error = true));
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

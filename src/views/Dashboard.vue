@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="is-size-2 is-uppercase has-text-weight-light mt-4">
-      Bem vindo, $USUARIO
+      Bem vindo, {{ user.firstName }}
     </h1>
     <h2 class="is-size-4 mb-4">O que deseja fazer?</h2>
     <div class="columns">
@@ -20,8 +20,12 @@
           </div>
           <footer class="card-footer">
             <p class="card-footer-item">
-               <b-button  tag="router-link" :to="{ path: '/adote-pet' }"
-            type="is-primary">Clique aqui e vamos começar!</b-button>
+              <b-button
+                tag="router-link"
+                :to="{ path: '/adote-pet' }"
+                type="is-primary"
+                >Clique aqui e vamos começar!</b-button
+              >
             </p>
           </footer>
         </div>
@@ -41,8 +45,12 @@
           </div>
           <footer class="card-footer">
             <p class="card-footer-item">
-               <b-button  tag="router-link" :to="{ path: '/cadastro-pet' }"
-            type="is-primary">Clique aqui e vamos começar!</b-button>
+              <b-button
+                tag="router-link"
+                :to="{ path: '/cadastro-pet' }"
+                type="is-primary"
+                >Clique aqui e vamos começar!</b-button
+              >
             </p>
           </footer>
         </div>
@@ -52,7 +60,12 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["user"]),
+  },
+};
 </script>
 
 <style lang="scss" scoped>
