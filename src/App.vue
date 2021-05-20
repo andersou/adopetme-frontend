@@ -17,6 +17,9 @@
         <b-navbar-item tag="router-link" :to="{ path: '/about' }">
           Sobre o projeto
         </b-navbar-item>
+        <b-navbar-item tag="router-link" :to="{ path: '/Solicitacoes' }">
+          Solicitações
+        </b-navbar-item>
       </template>
 
       <template #end>
