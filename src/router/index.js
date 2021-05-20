@@ -21,12 +21,6 @@ let middlewareAuth = function(to, from, next) {
           next({ path: "/" });
         });
   }
-  // let token = sessionStorage.getItem("token");
-  // if (token) {
-
-  // } else {
-  //   next({ path: "/" });
-  // }
 };
 const routes = [
   {
