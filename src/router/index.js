@@ -76,6 +76,14 @@ const routes = [
         /* webpackChunkName: "AtualizarPerfil" */ "../views/AtualizarPerfil.vue"
       ),
   },
+  {
+    path: "/solicitacoes",
+    name: "Solicitacoes",
+    component: () =>
+      import(
+        /* webpackChunkName: "Solicitacoes" */ "../views/Solicitacoes.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({
