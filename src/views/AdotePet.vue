@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="container">
-    <div class="is-flex is-flex-wrap-wrap is-justify-content-center ">
+    <div class="is-flex is-flex-wrap-wrap is-justify-content-center mb-6 ">
     <b-carousel-list class="mt-6" v-model="test" :data="items" :items-to-show="2">
         <template #item="list">
             <div class="card">
@@ -114,8 +114,8 @@ export default {
     data() {
         return {
             total: 200,
-            current: 10,
-            perPage: 10,
+            current: 1,
+            perPage: 5,
             rangeBefore: 3,
             rangeAfter: 1,
             order: '',
