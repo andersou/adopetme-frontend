@@ -128,13 +128,14 @@
                       ref="datepicker"
                       expanded
                       placeholder="Select a date"
+                      v-model="register.birthdayDate"
                     >
                     </b-datepicker>
                     <b-button
                       @click="$refs.datepicker.toggle()"
                       icon-left="calendar-today"
                       type="is-primary"
-                      v-model="register.birthdayDate"
+                     
                     />
                   </b-field>
                 </div>
