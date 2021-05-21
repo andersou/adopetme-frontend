@@ -93,7 +93,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Email *">
+                  <b-field
+                    label="Email *"
+                    :type="{ 'is-danger': isError('email') }"
+                    :message="getErrorMessage('email')"
+                  >
                     <b-input
                       v-model="register.email"
                       placeholder="Email"
@@ -138,7 +142,6 @@
                       placeholder="Fone"
                       validation-message="Entre com um telefone válido"
                       v-model="register.phone"
-                      
                       v-mask.raw="['+55 (##) # ####-####']"
                     >
                     </b-input>
@@ -303,18 +306,19 @@
 import Password from "vue-password-strength-meter";
 import { getEstados, getMunicipios } from "../services/ibge";
 import { registerUser } from "../services/api";
-import {mask} from 'vue-the-mask';
+import { mask } from "vue-the-mask";
 export default {
   name: "Registro",
   components: { Password },
   directives: {
     mask(el, binding) {
-      binding.value ? mask(el, binding) : (el.oninput = null)
-    }
+      binding.value ? mask(el, binding) : (el.oninput = null);
+    },
   },
 
   data() {
     return {
+      formErrors: [],
       avatar: null,
       imageData: null,
       passwordConfirm: "",
@@ -350,6 +354,17 @@ export default {
   },
 
   methods: {
+    isError(field) {
+      return !!this.getErrorMessage(field);
+    },
+    getErrorMessage(field) {
+      let result = this.formErrors.find((error) => error.param == field);
+
+      if (result) {
+        return result.msg;
+      }
+      return "";
+    },
     loadMunicipios() {
       console.log("Pegando cidades");
       if (this.register.state) {
@@ -382,11 +397,13 @@ export default {
           .replaceAll("-", "/")
       );
       console.log(formData);
+      this.formErrors = [];
       registerUser(formData)
         .then(() => {
           this.$router.replace("/dashboard");
         })
-        .catch(() => {
+        .catch((error) => {
+          this.formErrors = error.response.data.errors;
           this.$buefy.toast.open({
             message: "Ocorreu um erro ao efetuar o registro.",
             type: "is-danger",
