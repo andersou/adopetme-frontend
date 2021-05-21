@@ -6,7 +6,7 @@
           <div class="card ">
             <div class="card-content">
               <h1 class="is-size-3 is-uppercase has-text-weight-light">
-                Olá, $USUARIO
+                Olá, {{ user.firstName }}
               </h1>
               <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
               Adicione seu peludinho para adoção.
@@ -120,9 +120,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Cadastro",
   components: {},
+  computed: {
+    ...mapState(["user"]),
+  },
   
   data() {
     const today = new Date();
