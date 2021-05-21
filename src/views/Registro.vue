@@ -49,7 +49,7 @@
                       type="text"
                       v-model="register.firstName"
                       validation-message="Entre com um nome válido"
-                      pattern="[A-ZA-z]*"
+                      pattern="[A-ZA-z çâêîôûáéíóúàèìòùãẽĩõũ]*"
                       minlength="3"
                       maxlength="255"
                     ></b-input>
@@ -82,8 +82,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Gênero *" v-model="register.sex">
-                    <b-select placeholder="Selecione o gênero" expanded>
+                  <b-field label="Gênero *">
+                    <b-select
+                    v-model="register.sex" 
+                    placeholder="Selecione o gênero" 
+                    expanded>
                       <option value="M">Masculino</option>
                       <option value="F">Feminino</option>
                       <option value="B">Não binário</option>
