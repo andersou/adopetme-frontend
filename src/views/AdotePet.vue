@@ -1,6 +1,78 @@
 <template>
     <main>
-    <div class="column">
+    <section class="filtro">
+      <div class="container">
+          <div class="box">
+            <div class="columns">
+                <div class="column is-one-third mt-5">
+                    <img src="../assets/pet-adoption.png">
+                </div>
+                <div class="column">
+                    <h1 class="is-size-3 is-uppercase has-text-weight-light">
+                        {{user.firstName}},
+                    </h1>
+                    <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
+                        Aqui você pode filtrar pelos animais desejados.
+                    </h1><br>
+                 <b-field label="Nome" :label-position="labelPosition">
+                    <b-autocomplete
+                        rounded
+                        :data="['']"
+                        placeholder="Informação específica do Pet"
+                        icon="magnify"
+                        clearable
+                        @select="option => selected = option">
+                        <template #empty>No results found</template>
+                    </b-autocomplete>
+                 </b-field>
+                 <b-field grouped>
+                 <b-field label="Animal">
+                    <b-select placeholder="Animal" icon="cat" rounded>
+                        <option value="1">Gato</option>
+                        <option value="2">Cachorro</option>
+                    </b-select>
+                </b-field>
+                <b-field label="Porte">
+                    <b-select placeholder="Porte" icon="foot-print" rounded>
+                        <option value="1">Pequeno</option>
+                        <option value="2">Médio</option>
+                        <option value="2">Grande</option>
+                    </b-select>
+                </b-field>
+                <b-field label="Sexo">
+                    <b-select placeholder="Sexo" icon="gender-male-female" rounded>
+                        <option value="1">Macho</option>
+                        <option value="2">Fêmea</option>
+                    </b-select>
+                </b-field>
+                 </b-field>
+                </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    <div class="container">
+        <div class="column">
+     <b-pagination
+            :total="total"
+            v-model="current"
+            :range-before="rangeBefore"
+            :range-after="rangeAfter"
+            :order="order"
+            :size="size"
+            :simple="isSimple"
+            :rounded="isRounded"
+            :per-page="perPage"
+            :icon-prev="prevIcon"
+            :icon-next="nextIcon"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page">
+        </b-pagination>
+        </div>
+    </div>
+    <div class="container">
     <div class="is-flex is-flex-wrap-wrap is-justify-content-center ">
     <b-carousel-list class="mt-6" v-model="test" :data="items" :items-to-show="2">
         <template #item="list">
@@ -34,9 +106,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+    computed: {
+    ...mapState(["user"]),
+    },
     data() {
         return {
+            total: 200,
+            current: 10,
+            perPage: 10,
+            rangeBefore: 3,
+            rangeAfter: 1,
+            order: '',
+            size: '',
+            isSimple: false,
+            isRounded: false,
+            prevIcon: 'chevron-left',
+            nextIcon: 'chevron-right',
             test: 0,
             items: [
                 {
@@ -91,10 +178,13 @@ export default {
 
 <style lang="scss" scoped>
     main{
-        background:   url(../assets/capa.png),
-                      url(../assets/ruido.png),
-                      linear-gradient(110deg, $adopetme-logo-color, $primary);
-        background-attachment: fixed;
-        min-height: calc(100vh - 52px)
+        min-height: calc(100vh - 52px);
+        
     }
+    .filtro{
+    background: url(../assets/capa.png), url(../assets/ruido.png),
+    linear-gradient(110deg, $adopetme-logo-color, $primary);    
+    padding: 40px
+    }
+
 </style>
