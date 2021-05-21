@@ -81,7 +81,7 @@
 
             <hr class="dropdown-divider" aria-role="menuitem" />
             <b-dropdown-item value="logout" aria-role="menuitem">
-              <router-link to="/solicitacoes">
+              <router-link to="/">
                 <b-icon icon="logout" class="pr-5 pl-3"> </b-icon>Logout
               </router-link>
             </b-dropdown-item>
@@ -97,7 +97,7 @@
       </b-navbar>
       <router-view />
 
-    <footer class="footer">
+   <!-- <footer class="footer">
       <div class="content has-text-centered">
         <p>
           <strong>SIGA-NOS</strong>
@@ -129,7 +129,7 @@
         </figure>
         </div>
       </div>
-    </footer>
+    </footer> -->
     </div>
   </main>
 </template>
