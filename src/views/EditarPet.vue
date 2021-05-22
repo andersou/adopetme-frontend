@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FormPet from "../components/FormPet.vue";
+import FormPet from "../components/forms/FormPet.vue";
 export default {
   name: "EditarPet",
   components: { FormPet },
