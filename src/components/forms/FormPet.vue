@@ -22,7 +22,7 @@
                       :src="imageData"
                       alt=""
                     />
-                    <img v-else class="img-avatar" src="src/assets/pet.png" />
+                    <img v-else class="img-avatar" src="~assets/pet.png" />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
