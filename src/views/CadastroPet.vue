@@ -9,10 +9,12 @@
                 Olá, {{ user.firstName }}
               </h1>
               <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
-              Adicione seu peludinho para adoção.
+                Adicione seu peludinho para adoção.
               </h1>
-               <div class="container">
-                <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6">
+              <div class="container">
+                <div
+                  class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
+                >
                   <figure class="image ">
                     <img
                       class="img-avatar is-rounded"
@@ -20,11 +22,7 @@
                       :src="imageData"
                       alt=""
                     />
-                    <img
-                      v-else
-                      class="img-avatar"
-                      src="../assets/pet.png"
-                    />
+                    <img v-else class="img-avatar" src="../assets/pet.png" />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
@@ -45,52 +43,57 @@
                 </div>
               </div>
 
-                <b-field label="Nome" expanded>
-                  <b-input></b-input>
-                </b-field>
+              <b-field label="Nome" expanded>
+                <b-input></b-input>
+              </b-field>
               <div class="columns">
                 <div class="column">
                   <b-field label="Animal" expanded>
-                  <b-select>
-                    <option>Gato</option>
-                    <option>Cachorro</option>
-                  </b-select>
-                </b-field>
+                    <b-select>
+                      <option>Gato</option>
+                      <option>Cachorro</option>
+                    </b-select>
+                  </b-field>
                 </div>
                 <div class="column">
                   <b-field label="Porte">
-            <b-radio-button v-model="radioButton"
-                native-value="Pequeno"
-                type="is-primary is-light is-outlined">
-                <span>Pequeno</span>
-            </b-radio-button>
+                    <b-radio-button
+                      v-model="radioButton"
+                      native-value="Pequeno"
+                      type="is-primary is-light is-outlined"
+                    >
+                      <span>Pequeno</span>
+                    </b-radio-button>
 
-            <b-radio-button v-model="radioButton"
-                native-value="Médio"
-                type="is-primary is-light is-outlined">
-                <span>Médio</span>
-            </b-radio-button>
+                    <b-radio-button
+                      v-model="radioButton"
+                      native-value="Médio"
+                      type="is-primary is-light is-outlined"
+                    >
+                      <span>Médio</span>
+                    </b-radio-button>
 
-            <b-radio-button v-model="radioButton"
-                native-value="Grande"
-                type="is-primary is-light is-outlined">
-                <span>Grande</span>
-            </b-radio-button>
-
-           </b-field>
-            <p class="content">
-                <b>Escolha:</b>
-                {{ radioButton }}
-            </p>
+                    <b-radio-button
+                      v-model="radioButton"
+                      native-value="Grande"
+                      type="is-primary is-light is-outlined"
+                    >
+                      <span>Grande</span>
+                    </b-radio-button>
+                  </b-field>
+                  <p class="content">
+                    <b>Escolha:</b>
+                    {{ radioButton }}
+                  </p>
                 </div>
-              <div class="column">
-                <b-field label="Sexo" expanded>
-                  <b-select>
-                    <option>Macho</option>
-                    <option>Fêmea</option>
-                  </b-select>
-                </b-field>
-              </div>
+                <div class="column">
+                  <b-field label="Sexo" expanded>
+                    <b-select>
+                      <option>Macho</option>
+                      <option>Fêmea</option>
+                    </b-select>
+                  </b-field>
+                </div>
               </div>
 
               <div class="column">
@@ -102,11 +105,11 @@
                   >
                   </b-datepicker>
                 </b-field>
-                </div>
+              </div>
               <div class="column">
-              <b-field label="Descrição" class="descricao">
-                <b-input maxlength="200" type="textarea"></b-input>
-              </b-field>
+                <b-field label="Descrição" class="descricao">
+                  <editor initialEditType="wysiwyg" :options="editorOptions" />
+                </b-field>
               </div>
               <div class="buttons">
                 <b-button type="is-primary" outlined>Enviar</b-button>
@@ -120,22 +123,56 @@
 </template>
 
 <script>
+import "codemirror/lib/codemirror.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
+
+import { Editor } from "@toast-ui/vue-editor";
+import "@toast-ui/editor/dist/i18n/pt-br";
 import { mapState } from "vuex";
 export default {
   name: "Cadastro",
-  components: {},
+  components: { Editor },
   computed: {
     ...mapState(["user"]),
   },
-  
+
   data() {
     const today = new Date();
 
     return {
       avatar: null,
       imageData: null,
-      radioButton: '',
+      radioButton: "",
       date: new Date(),
+      editorOptions: {
+        language: "pt",
+        useCommandShortcut: true,
+        useDefaultHTMLSanitizer: true,
+        usageStatistics: false,
+        hideModeSwitch: true,
+        toolbarItems: [
+          "heading",
+          "bold",
+          "italic",
+          "strike",
+          "divider",
+          "hr",
+          "quote",
+          "divider",
+          "ul",
+          "ol",
+          "task",
+          "indent",
+          "outdent",
+          "divider",
+          "table",
+          "image",
+          "link",
+          "divider",
+          "code",
+          "codeblock",
+        ],
+      },
       minDate: new Date(
         today.getFullYear() - 80,
         today.getMonth(),
@@ -146,7 +183,6 @@ export default {
         today.getMonth(),
         today.getDate()
       ),
-
     };
   },
   methods: {
@@ -180,9 +216,8 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  background:   url(../assets/capa.png),
-                url(../assets/ruido.png),
-                linear-gradient(110deg, $adopetme-logo-color, $primary);
+  background: url(../assets/capa.png), url(../assets/ruido.png),
+    linear-gradient(110deg, $adopetme-logo-color, $primary);
   background-attachment: fixed;
   //@include desktop {
   min-height: calc(100vh - 52px);
@@ -197,5 +232,4 @@ main {
     margin-right: 3rem;
   }
 }
-
 </style>
