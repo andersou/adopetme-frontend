@@ -3,7 +3,7 @@ $adopetme-navbar-height: 59px + $adopetme-navbar-border-height;
 $adopetme-logo-color: #8c67ef;
 
 @mixin adopetme-background {
-  background: url(../assets/capa.png), url(../assets/ruido.png),
+  background: url("~assets/capa.png"), url("~assets/ruido.png"),
     linear-gradient(110deg, $adopetme-logo-color, $primary);
   background-attachment: fixed;
   //@include desktop {
