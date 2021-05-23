@@ -267,4 +267,16 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+main {
+  @include adopetme-background;
+}
+.img-avatar {
+  max-width: 280px;
+}
+@include tablet {
+  .img-avatar {
+    margin-right: 3rem;
+  }
+}
+</style>
