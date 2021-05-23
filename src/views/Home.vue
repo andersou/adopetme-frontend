@@ -77,11 +77,15 @@ export default {
 @include touch {
   .home-image {
     position: absolute;
+    top: 5rem;
     max-height: 90%;
     max-width: 90%;
   }
   .home {
     min-height: calc(100vh - #{$adopetme-navbar-height});
+  }
+  .card-login {
+    background-color: rgba(255, 255, 255, 0.9);
   }
 }
 </style>
