@@ -85,7 +85,7 @@ export default {
     min-height: calc(100vh - #{$adopetme-navbar-height});
   }
   .card-login {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
   }
 }
 </style>
