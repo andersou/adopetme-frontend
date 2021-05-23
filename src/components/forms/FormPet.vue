@@ -1,5 +1,5 @@
 <template>
-  <main>
+   <main>
     <div class="container pt-6 pb-4">
       <div class="columns">
         <div class="column is-10 is-offset-1">
@@ -22,7 +22,7 @@
                       :src="imageData"
                       alt=""
                     />
-                    <img v-else class="img-avatar" src="~assets/pet.png" />
+                    <img v-else class="img-avatar" src="../../assets/pet.png" />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
@@ -43,39 +43,42 @@
                 </div>
               </div>
 
-              <b-field label="Nome" expanded>
-                <b-input></b-input>
+              <b-field label="Nome" expanded >
+                <b-input 
+                v-model="registerPet.name"
+                placeholder="Nome do Pet"
+                ></b-input>
               </b-field>
               <div class="columns">
                 <div class="column">
                   <b-field label="Animal" expanded>
-                    <b-select>
-                      <option>Gato</option>
-                      <option>Cachorro</option>
+                    <b-select v-model="registerPet.typeAnimal">
+                      <option value="C">Gato</option>
+                      <option value="D">Cachorro</option>
                     </b-select>
                   </b-field>
                 </div>
                 <div class="column">
                   <b-field label="Porte">
                     <b-radio-button
-                      v-model="radioButton"
-                      native-value="Pequeno"
+                      v-model="registerPet.sizePet"
+                      native-value="P"
                       type="is-primary is-light is-outlined"
                     >
                       <span>Pequeno</span>
                     </b-radio-button>
 
                     <b-radio-button
-                      v-model="radioButton"
-                      native-value="Médio"
+                      v-model="registerPet.sizePet"
+                      native-value="M"
                       type="is-primary is-light is-outlined"
                     >
                       <span>Médio</span>
                     </b-radio-button>
 
                     <b-radio-button
-                      v-model="radioButton"
-                      native-value="Grande"
+                      v-model="registerPet.sizePet"
+                      native-value="G"
                       type="is-primary is-light is-outlined"
                     >
                       <span>Grande</span>
@@ -83,14 +86,14 @@
                   </b-field>
                   <p class="content">
                     <b>Escolha:</b>
-                    {{ radioButton }}
+                    {{ registerPet.sizePet }}
                   </p>
                 </div>
                 <div class="column">
                   <b-field label="Sexo" expanded>
-                    <b-select>
-                      <option>Macho</option>
-                      <option>Fêmea</option>
+                    <b-select v-model="registerPet.sex">
+                      <option value="M">Macho</option>
+                      <option value="F">Fêmea</option>
                     </b-select>
                   </b-field>
                 </div>
@@ -99,20 +102,29 @@
               <div class="column">
                 <b-field label="Data do Nascimento">
                   <b-datepicker
+                    v-model="registerPet.birthdayDate"
                     placeholder="Click to select..."
                     :min-date="minDate"
                     :max-date="maxDate"
                   >
                   </b-datepicker>
+                  <b-button
+                      @click="$refs.datepicker.toggle()"
+                      icon-left="calendar-today"
+                      type="is-primary"
+                     />
                 </b-field>
               </div>
               <div class="column">
                 <b-field label="Descrição" class="descricao">
-                  <editor initialEditType="wysiwyg" :options="editorOptions" />
+                  <editor
+                  v-model="registerPet.description" 
+                  initialEditType="wysiwyg" 
+                  :options="editorOptions" />
                 </b-field>
               </div>
               <div class="buttons">
-                <b-button type="is-primary" outlined>Enviar</b-button>
+                <b-button type="is-primary"  @click="doRegister" outlined>Enviar</b-button>
               </div>
             </div>
           </div>
@@ -128,6 +140,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 
 import { Editor } from "@toast-ui/vue-editor";
 import "@toast-ui/editor/dist/i18n/pt-br";
+import { registerPet } from "../../services/api";
 import { mapState } from "vuex";
 export default {
   name: "Cadastro",
@@ -142,8 +155,14 @@ export default {
     return {
       avatar: null,
       imageData: null,
-      radioButton: "",
-      date: new Date(),
+      registerPet: {
+        name: "", //
+        typeAnimal: "D", //
+        birthdayDate: new Date(), //
+        sex: "M", //
+        description: "", //
+        sizePet: "P" 
+      },
       editorOptions: {
         language: "pt",
         useCommandShortcut: true,
@@ -186,6 +205,41 @@ export default {
     };
   },
   methods: {
+    doRegister() {
+      let formData = new FormData();
+      for (let prop in this.registerPet) {
+        if (this.registerPet[prop]) formData.set(prop, this.registerPet[prop]);
+      }
+      formData.set("avatar", this.avatar);
+      formData.set(
+        "birthdayDate",
+        this.registerPet.birthdayDate
+          .toISOString()
+          .split("T")[0]
+          .replaceAll("-", "/")
+      );
+      console.log(formData);
+      this.formErrors = [];
+      registerPet(formData)
+        .then(() => {
+          this.$router.replace("/dashboard")
+          this.$buefy.toast.open({
+            message: "Seu pet foi cadastrado com sucesso!.",
+            type: "is-primary",
+          });
+        })
+        .catch((error) => {
+          this.formErrors = error.response.data.errors;
+          this.$buefy.toast.open({
+            message: "Ocorreu um erro ao cadastrar o pet.",
+            type: "is-danger",
+          });
+        });
+      //instanciar formdata
+      //preencher formdata
+      //colocar a imagem
+      //enviar
+    },
     deleteDropFile() {
       this.avatar = null;
     },
@@ -210,20 +264,7 @@ export default {
         this.previewImage();
       }
     },
-  },
-};
-</script>
-
-<style lang="scss">
-main {
-  @include adopetme-background;
-}
-.img-avatar {
-  max-width: 280px;
-}
-@include tablet {
-  .img-avatar {
-    margin-right: 3rem;
   }
 }
-</style>
+</script>
+<style lang="scss" scoped></style>
