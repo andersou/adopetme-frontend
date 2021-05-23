@@ -46,7 +46,11 @@
               </div>
               <div class="columns">
                 <div class="column is-3 is-offset-2">
-                  <b-field label="Animal">
+                  <b-field
+                    label="Animal"
+                    :type="{ 'is-danger': isError('specie') }"
+                    :message="getErrorMessage('specie')"
+                  >
                     <b-select
                       v-model="register.specie"
                       placeholder="Selecione uma opção"
@@ -59,7 +63,11 @@
                   </b-field>
                 </div>
                 <div class="column is-5">
-                  <b-field label="Nome">
+                  <b-field
+                    label="Nome"
+                    :type="{ 'is-danger': isError('name') }"
+                    :message="getErrorMessage('name')"
+                  >
                     <b-input
                       v-model="register.name"
                       placeholder="Nome do Pet"
@@ -70,7 +78,11 @@
 
               <div class="columns">
                 <div class="column is-8 is-offset-2">
-                  <b-field label="Porte">
+                  <b-field
+                    label="Porte"
+                    :type="{ 'is-danger': isError('size') }"
+                    :message="getErrorMessage('size')"
+                  >
                     <b-slider
                       size="is-medium"
                       :min="0"
@@ -97,7 +109,11 @@
               </div>
               <div class="columns">
                 <div class="column is-4 is-offset-2">
-                  <b-field label="Data do Nascimento">
+                  <b-field
+                    label="Data do Nascimento"
+                    :type="{ 'is-danger': isError('birthdayDate') }"
+                    :message="getErrorMessage('birthdayDate')"
+                  >
                     <b-datepicker
                       v-model="register.birthdayDate"
                       placeholder="Selecione uma data"
@@ -114,24 +130,42 @@
                   </b-field>
                 </div>
                 <div class="column is-4 ">
-                  <b-field label="Sexo">
-                    <b-select v-model="register.sex" expanded>
+                  <b-field
+                    label="Sexo"
+                    :type="{ 'is-danger': isError('sex') }"
+                    :message="getErrorMessage('sex')"
+                  >
+                    <b-select
+                      v-model="register.sex"
+                      placeholder="Selecione o sexo"
+                      expanded
+                    >
                       <option value="M">Macho</option>
                       <option value="F">Fêmea</option>
+                      <option value="N">Não sei identificar</option>
                     </b-select>
                   </b-field>
                 </div>
               </div>
               <div class="columns">
                 <div class="column is-8 is-offset-2">
-                  <b-field label="Descrição breve">
+                  <b-field
+                    label="Descrição breve"
+                    :type="{ 'is-danger': isError('simpleDescription') }"
+                    :message="getErrorMessage('simpleDescription')"
+                  >
                     <b-input v-model="register.simpleDescription"></b-input>
                   </b-field>
                 </div>
               </div>
               <div class="columns">
                 <div class="column is-8 is-offset-2">
-                  <b-field label="Descrição" class="descricao">
+                  <b-field
+                    label="Descrição"
+                    class="descricao"
+                    :type="{ 'is-danger': isError('detailedDescription') }"
+                    :message="getErrorMessage('detailedDescription')"
+                  >
                     <editor
                       initialEditType="wysiwyg"
                       :options="editorOptions"
@@ -173,6 +207,7 @@ export default {
     const today = new Date();
 
     return {
+      formErrors: [],
       avatar: null,
       imageData: null,
       register: {
@@ -180,7 +215,7 @@ export default {
         birthdayDate: new Date(),
         size: 2,
         specie: null,
-        sex: "M",
+        sex: null,
         simpleDescription: "",
         detailedDescription: "",
       },
@@ -226,6 +261,18 @@ export default {
     };
   },
   methods: {
+    isError(field) {
+      return !!this.getErrorMessage(field);
+    },
+    getErrorMessage(field) {
+      if (!this.formErrors) return "";
+      let result = this.formErrors.find((error) => error.param == field);
+
+      if (result) {
+        return result.msg;
+      }
+      return "";
+    },
     doRegister() {
       let formData = new FormData();
       for (let prop in this.register) {
