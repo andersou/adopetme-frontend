@@ -1,14 +1,16 @@
 <template>
-   <main>
+  <main>
     <div class="container pt-6 pb-4">
       <div class="columns">
         <div class="column is-10 is-offset-1">
           <div class="card ">
             <div class="card-content">
-              <h1 class="is-size-3 is-uppercase has-text-weight-light">
+              <h1 class="is-size-3 is-uppercase has-text-weight-light ml-6">
                 Olá, {{ user.firstName }}
               </h1>
-              <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
+              <h1
+                class="is-size-6 is-uppercase has-text-weight-light pb-2 ml-6"
+              >
                 Adicione seu peludinho para adoção.
               </h1>
               <div class="container">
@@ -24,7 +26,7 @@
                     />
                     <img v-else class="img-avatar" src="../../assets/pet.png" />
                   </figure>
-                  <b-field label="Foto Pessoal" class=" has-text-centered">
+                  <b-field label="Foto" class=" has-text-centered">
                     <b-upload
                       v-model="avatar"
                       accept="image/png,  image/jpeg"
@@ -42,89 +44,107 @@
                   </b-field>
                 </div>
               </div>
-
-              <b-field label="Nome" expanded >
-                <b-input 
-                v-model="registerPet.name"
-                placeholder="Nome do Pet"
-                ></b-input>
-              </b-field>
               <div class="columns">
-                <div class="column">
-                  <b-field label="Animal" expanded>
-                    <b-select v-model="registerPet.typeAnimal">
-                      <option value="C">Gato</option>
-                      <option value="D">Cachorro</option>
+                <div class="column is-3 is-offset-2">
+                  <b-field label="Animal">
+                    <b-select
+                      v-model="register.specie"
+                      placeholder="Selecione uma opção"
+                      expanded
+                    >
+                      <option value="2">Gato</option>
+                      <option value="1">Cachorro</option>
+                      <option value="0">Outro</option>
                     </b-select>
                   </b-field>
                 </div>
-                <div class="column">
-                  <b-field label="Porte">
-                    <b-radio-button
-                      v-model="registerPet.sizePet"
-                      native-value="P"
-                      type="is-primary is-light is-outlined"
-                    >
-                      <span>Pequeno</span>
-                    </b-radio-button>
-
-                    <b-radio-button
-                      v-model="registerPet.sizePet"
-                      native-value="M"
-                      type="is-primary is-light is-outlined"
-                    >
-                      <span>Médio</span>
-                    </b-radio-button>
-
-                    <b-radio-button
-                      v-model="registerPet.sizePet"
-                      native-value="G"
-                      type="is-primary is-light is-outlined"
-                    >
-                      <span>Grande</span>
-                    </b-radio-button>
+                <div class="column is-5">
+                  <b-field label="Nome">
+                    <b-input
+                      v-model="register.name"
+                      placeholder="Nome do Pet"
+                    ></b-input>
                   </b-field>
-                  <p class="content">
-                    <b>Escolha:</b>
-                    {{ registerPet.sizePet }}
-                  </p>
                 </div>
-                <div class="column">
-                  <b-field label="Sexo" expanded>
-                    <b-select v-model="registerPet.sex">
+              </div>
+
+              <div class="columns">
+                <div class="column is-8 is-offset-2">
+                  <b-field label="Porte">
+                    <b-slider
+                      size="is-medium"
+                      :min="0"
+                      :max="4"
+                      :tooltip="false"
+                      v-model="register.size"
+                    >
+                      <template
+                        v-for="(val, idx) in [
+                          'Muito Pequeno',
+                          'Pequeno',
+                          'Médio',
+                          'Grande',
+                          'Muito Grande',
+                        ]"
+                      >
+                        <b-slider-tick :value="idx" :key="val">{{
+                          val
+                        }}</b-slider-tick>
+                      </template>
+                    </b-slider>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-4 is-offset-2">
+                  <b-field label="Data do Nascimento">
+                    <b-datepicker
+                      v-model="register.birthdayDate"
+                      placeholder="Selecione uma data"
+                      ref="datepicker"
+                      :min-date="minDate"
+                      :max-date="maxDate"
+                    >
+                    </b-datepicker>
+                    <b-button
+                      @click="$refs.datepicker.toggle()"
+                      icon-left="calendar-today"
+                      type="is-primary"
+                    />
+                  </b-field>
+                </div>
+                <div class="column is-4 ">
+                  <b-field label="Sexo">
+                    <b-select v-model="register.sex" expanded>
                       <option value="M">Macho</option>
                       <option value="F">Fêmea</option>
                     </b-select>
                   </b-field>
                 </div>
               </div>
+              <div class="columns">
+                <div class="column is-8 is-offset-2">
+                  <b-field label="Descrição breve">
+                    <b-input v-model="register.simpleDescription"></b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-8 is-offset-2">
+                  <b-field label="Descrição" class="descricao">
+                    <editor
+                      initialEditType="wysiwyg"
+                      :options="editorOptions"
+                      ref="toastuiEditor"
+                    />
+                  </b-field>
+                </div>
+              </div>
 
-              <div class="column">
-                <b-field label="Data do Nascimento">
-                  <b-datepicker
-                    v-model="registerPet.birthdayDate"
-                    placeholder="Click to select..."
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                  >
-                  </b-datepicker>
-                  <b-button
-                      @click="$refs.datepicker.toggle()"
-                      icon-left="calendar-today"
-                      type="is-primary"
-                     />
-                </b-field>
-              </div>
-              <div class="column">
-                <b-field label="Descrição" class="descricao">
-                  <editor
-                  v-model="registerPet.description" 
-                  initialEditType="wysiwyg" 
-                  :options="editorOptions" />
-                </b-field>
-              </div>
               <div class="buttons">
-                <b-button type="is-primary"  @click="doRegister" outlined>Enviar</b-button>
+                <b-button type="is-primary" @click="doRegister" outlined
+                  >Enviar</b-button
+                >
               </div>
             </div>
           </div>
@@ -155,13 +175,14 @@ export default {
     return {
       avatar: null,
       imageData: null,
-      registerPet: {
-        name: "", //
-        typeAnimal: "D", //
-        birthdayDate: new Date(), //
-        sex: "M", //
-        description: "", //
-        sizePet: "P" 
+      register: {
+        name: "",
+        birthdayDate: new Date(),
+        size: 2,
+        specie: null,
+        sex: "M",
+        simpleDescription: "",
+        detailedDescription: "",
       },
       editorOptions: {
         language: "pt",
@@ -207,22 +228,24 @@ export default {
   methods: {
     doRegister() {
       let formData = new FormData();
-      for (let prop in this.registerPet) {
-        if (this.registerPet[prop]) formData.set(prop, this.registerPet[prop]);
+      for (let prop in this.register) {
+        if (this.register[prop]) formData.set(prop, this.register[prop]);
       }
-      formData.set("avatar", this.avatar);
+      formData.set("photos", this.avatar);
       formData.set(
         "birthdayDate",
-        this.registerPet.birthdayDate
+        this.register.birthdayDate
           .toISOString()
           .split("T")[0]
           .replaceAll("-", "/")
       );
-      console.log(formData);
+
+      let html = this.$refs.toastuiEditor.invoke("getHtml");
+      formData.set("detailedDescription", html);
       this.formErrors = [];
       registerPet(formData)
         .then(() => {
-          this.$router.replace("/dashboard")
+          this.$router.replace("/dashboard");
           this.$buefy.toast.open({
             message: "Seu pet foi cadastrado com sucesso!.",
             type: "is-primary",
@@ -264,8 +287,8 @@ export default {
         this.previewImage();
       }
     },
-  }
-}
+  },
+};
 </script>
 <style lang="scss" scoped>
 main {
