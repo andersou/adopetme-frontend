@@ -80,5 +80,8 @@ export default {
     max-height: 90%;
     max-width: 90%;
   }
+  .home {
+    min-height: calc(100vh - #{$adopetme-navbar-height});
+  }
 }
 </style>
