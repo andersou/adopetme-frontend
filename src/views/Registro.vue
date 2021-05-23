@@ -405,6 +405,10 @@ export default {
       registerUser(formData)
         .then(() => {
           this.$router.replace("/dashboard");
+          this.$buefy.toast.open({
+            message: "Registro efetuado com sucesso.",
+            type: "is-primary",
+          });
         })
         .catch((error) => {
           this.formErrors = error.response.data.errors;
