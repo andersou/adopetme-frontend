@@ -100,6 +100,7 @@
             </div>
         </template>
     </b-carousel-list>
+
     </div>
     </div>
     </main>
