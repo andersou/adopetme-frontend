@@ -353,7 +353,11 @@
               <div class="columns">
                 <div class="column">
                   <div class="buttons">
-                    <b-button type="is-primary" @click="doRegister" outlined
+                    <b-button
+                      type="is-primary"
+                      @click="doRegister"
+                      outlined
+                      :loading="isRegistering"
                       >Registrar</b-button
                     >
                   </div>
@@ -364,6 +368,25 @@
         </div>
       </div>
     </div>
+    <b-modal
+      v-model="isModalRegisterSuccessActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      @close="$router.replace('/')"
+    >
+      <div class="card">
+        <div class="card-content">
+          <div class="is-flex is-align-items-center">
+            <b-icon icon="check-circle" size="is-large" type="is-success">
+            </b-icon>
+            <h1 class="pl-3">
+              Registro realizado com sucesso!
+            </h1>
+          </div>
+        </div>
+      </div>
+    </b-modal>
   </main>
 </template>
 
@@ -390,6 +413,8 @@ export default {
       errors: {
         passwordConfirmed: true,
       },
+      isModalRegisterSuccessActive: false,
+      isRegistering: false,
       estados: [],
       municipios: [],
       register: {
@@ -431,7 +456,6 @@ export default {
       return "";
     },
     loadMunicipios() {
-      console.log("Pegando cidades");
       if (this.register.state) {
         return getMunicipios(this.register.state).then(
           (resp) => (this.municipios = resp.data)
@@ -449,6 +473,7 @@ export default {
         });
         return;
       }
+      this.isRegistering = true;
       let formData = new FormData();
       for (let prop in this.register) {
         if (this.register[prop]) formData.set(prop, this.register[prop]);
@@ -461,16 +486,13 @@ export default {
           .split("T")[0]
           .replaceAll("-", "/")
       );
-      
-      console.log(formData);
+      formData.set("document", this.register.document.replace(/[.-]/g, ""));
+      if (this.register.phone)
+        formData.set("phone", this.register.phone.replace(/[ ()-]/g, ""));
       this.formErrors = [];
       registerUser(formData)
         .then(() => {
-          this.$router.replace("/dashboard");
-          this.$buefy.toast.open({
-            message: "Registro efetuado com sucesso.",
-            type: "is-primary",
-          });
+          this.isModalRegisterSuccessActive = true;
         })
         .catch((error) => {
           this.formErrors = error.response.data.errors;
@@ -478,6 +500,9 @@ export default {
             message: "Ocorreu um erro ao efetuar o registro.",
             type: "is-danger",
           });
+        })
+        .finally(() => {
+          this.isRegistering = false;
         });
       //instanciar formdata
       //preencher formdata
