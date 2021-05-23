@@ -16,11 +16,7 @@
                       :src="imageData"
                       alt=""
                     />
-                    <img
-                      v-else
-                      class="img-avatar"
-                      src="https://avataaars.io/?avatarStyle=Circle&topType=WinterHat4&accessoriesType=Blank&hatColor=PastelGreen&facialHairType=Blank&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
-                    />
+                    <img v-else class="img-avatar" src="~assets/avatar.svg" />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
@@ -448,6 +444,7 @@ export default {
       return !!this.getErrorMessage(field);
     },
     getErrorMessage(field) {
+      if (!this.formErrors) return "";
       let result = this.formErrors.find((error) => error.param == field);
 
       if (result) {

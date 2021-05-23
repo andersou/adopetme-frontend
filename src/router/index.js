@@ -20,6 +20,7 @@ let middlewareAuth = function(to, from, next) {
           window.sessionStorage.removeItem("token");
           next({ path: "/" });
         });
+    else next({ path: "/" });
   }
 };
 const routes = [

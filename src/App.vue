@@ -37,6 +37,12 @@
         </template>
 
         <template #end>
+          <figure
+            v-if="user.photoUri"
+            class="image is-32x32 is-align-self-center"
+          >
+            <img class="is-rounded" :src="processLink(user.photoUri)" />
+          </figure>
           <b-dropdown
             v-if="user.id"
             position="is-bottom-left"
@@ -46,12 +52,13 @@
             <template #trigger>
               <a class="navbar-item" role="button">
                 <span>Menu</span>
+
                 <b-icon icon="menu-down"></b-icon>
               </a>
             </template>
 
             <b-dropdown-item custom aria-role="menuitem">
-              Logged as <b>{{ user.firstName }} {{ user.lastName }}</b>
+              <b>{{ user.firstName }} {{ user.lastName }}</b>
             </b-dropdown-item>
             <b-dropdown-item has-link aria-role="menuitem">
               <router-link to="/atualizar-perfil">
@@ -97,7 +104,7 @@
       </b-navbar>
       <router-view />
 
-   <!-- <footer class="footer">
+      <!-- <footer class="footer">
       <div class="content has-text-centered">
         <p>
           <strong>SIGA-NOS</strong>
@@ -139,6 +146,16 @@ export default {
   computed: {
     ...mapState(["user"]),
   },
+  methods: {
+    processLink(link) {
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/images/users${link}`;
+      }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -158,8 +175,6 @@ export default {
   font-size: 1.5rem;
 }
 .adopetme-social-media {
-  width: 800px
+  width: 800px;
 }
-
-
 </style>
