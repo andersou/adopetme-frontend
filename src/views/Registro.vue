@@ -43,7 +43,11 @@
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Nome *">
+                  <b-field
+                    label="Nome *"
+                    :type="{ 'is-danger': isError('firstName') }"
+                    :message="getErrorMessage('firstName')"
+                  >
                     <b-input
                       placeholder="Nome"
                       type="text"
@@ -56,7 +60,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Sobrenome *">
+                  <b-field
+                    label="Sobrenome *"
+                    :type="{ 'is-danger': isError('lastName') }"
+                    :message="getErrorMessage('lastName')"
+                  >
                     <b-input
                       type="text"
                       placeholder="Sobrenome"
@@ -71,7 +79,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="CPF *">
+                  <b-field
+                    label="CPF *"
+                    :type="{ 'is-danger': isError('document') }"
+                    :message="getErrorMessage('document')"
+                  >
                     <b-input
                       type="text"
                       placeholder="CPF"
@@ -82,11 +94,16 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Gênero *">
+                  <b-field
+                    label="Gênero *"
+                    :type="{ 'is-danger': isError('sex') }"
+                    :message="getErrorMessage('sex')"
+                  >
                     <b-select
-                    v-model="register.sex" 
-                    placeholder="Selecione o gênero" 
-                    expanded>
+                      v-model="register.sex"
+                      placeholder="Selecione o gênero"
+                      expanded
+                    >
                       <option value="M">Masculino</option>
                       <option value="F">Feminino</option>
                       <option value="B">Não binário</option>
@@ -111,7 +128,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Perfil do Facebook">
+                  <b-field
+                    label="Perfil do Facebook"
+                    :type="{ 'is-danger': isError('facebookProfile') }"
+                    :message="getErrorMessage('facebookProfile')"
+                  >
                     <b-input
                       v-model="register.facebookProfile"
                       placeholder="URL"
@@ -123,7 +144,11 @@
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Data de nascimento *">
+                  <b-field
+                    label="Data de nascimento *"
+                    :type="{ 'is-danger': isError('birthdayDate') }"
+                    :message="getErrorMessage('birthdayDate')"
+                  >
                     <b-datepicker
                       ref="datepicker"
                       expanded
@@ -135,12 +160,15 @@
                       @click="$refs.datepicker.toggle()"
                       icon-left="calendar-today"
                       type="is-primary"
-                     
                     />
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Telefone">
+                  <b-field
+                    label="Telefone"
+                    :type="{ 'is-danger': isError('phone') }"
+                    :message="getErrorMessage('phone')"
+                  >
                     <b-input
                       type="text"
                       placeholder="Fone"
@@ -154,7 +182,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="CEP">
+                  <b-field
+                    label="CEP"
+                    :type="{ 'is-danger': isError('zipcode') }"
+                    :message="getErrorMessage('zipcode')"
+                  >
                     <b-input
                       type="text"
                       placeholder="CEP"
@@ -166,7 +198,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Bairro">
+                  <b-field
+                    label="Bairro"
+                    :type="{ 'is-danger': isError('neighborhood') }"
+                    :message="getErrorMessage('neighborhood')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -180,7 +216,11 @@
               </div>
               <div class="columns">
                 <div class="column is-6">
-                  <b-field label="Rua">
+                  <b-field
+                    label="Rua"
+                    :type="{ 'is-danger': isError('address') }"
+                    :message="getErrorMessage('address')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -192,7 +232,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Número">
+                  <b-field
+                    label="Número"
+                    :type="{ 'is-danger': isError('number') }"
+                    :message="getErrorMessage('number')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -206,7 +250,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Complemento">
+                  <b-field
+                    label="Complemento"
+                    :type="{ 'is-danger': isError('complement') }"
+                    :message="getErrorMessage('complement')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -220,7 +268,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Estado">
+                  <b-field
+                    label="Estado"
+                    :type="{ 'is-danger': isError('state') }"
+                    :message="getErrorMessage('state')"
+                  >
                     <b-select
                       placeholder="Selecione o estado"
                       @input="loadMunicipios"
@@ -237,7 +289,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Municipio">
+                  <b-field
+                    label="Municipio"
+                    :type="{ 'is-danger': isError('city') }"
+                    :message="getErrorMessage('city')"
+                  >
                     <b-select
                       placeholder="Selecione o municipio"
                       v-model="register.city"
@@ -260,7 +316,12 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Senha" class="">
+                  <b-field
+                    label="Senha"
+                    class=""
+                    :type="{ 'is-danger': isError('password') }"
+                    :message="getErrorMessage('password')"
+                  >
                     <password
                       v-model="register.password"
                       maxlength="60"
@@ -400,6 +461,7 @@ export default {
           .split("T")[0]
           .replaceAll("-", "/")
       );
+      
       console.log(formData);
       this.formErrors = [];
       registerUser(formData)
