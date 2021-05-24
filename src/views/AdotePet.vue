@@ -81,12 +81,39 @@
                     <figure class="image is-5by4">
                         <a @click="info(list.index)"><img :src="list.image"></a>
                     </figure>
-                    <b-tag type="is-danger" rounded style="position: absolute; top: 0;"><b>Médio</b></b-tag>
+                    <b-tag type="is-danger" rounded style="position: absolute; top: 0;"><b>{{list.sizePet}}</b></b-tag>
                 </div>
                 <div class="card-content">
                     <div class="content">
                         <p class="title is-6">{{ list.title }}</p>
-                        <p class="subtitle is-7">@johnsmith</p>
+                        <p class="subtitle is-7">{{list.subtitle}}</p>
+                        <b-field grouped >
+                            <p class="control" v-if="list.rating">
+                                <b-rate :value="list.rating" show-score disabled/>
+                            </p>
+                            <p class="control" style="margin-left: auto">
+                                <b-button size="is-small" type="is-danger" icon-left="heart" outlined>ADOTE</b-button>
+                            </p>
+                        </b-field>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </b-carousel-list>
+
+    <b-carousel-list class="mt-6" v-model="testTwo" :data="itemsTwo" :items-to-show="2">
+        <template #item="list">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-5by4">
+                        <a @click="info(list.index)"><img :src="list.image"></a>
+                    </figure>
+                    <b-tag type="is-danger" rounded style="position: absolute; top: 0;"><b>{{list.sizePet}}</b></b-tag>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <p class="title is-6">{{ list.title }}</p>
+                        <p class="subtitle is-7">{{list.subtitle}}</p>
                         <b-field grouped >
                             <p class="control" v-if="list.rating">
                                 <b-rate :value="list.rating" show-score disabled/>
@@ -126,45 +153,121 @@ export default {
             prevIcon: 'chevron-left',
             nextIcon: 'chevron-right',
             test: 0,
+            testTwo: 0,
             items: [
                 {
-                    title: 'Nome',
+                    title: 'Cusco',
+                    subtitle: 'anderson@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2020/06/25/21/03/dog-5340892_960_720.jpg',
+                    sizePet: 'Médio',
                     rating: 4.4
                 },
                 {
-                    title: 'Nome',
+                    title: 'Isabel',
+                    subtitle: 'anderson@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2018/07/12/18/13/animal-3534084_960_720.jpg',
-                    rating: 3.5
+                    sizePet: 'Pequeno',
+                    rating: 4.4
                 },
                 {
-                    title: 'Nome',
+                    title: 'Guria',
+                    subtitle: 'mathaus@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2017/05/09/23/02/dog-2299482_960_720.jpg',
+                    sizePet: 'Médio',
                     rating: 5
                 },
                 {
-                    title: 'Nome',
-                    image: 'https://cdn.pixabay.com/photo/2015/03/26/09/54/pug-690566_960_720.jpg'
+                    title: 'Husky',
+                    subtitle: 'mathaus@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2015/03/26/09/54/pug-690566_960_720.jpg',
+                    sizePet: 'Grande',
+                    rating: 5
                 },
                 {
-                    title: 'Nome',
+                    title: 'Ted',
+                    subtitle: 'mathaus@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2016/02/18/18/37/puppy-1207816_960_720.jpg',
+                    sizePet: 'Muito Grande',
                     rating: 5
                 },
                 {
-                    title: 'Nome',
+                    title: 'Deisy',
+                    subtitle: 'frederico@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2015/12/08/00/52/puppy-1082141_960_720.jpg',
-                    rating: 4
+                    sizePet: 'Médio',
+                    rating: 2.5
                 },
                 {
-                    title: 'Nome',
+                    title: 'Salcicha',
+                    subtitle: 'pedrao@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_960_720.jpg',
-                    rating: 2.7
+                    sizePet: 'Médio',
+                    rating: 3.7
                 },
                 {
-                    title: 'Nome',
+                    title: 'Bajo',
+                    subtitle: 'vitor@adopet.me',
                     image: 'https://cdn.pixabay.com/photo/2019/08/07/14/11/dog-4390885_960_720.jpg',
-                    rating: 1.5
+                    sizePet: 'Grande',
+                    rating: 4.0
+                }
+            ],
+            itemsTwo: [
+                {
+                    title: 'Sofia',
+                    subtitle: 'anderson@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2013/04/01/03/45/cat-98359_960_720.jpg',
+                    sizePet: 'Médio',
+                    rating: 4.4
+                },
+                {
+                    title: 'Luna',
+                    subtitle: 'anderson@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_960_720.jpg',
+                    sizePet: 'Pequeno',
+                    rating: 4.4
+                },
+                {
+                    title: 'Stevie',
+                    subtitle: 'mathaus@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2016/07/15/15/55/dachshund-1519374_960_720.jpg',
+                    sizePet: 'Médio',
+                    rating: 5
+                },
+                {
+                    title: 'Jobinha',
+                    subtitle: 'mathaus@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2016/03/27/21/16/pet-1284307_960_720.jpg',
+                    sizePet: 'Grande',
+                    rating: 5
+                },
+                {
+                    title: 'Willie',
+                    subtitle: 'mathaus@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2018/05/07/10/48/husky-3380548_960_720.jpg',
+                    sizePet: 'Muito Grande',
+                    rating: 5
+                },
+                {
+                    title: 'Rex',
+                    subtitle: 'frederico@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2015/11/03/12/58/dalmatian-1020790_960_720.jpg',
+                    sizePet: 'Médio',
+                    rating: 2.5
+                },
+                {
+                    title: 'Scooby',
+                    subtitle: 'pedrao@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2016/02/26/16/32/bulldog-1224267_960_720.jpg',
+                    sizePet: 'Médio',
+                    rating: 3.7
+                },
+                {
+                    title: 'Toddy',
+                    subtitle: 'vitor@adopet.me',
+                    image: 'https://cdn.pixabay.com/photo/2016/02/19/15/46/labrador-retriever-1210559_960_720.jpg',
+                    sizePet: 'Grande',
+                    rating: 4.0
                 }
             ]
         }
