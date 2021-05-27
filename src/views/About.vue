@@ -195,7 +195,7 @@
         <div class="column">
           <div class="card">
             <div class="card-content">
-              <p class="title">Pedro Barros</p>
+              <p class="title">Pedro Barros Machado</p>
               <p class="subtitle ellipsis">
                 pedrobarros05
               </p>
