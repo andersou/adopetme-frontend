@@ -10,7 +10,8 @@
                     </h1>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                     <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
-                        <div class="box">
+                       
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -23,11 +24,10 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        
-                        <div class="box">
+                    
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -40,10 +40,9 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -56,10 +55,9 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -72,10 +70,9 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -88,10 +85,9 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -104,10 +100,9 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <h2>Nome Usuário</h2>
                             <h3>Idade </h3>
                             <h3>Localidade </h3>
@@ -120,8 +115,39 @@
                                 <div class="media-content">
                                 </div>
                             </article>
-                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">...</b-button>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
                         </div>
+                        <div class="box mx-2">
+                            <h2>Nome Usuário</h2>
+                            <h3>Idade </h3>
+                            <h3>Localidade </h3>
+                            <article class="media">
+                                <div class="media-center">
+                                    <figure class="image is-128x128">
+                                        <img src="../assets/hp-image.png">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                </div>
+                            </article>
+                            <b-button class="is-fullwidth" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
+                        </div>
+                        <div class="box mx-2">
+                            <h2>Nome Usuário</h2>
+                            <h3>Idade </h3>
+                            <h3>Localidade </h3>
+                            <article class="media">
+                                <div class="media-center">
+                                    <figure class="image is-128x128">
+                                        <img src="../assets/hp-image.png">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                </div>
+                            </article>
+                            <b-button class="is-fullwidth mb-0" tag="router-link" :to="{ path: '/Solicitacoes' }" type="is-primary">  </b-button>
+                        </div>
+                        <div></div> <!-- Coloquei esse div aqui, pq a ultima box ficava mais longa que as outras -->
 
                     </div>
                     </div>
@@ -132,7 +158,7 @@
                     </h1>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                     <div class="is-flex is-flex-wrap-wrap is-justify-content-center ">
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -152,9 +178,8 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
                         
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -174,8 +199,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -195,8 +219,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -216,8 +239,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -237,8 +259,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -258,8 +279,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
-                        <div class="box">
+                        <div class="box mx-2">
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
@@ -279,7 +299,6 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="box"></div>
 
                     </div>
                     </div>
