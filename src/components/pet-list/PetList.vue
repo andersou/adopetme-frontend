@@ -25,9 +25,20 @@
           </div>
           <div class="card-content">
             <div class="media">
-              <div class="media-left">
+              <div class="media-left is-relative">
                 <b-icon
                   :icon="{ 0: 'paw', 1: 'dog', 2: 'cat' }[pet._specie]"
+                  pack="fas"
+                  size="is-large"
+                >
+                </b-icon>
+                <b-icon
+                  :icon="{ M: 'mars', F: 'venus', N: 'genderless' }[pet.sex]"
+                  :class="{
+                    'sex-icon': true,
+                    'sex-icon-male': !!(pet.sex == 'M'),
+                    'sex-icon-female': !!(pet.sex == 'F'),
+                  }"
                   pack="fas"
                   size="is-large"
                 >
@@ -539,4 +550,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.sex-icon {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+}
+.sex-icon-male {
+  color: #b0c7ed;
+}
+.sex-icon-female {
+  color: #e0caed;
+}
+</style>

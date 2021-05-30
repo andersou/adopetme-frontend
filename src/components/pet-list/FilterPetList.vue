@@ -1,5 +1,5 @@
 <template>
-  <section class="filtro px-2 py-3 ">
+  <section class="filtro px-4 py-3 ">
     <!-- <div class="column is-one-third mt-5">
             <img src="~assets/pet-adoption.png" />
           </div> -->
