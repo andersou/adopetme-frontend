@@ -13,6 +13,7 @@
     "@toast-ui/vue-editor": "^2.5.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "v-mask": "^2.2.4",
     "vue": "^2.6.11",
     "vue-password-strength-meter": "^1.7.2",

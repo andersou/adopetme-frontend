@@ -47,9 +47,9 @@
               <div class="media-content">
                 <p class="title is-4">
                   {{ pet.name }}
-                  <span class="is-size-6 is-italic has-text-weight-light"
-                    >idade</span
-                  >
+                  <span class="is-size-6 is-italic has-text-weight-light">{{
+                    calculateAge(pet._birthdayDate)
+                  }}</span>
                 </p>
                 <p class="subtitle is-6 mb-1">@nome do protetor</p>
                 <p class="subtitle is-6 mb-1">
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import moment from "moment";
+import "moment/locale/pt-br";
 export default {
   data() {
     return {
@@ -545,6 +547,9 @@ export default {
       };
       //   return this.petsData.consts.sizes[petSize];
       return sizes[petSize];
+    },
+    calculateAge(birthdayDate) {
+      return moment(birthdayDate).fromNow(true);
     },
   },
 };
