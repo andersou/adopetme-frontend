@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container my-2 mr-2">
+    <div class="container my-2 ">
       <b-pagination
         :total="petsData.itemsCount"
         :per-page="itemsPerPage"
@@ -13,7 +13,7 @@
       >
       </b-pagination>
     </div>
-    <div v-if="petsData.data" class="columns is-multiline pr-4">
+    <div v-if="petsData.data" class="columns is-multiline">
       <div class="column is-4" v-for="pet in petsData.data" :key="pet.id">
         <!-- Pet-card (separar em componente) -->
         <div class="card">
