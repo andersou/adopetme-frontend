@@ -1,21 +1,19 @@
 <template>
   <div>
-    <div class="container">
-      <div class="column">
-        <b-pagination
-          :total="petsData.itemsCount"
-          :per-page="itemsPerPage"
-          v-model="currentPage"
-          aria-next-label="Proxima pagina"
-          aria-previous-label="Pagina anterior"
-          aria-page-label="Pagina"
-          aria-current-label="Pagina atual"
-          @change="loadPets"
-        >
-        </b-pagination>
-      </div>
+    <div class="container my-2 mr-2">
+      <b-pagination
+        :total="petsData.itemsCount"
+        :per-page="itemsPerPage"
+        v-model="currentPage"
+        aria-next-label="Proxima pagina"
+        aria-previous-label="Pagina anterior"
+        aria-page-label="Pagina"
+        aria-current-label="Pagina atual"
+        @change="loadPets"
+      >
+      </b-pagination>
     </div>
-    <div v-if="petsData.data" class="columns is-multiline pr-4">
+    <div v-if="petsData.data" class="columns is-multiline pr-4 mx-0">
       <div class="column is-4" v-for="pet in petsData.data" :key="pet.id">
         <!-- Pet-card (separar em componente) -->
         <div class="card">
