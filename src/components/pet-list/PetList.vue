@@ -89,9 +89,17 @@ export default {
     };
   },
   methods: {
+    processPetsLink(link) {
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/pets/users${link}`;
+      }
+    },
     getPetPhoto(pet) {
       if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
-        return pet.petPhotos[0].photoUri;
+        return this.processPetsLink(pet.petPhotos[0].photoUri);
 
       return "";
     },
