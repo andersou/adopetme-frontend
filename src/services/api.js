@@ -19,5 +19,15 @@ function getUser() {
   return api.get("/users");
 }
 
-export { registerUser, loginUser, getUser, registerPet };
+function getPets(page = 1, limit = 15, filters) {
+  return api.get("/pets", {
+    params: {
+      limit,
+      page,
+      filters: filters,
+    },
+  });
+}
+
+export { registerUser, loginUser, getUser, registerPet, getPets };
 export default api;
