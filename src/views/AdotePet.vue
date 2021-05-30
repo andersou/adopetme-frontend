@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="columns mx-0 is-desktop">
+    <div class="columns is-desktop">
       <div class="column is-3-desktop">
         <filter-pet-list />
       </div>

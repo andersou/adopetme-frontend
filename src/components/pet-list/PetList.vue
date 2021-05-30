@@ -13,7 +13,7 @@
       >
       </b-pagination>
     </div>
-    <div v-if="petsData.data" class="columns is-multiline pr-4 mx-0">
+    <div v-if="petsData.data" class="columns is-multiline pr-4">
       <div class="column is-4" v-for="pet in petsData.data" :key="pet.id">
         <!-- Pet-card (separar em componente) -->
         <div class="card">
