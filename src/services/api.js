@@ -19,7 +19,7 @@ function getUser() {
   return api.get("/users");
 }
 
-function getPets(page = 1, limit = 15, filters) {
+function getPets(page = 1, filters, limit = 15) {
   return api.get("/pets", {
     params: {
       limit,

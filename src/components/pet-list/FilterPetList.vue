@@ -11,18 +11,32 @@
     <div class="columns is-multiline is-mobile ">
       <div class="column is-12-desktop is-6-mobile is-4-tablet  ">
         <b-field label="Animal">
-          <b-select placeholder="Animal" icon="cat" expanded rounded>
-            <option value="1">Gato</option>
-            <option value="2">Cachorro</option>
+          <b-select
+            placeholder="Animal"
+            icon="cat"
+            expanded
+            v-model="filters.specie"
+            rounded
+          >
+            <option value="2">Gato</option>
+            <option value="1">Cachorro</option>
           </b-select>
         </b-field>
       </div>
       <div class="column is-12-desktop is-6-mobile is-4-tablet ">
         <b-field label="Porte">
-          <b-select placeholder="Porte" icon="foot-print" expanded rounded>
+          <b-select
+            placeholder="Porte"
+            icon="foot-print"
+            v-model="filters.size"
+            expanded
+            rounded
+          >
+            <option value="0">Muito Pequeno</option>
             <option value="1">Pequeno</option>
             <option value="2">Médio</option>
-            <option value="2">Grande</option>
+            <option value="3">Grande</option>
+            <option value="4">Muito Grande</option>
           </b-select>
         </b-field>
       </div>
@@ -31,24 +45,49 @@
           <b-select
             placeholder="Sexo"
             icon="gender-male-female"
+            v-model="filters.sex"
             expanded
             rounded
           >
-            <option value="1">Macho</option>
-            <option value="2">Fêmea</option>
+            <option value="M">Macho</option>
+            <option value="F">Fêmea</option>
           </b-select>
         </b-field>
       </div>
     </div>
     <div class="buttons">
-      <b-button type="is-primary">Buscar</b-button>
-      <b-button type="is-primary is-light">Limpar</b-button>
+      <b-button @click="setFilters(filters)" type="is-primary">Buscar</b-button>
+      <b-button @click="resetFilters" type="is-primary is-light"
+        >Limpar</b-button
+      >
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+import { mapMutations } from "vuex";
+export default {
+  data() {
+    return {
+      filters: {
+        sex: null,
+        specie: null,
+        size: null,
+      },
+    };
+  },
+  methods: {
+    ...mapMutations(["setFilters", "clearFilters"]),
+    resetFilters() {
+      this.filters = {
+        sex: null,
+        specie: null,
+        size: null,
+      };
+      this.clearFilters();
+    },
+  },
+};
 </script>
 
 <style lang="scss">

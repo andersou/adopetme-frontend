@@ -73,6 +73,7 @@
 import moment from "moment";
 import "moment/locale/pt-br";
 import { getPets } from "../../services/api";
+import { mapState } from "vuex";
 export default {
   mounted() {
     this.loadPets();
@@ -86,6 +87,7 @@ export default {
       petsData: {},
     };
   },
+  computed: mapState(["filters"]),
   methods: {
     processPetsLink(link) {
       if (link.startsWith("http")) {
@@ -102,10 +104,11 @@ export default {
       return "";
     },
     loadPets(page = 1) {
-      getPets(page).then((r) => {
+      getPets(page, this.filters).then((r) => {
         this.petsData = r.data;
       });
     },
+
     petSizeTransform(petSize) {
       let sizes = {
         "0": "Bem Pequeno",
@@ -119,6 +122,11 @@ export default {
     },
     calculateAge(birthdayDate) {
       return moment(birthdayDate).fromNow(true);
+    },
+  },
+  watch: {
+    filters() {
+      this.loadPets(this.currentPage);
     },
   },
 };
