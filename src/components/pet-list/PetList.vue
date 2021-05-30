@@ -87,7 +87,7 @@ export default {
       petsData: {},
     };
   },
-  computed: mapState(["filters"]),
+  computed: mapState(["filters", "sort"]),
   methods: {
     processPetsLink(link) {
       if (link.startsWith("http")) {
@@ -103,10 +103,15 @@ export default {
 
       return "";
     },
-    loadPets(page = 1) {
-      getPets(page, this.filters).then((r) => {
-        this.petsData = r.data;
-      });
+    loadPets() {
+      console.log(this.sort);
+      getPets(this.currentPage, this.filters, this.sort)
+        .then((r) => {
+          this.petsData = r.data;
+        })
+        .catch(() => {
+          this.petsData = {};
+        });
     },
 
     petSizeTransform(petSize) {
@@ -126,7 +131,7 @@ export default {
   },
   watch: {
     filters() {
-      this.loadPets(this.currentPage);
+      this.loadPets();
     },
   },
 };

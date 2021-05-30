@@ -54,10 +54,26 @@
           </b-select>
         </b-field>
       </div>
+      <div class="column is-12-desktop is-6-mobile is-4-tablet ">
+        <b-field label="Ordenação">
+          <b-select
+            placeholder="Selecione a ordem"
+            icon="sort"
+            v-model="sort"
+            expanded
+            rounded
+          >
+            <option value="ASC">Mais velhos</option>
+            <option value="DESC">Mais novos</option>
+          </b-select>
+        </b-field>
+      </div>
     </div>
     <div class="buttons">
-      <b-button @click="setFilters(filters)" type="is-primary">Buscar</b-button>
-      <b-button @click="resetFilters" type="is-primary is-light"
+      <b-button @click="setFiltersAndSort({ filters, sort })" type="is-primary"
+        >Buscar</b-button
+      >
+      <b-button @click="resetFiltersAndSort" type="is-primary is-light"
         >Limpar</b-button
       >
     </div>
@@ -74,17 +90,19 @@ export default {
         specie: null,
         size: null,
       },
+      sort: null,
     };
   },
   methods: {
-    ...mapMutations(["setFilters", "clearFilters"]),
-    resetFilters() {
+    ...mapMutations(["setFiltersAndSort", "clearFiltersAndSort"]),
+    resetFiltersAndSort() {
       this.filters = {
         sex: null,
         specie: null,
         size: null,
       };
-      this.clearFilters();
+      this.sort = null;
+      this.clearFiltersAndSort();
     },
   },
 };

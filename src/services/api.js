@@ -19,12 +19,17 @@ function getUser() {
   return api.get("/users");
 }
 
-function getPets(page = 1, filters, limit = 15) {
+function getPets(page = 1, filters, sort, limit = 15) {
+  let filtersList = {};
+  for (let filter in filters) {
+    if (filters[filter]) filtersList[`filters[${filter}]`] = filters[filter];
+  }
   return api.get("/pets", {
     params: {
       limit,
       page,
-      filters: filters,
+      sort,
+      ...filtersList,
     },
   });
 }
