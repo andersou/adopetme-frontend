@@ -8,6 +8,9 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+// esse é um problema conhecido do bulma, sugeri isso em uma issue aberta no github do bulma
+// https://github.com/jgthms/bulma/issues/2242
 .columns {
   @extend .mx-0;
 }
