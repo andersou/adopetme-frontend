@@ -7,7 +7,7 @@
             <span class="logo-adopetme">Adopetme</span>
           </b-navbar-item>
           <b-navbar-item
-            v-if="user.id"
+            v-else
             tag="router-link"
             :to="{ path: '/dashboard' }"
           >
@@ -24,7 +24,7 @@
             Adotar um Pet
           </b-navbar-item>
           <b-navbar-item
-            v-if="user.id"
+            v-else
             class="has-background-primary-light"
             tag="router-link"
             :to="{ path: '/adote-pet' }"
@@ -73,15 +73,15 @@
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/editar-pet">
+              <router-link to="/request-received">
                 <b-icon icon="dog-service" class="pr-5 pl-3"> </b-icon
                 >Solicitações Recebidas
               </router-link>
             </b-dropdown-item>
             <hr class="dropdown-divider" />
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/solicitacoes">
-                <b-icon icon="dog-service" class="pr-5 pl-3"> </b-icon
+              <router-link to="/request-sent">
+                <b-icon icon="paw" class="pr-5 pl-3"> </b-icon
                 >Solicitações Enviadas
               </router-link>
             </b-dropdown-item>
@@ -93,7 +93,10 @@
               </router-link>
             </b-dropdown-item>
           </b-dropdown>
-          <b-navbar-item v-else tag="router-link" :to="{ path: '/registro' }">
+          <b-navbar-item
+           v-else
+           tag="router-link" 
+           :to="{ path: '/registro' }">
             <div class="buttons">
               <a class="button is-primary">
                 <strong>Registrar</strong>
