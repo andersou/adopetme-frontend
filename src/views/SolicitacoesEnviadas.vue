@@ -9,25 +9,27 @@
                         {{user.firstName}}, 
                     </h1>
                     <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
-                    suas solicitações de adoção se encontram aqui!
+                    Estes são todos os usuários que desejam adotar um pet seu!
                     </h1>
-                    <div class="content has-text-centered">
+                   <section class="hero">
+                      <div class="container has-text-centered">
                         <h1 class="is-size-4">
-                            Você ainda não tem nenhuma solicitação de adoção enviada!
+                        Você ainda não solicitou nenhuma adoção!
                         </h1>
-                      <img
-                          class="image-adopt"
-                          src="../../src/assets/no-adoptions.svg"
-                          alt=""
-                          srcset=""
+                        <img
+                            src="../../src/assets/no-adoptions-sent.svg"
+                            alt=""
+                            srcset=""
                         />  
-                    <b-button
+                        <b-button
+                        class="mr-4"
                         tag="router-link"
                         :to="{ path: '/adote-pet' }"
-                        type="is-primary"
-                        >Solicite o seu novo amiguinho!</b-button
-                    >
-                    </div>
+                        type="is-primary">
+                        Encontre seu novo amiguinho!
+                        </b-button>
+                      </div>
+                    </section>
                     </div>
                 </div>
             </div>
@@ -54,10 +56,5 @@ export default {
                       linear-gradient(110deg, $adopetme-logo-color, $primary);
         background-attachment: fixed;
         min-height: calc(100vh - 52px)
-    }
-    .image-adopt{
-        width: 500px; 
-        height: 500px;
-        display: flex;
     }
 </style>
