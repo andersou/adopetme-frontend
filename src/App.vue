@@ -68,7 +68,7 @@
             </b-dropdown-item>
             <hr class="dropdown-divider" />
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/editar-pet">
+              <router-link to="/my-pets">
                 <b-icon icon="dog" class="pr-5 pl-3"> </b-icon>Meus Pets
               </router-link>
             </b-dropdown-item>
