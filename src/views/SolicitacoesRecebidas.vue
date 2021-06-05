@@ -11,30 +11,32 @@
                     <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
                     Estes são todos os usuários que desejam adotar um pet seu!
                     </h1>
-                    <div class="content has-text-centered">
+                   <section class="hero">
+                      <div class="container has-text-centered">
                         <h1 class="is-size-4">
-                            Você ainda não recebeu nenhuma solicitação de adoção!
+                        Nenhuma solicitação de adoção recebida!
                         </h1>
-                      <img
-                          class="image-adopt"
-                          src="../../src/assets/no-adoptions2.svg"
-                          alt=""
-                          srcset=""
+                        <img
+                            src="../../src/assets/no-adoptions.svg"
+                            alt=""
+                            srcset=""
                         />  
-                    <b-button
+                        <b-button
                         class="mr-4"
                         tag="router-link"
-                        :to="{ path: '/adote-pet' }"
-                        type="is-primary"
-                        >Adicione um amiguinho para doar!</b-button
-                    >
-                    <b-button
+                        :to="{ path: '/cadastro-pet' }"
+                        type="is-primary">
+                        Adicionar Pet
+                        </b-button>
+                        <b-button
+                        class="mr-4"
                         tag="router-link"
-                        :to="{ path: '/adote-pet' }"
-                        type="is-primary"
-                        >Edite as informações dos seus pets</b-button
-                    >
-                    </div>
+                        :to="{ path: '/my-pets' }"
+                        type="is-primary">
+                        Editar Pets
+                        </b-button>
+                      </div>
+                    </section>
                     </div>
                 </div>
             </div>
@@ -61,10 +63,5 @@ export default {
                       linear-gradient(110deg, $adopetme-logo-color, $primary);
         background-attachment: fixed;
         min-height: calc(100vh - 52px)
-    }
-    .image-adopt{
-        width: 500px; 
-        height: 500px;
-        display: flex;
     }
 </style>
