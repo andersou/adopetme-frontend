@@ -93,6 +93,14 @@ const routes = [
         /* webpackChunkName: "SolicitacoesRecebidas" */ "../views/SolicitacoesRecebidas.vue"
       ),
   },
+   {
+    path: "/my-pets",
+    name: "MeusPets",
+    component: () =>
+      import(
+        /* webpackChunkName: "MeusPets" */ "../views/MeusPets.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({
