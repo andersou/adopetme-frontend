@@ -85,7 +85,7 @@
             <section class="hero">
               <div class="container has-text-centered">
                 <h1 class="is-size-4">
-                  Você ainda não solicitou nenhuma adoção!
+                  Você ainda não tem nenhum Pet!
                 </h1>
                   <img
                     src="../../src/assets/no-pet.svg"
@@ -96,8 +96,8 @@
                   class="mr-4"
                   tag="router-link"
                   :to="{ path: '/adote-pet' }"
-                  type="is-primary">
-                  Buscar próximo amiguinho!
+                  type="is-primary is-uppercase">
+                  Adicionar Pet
                   </b-button>
               </div>
             </section>
