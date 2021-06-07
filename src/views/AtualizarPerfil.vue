@@ -24,8 +24,8 @@
                     />
                     <img
                       v-else
-                      class="img-avatar"
-                      src="https://avataaars.io/?avatarStyle=Circle&topType=WinterHat4&accessoriesType=Blank&hatColor=PastelGreen&facialHairType=Blank&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+                      class="is-rounded img-avatar"
+                      :src="processLink(user.photoUri)"
                     />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
@@ -52,14 +52,14 @@
                   <b-field label="Nome *" disabled>
                     <b-input
                       placeholder="Não é possível editar essa informação"
-                      value="Nome do Banco de Dados"
+                      :value="user.firstName"
                       disabled ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
                   <b-field label="Sobrenome *">
                     <b-input
-                      value="Sobrenome do Banco de Dados"
+                      :value="user.lastName"
                       disabled></b-input>
                   </b-field>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="column">
                   <b-field label="CPF *">
                     <b-input
-                      value="CPF do Banco de Dados"
+                      :value="user.document"
                       disabled></b-input>
                   </b-field>
                 </div>
@@ -345,6 +345,14 @@ export default {
   },
 
   methods: {
+    processLink(link) {
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/images/users${link}`;
+      }
+    },
     loadMunicipios() {
       console.log("Pegando cidades");
       if (this.register.state) {
@@ -422,7 +430,8 @@ export default {
 
 <style lang="scss" scoped>
 .img-avatar {
-  max-width: 280px;
+  width: 240px;
+  height: 240px;
 }
 @include tablet {
   .img-avatar {

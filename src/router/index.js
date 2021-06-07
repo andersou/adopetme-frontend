@@ -78,11 +78,27 @@ const routes = [
       ),
   },
   {
-    path: "/solicitacoes",
-    name: "Solicitacoes",
+    path: "/request-sent",
+    name: "SoliciticoesEnviadas",
     component: () =>
       import(
-        /* webpackChunkName: "Solicitacoes" */ "../views/Solicitacoes.vue"
+        /* webpackChunkName: "SolicitacoesEnviadas" */ "../views/SolicitacoesEnviadas.vue"
+      ),
+  },
+   {
+    path: "/request-received",
+    name: "SoliciticoesRecebidas",
+    component: () =>
+      import(
+        /* webpackChunkName: "SolicitacoesRecebidas" */ "../views/SolicitacoesRecebidas.vue"
+      ),
+  },
+   {
+    path: "/my-pets",
+    name: "MeusPets",
+    component: () =>
+      import(
+        /* webpackChunkName: "MeusPets" */ "../views/MeusPets.vue"
       ),
   },
   {

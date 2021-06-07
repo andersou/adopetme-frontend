@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container content">
     <h1 class="is-size-2 is-uppercase has-text-weight-light mt-4">
       Bem vindo, {{ user.firstName }}
     </h1>
@@ -90,6 +90,9 @@ export default {
   .column {
     padding-right: 3rem;
     padding-left: 3rem;
+  }
+  .content{
+  margin-bottom: 240px;
   }
 }
 </style>

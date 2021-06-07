@@ -170,7 +170,7 @@
               <div class="card-content">
                 <p class="title">Anderson Souza</p>
                 <p class="subtitle ellipsis">
-                  andersou
+                  andersou <b-icon icon="github"></b-icon>
                 </p>
                 <figure class="image adopetme-figure">
                   <img src="../assets/ander-image.png" alt="" srcset="" />
@@ -184,7 +184,7 @@
             <div class="card-content">
               <p class="title">Mathaus Huber</p>
               <p class="subtitle ellipsis">
-                HuberM1998
+                HuberM1998 <b-icon icon="github"></b-icon>
               </p>
               <figure class="image adopetme-figure">
                 <img src="../assets/mh-image.png" alt="" srcset="" />
@@ -195,9 +195,9 @@
         <div class="column">
           <div class="card">
             <div class="card-content">
-              <p class="title">Pedro Barros Machado</p>
+              <p class="title">Pedro Barros</p>
               <p class="subtitle ellipsis">
-                pedrobarros05
+                pedrobarros05 <b-icon icon="github"></b-icon>
               </p>
               <figure class="image adopetme-figure">
                 <img src="../assets/p-image.png" alt="" srcset="" />
@@ -210,7 +210,7 @@
             <div class="card-content">
               <p class="title">Frederico Antunes</p>
               <p class="subtitle ellipsis">
-                hpfred
+                hpfred <b-icon icon="github"></b-icon>
               </p>
               <figure class="image adopetme-figure">
                 <img src="../assets/hp-image.png" alt="" srcset="" />
@@ -223,7 +223,7 @@
             <div class="card-content">
               <p class="title">Vitor Santos Borges</p>
               <p class="subtitle ellipsis">
-                VitorBorg
+                VitorBorg <b-icon icon="github"></b-icon>
               </p>
               <figure class="image adopetme-figure">
                 <img src="../assets/v-image.png" alt="" srcset="" />
