@@ -66,12 +66,14 @@ const routes = [
   {
     path: "/editar-pet",
     name: "EditarPet",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(/* webpackChunkName: "EditarPet" */ "../views/EditarPet.vue"),
   },
   {
     path: "/atualizar-perfil",
     name: "AtualizarPerfil",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(
         /* webpackChunkName: "AtualizarPerfil" */ "../views/AtualizarPerfil.vue"
@@ -80,6 +82,7 @@ const routes = [
   {
     path: "/request-sent",
     name: "SoliciticoesEnviadas",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(
         /* webpackChunkName: "SolicitacoesEnviadas" */ "../views/SolicitacoesEnviadas.vue"
@@ -88,6 +91,7 @@ const routes = [
   {
     path: "/request-received",
     name: "SoliciticoesRecebidas",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(
         /* webpackChunkName: "SolicitacoesRecebidas" */ "../views/SolicitacoesRecebidas.vue"
@@ -96,6 +100,7 @@ const routes = [
   {
     path: "/my-pets",
     name: "MeusPets",
+    beforeEnter: middlewareAuth,
     component: () =>
       import(/* webpackChunkName: "MeusPets" */ "../views/MeusPets.vue"),
   },

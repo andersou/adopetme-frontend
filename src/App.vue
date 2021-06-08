@@ -123,11 +123,7 @@
                   Adotar um Pet
                 </router-link>
               </p>
-              <p>
-                <a :to="{ path: '/adote-pet' }">
-                  Adotar um Pet erro
-                </a>
-              </p>
+            
             </div>
           </div>
 
