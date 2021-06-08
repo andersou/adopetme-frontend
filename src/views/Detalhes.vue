@@ -1,0 +1,293 @@
+<template>
+  <main>
+
+    <div class="columns">
+      <div class="column is-half f1">     
+        <div class="">
+
+          <b-carousel
+              :progress="progress"
+              :progress-type="progressType">
+              <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
+                  <section :class="`hero is-large is-${carousel.color}`">
+                      <div class="hero-body has-text-centered">
+                          <h1 class="title">{{carousel.title}}</h1>
+                      </div>
+                  </section>
+              </b-carousel-item>
+          </b-carousel>
+
+        </div>
+      </div>
+
+      <div class="column">
+          <div class="columns ">
+              <div class="column">
+
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="dog" size="is-small"></b-icon>
+                    Nome
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    Bolotinha
+                </h1>
+              </div>
+
+              <div class="column">
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="dog" size="is-small"></b-icon>
+                    Idade
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    5 meses
+                </h1>
+              </div>
+
+              <div class="column">
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="dog" size="is-small"></b-icon>
+                    Localização
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    Pelotas, RS
+                </h1>
+              </div>
+
+          </div>
+
+          <div class="columns ">
+
+              <div class="column">
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="cat" size="is-small"></b-icon>
+                    Animal
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    Cachorro
+                </h1>
+              </div>
+
+              <div class="column">
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="foot-print" size="is-small"></b-icon>
+                    Porte
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    Grande
+                </h1>
+              </div>
+
+              <div class="column">
+                <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
+                    <b-icon icon="gender-male-female" size="is-small"></b-icon>
+                    Sexo
+                </h1>
+                <h1 class="is-size-4 is-uppercase has-text-weight-bold">
+                    Fêmea
+                </h1>
+              </div>
+
+          </div>
+
+          <div class="Highmargin">
+                <h1 class="is-size-6 has-text-weight-bold is-uppercase">
+                    <b-icon icon="dog" size="is-small"></b-icon>
+                    História
+                </h1>
+          </div>
+
+          <div class="Lowmargin">
+            <h2 class="is-size-7 is-uppercase left">
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.<p></p><p></p>
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.<p></p>
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.<p></p>
+            Bolotinha é um cachorro preguiçoso.
+<p></p><p></p><p></p>
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.
+            Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.Bolotinha é um cachorro preguiçoso.
+            </h2>
+          </div>
+
+          <div>
+              <h2 class="Highmargin">
+                <b-button
+                        label="Solicitar adoção"
+                        type="is-success"
+                        size="is-medium"
+                        @click="confirmCustom" />
+              </h2>
+          </div>
+
+      </div>
+    </div>
+
+    <section id="content">
+      <h1 class="is-size-4 is-uppercase has-text-weight-bold mt-4">
+        <div class="column">
+          <h1 class="is-size-4 is-uppercase has-text-weight-bold mt-4">
+            Informações sobre o protetor
+          </h1>
+
+          <div class="is-flex is-flex-wrap-wrap is-justify-content-center Lowmargin">
+                       
+                        <div class="box mx-2 ">
+                            <h2>Nome Usuário</h2>
+                            <h3>Nota </h3>
+                            <h3>Rede social </h3>
+                            <article class="media">
+                                <div class="media-center">
+                                    <figure class="image is-128x128">
+                                        <img src="../assets/hp-image.png">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                </div>
+                            </article>
+                        </div>
+          </div>
+
+        </div>
+      </h1>
+    </section>
+
+  </main>
+</template>
+
+<script>
+import moment from "moment";
+import { getPets, getUser } from "../services/api";
+//import { getUser } from "../services/api";
+export default {
+    mounted() {
+    this.loadPets();
+  },
+    data() {
+        return {
+            progress: false,
+            progressType: 'is-primary',
+            carousels: [
+                { title: 'Slide 1', color: 'grey' },
+                { title: 'Slide 2', color: 'dark' },
+                { title: 'Slide 3', color: 'primary' },
+                { title: 'Slide 4', color: 'info' }
+            ]
+        }
+    },
+    methods: {
+    processPetsLink(link) {
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/pets/users${link}`;
+      }
+    },
+    getPetPhoto(pet) {
+      if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
+        return this.processPetsLink(pet.petPhotos[0].photoUri);
+
+      return "";
+    },
+    loadPets() {
+      console.log(this.sort);
+      getPets(this.currentPage, this.filters, this.sort)
+        .then((r) => {
+          this.petsData = r.data;
+        })
+        .catch(() => {
+          this.petsData = {};
+        });
+    },
+    loadUser() {
+      return getUser();
+    },
+        petSizeTransform(petSize) {
+      let sizes = {
+        "0": "Bem Pequeno",
+        "1": "Pequeno",
+        "2": "Médio",
+        "3": "Grande",
+        "4": "Bem Grande",
+      };
+      //   return this.petsData.consts.sizes[petSize];
+      return sizes[petSize];
+    },
+        calculateAge(birthdayDate) {
+      return moment(birthdayDate).fromNow(true);
+    },
+    confirmCustom() {
+                this.$buefy.dialog.confirm({
+                    title: 'Confirmação da solicitação de adoção',
+                    message: `Ao confirmar a solicitação você afirma interesse na adoção do Pet.
+                    <p></p>
+                    O protetor entrará em contato para se certificar que você realmente combina com o animalzinho.`,
+                    cancelText: 'Vou pensar mais um pouco.',
+                    confirmText: 'Quero adotar!',
+                    type: 'is-success',
+                    onConfirm: () => this.$buefy.toast.open('Solicitação feita com sucesso!')
+                })
+            }
+    }
+}
+</script>
+
+<style>
+.is-active .al img {
+    filter: grayscale(0%);
+}
+.al img {
+  height: 100%;
+    filter: grayscale(100%);
+}
+h1{
+  text-align: center;
+}
+h2{
+  text-align: center;
+  color: dimgray;
+}
+h3{
+  color: dimgray;
+}
+.left{
+  text-align: left;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.Minmargin{
+  padding-top: 4px;
+}
+.Lowmargin{
+  padding-top: 10px;
+}
+.Mediummargin{
+  padding-top: 25px;
+}
+.Highmargin{
+  padding-top: 50px;
+}
+.Maxmargin{
+  padding-top: 80px;
+}
+.Fullmargin{
+  padding-top: 100px;
+}
+.f1{
+    padding-left: 0px;
+}
+ #content{
+    background-color: rgb(110, 16, 197);
+    height: 100%;
+    color: white;
+  }
+.FullHeight{
+  height: 100%;
+}
+.border{
+    border-top-style: dashed;
+    border-left-style:inset;
+    border-right-style: ridge;
+}
+</style>
