@@ -103,108 +103,7 @@
 
       <div class="column"></div>
       <!-- Sei que não é a forma certa de adicionar esse espaço, mas tbm n sei qual a forma certa -->
-      <footer class="footer pb-0 has-background-light">
-        <!-- E aqui  não tava sabendo como setar uma cor qualquer na classe footer do Bulma, então deixei cinza -->
-        <div class="columns">
-          <div class="column is-one-third">
-            <div class="content has-text-centered">
-              <p>
-                <strong>MAPA DO SITE</strong>
-              </p>
-
-              <p>
-                <router-link to="/about">
-                  Sobre
-                </router-link>
-              </p>
-
-              <p>
-                <router-link :to="{ path: '/adote-pet' }">
-                  Adotar um Pet
-                </router-link>
-              </p>
-            
-            </div>
-          </div>
-
-          <div class="column is-one-third">
-            <div class="content has-text-centered">
-              <p>
-                <strong>CONTATO</strong>
-              </p>
-              <p>
-                <b-icon icon="map-marker" size="is-small"> </b-icon>
-                Endereço: R. Gomes Carneiro, 01 - Balsa, Pelotas
-              </p>
-              <p>
-                <b-icon icon="phone-classic" size="is-small"> </b-icon>
-                Telefone: +55(53)99999-9999
-              </p>
-              <p>
-                <b-icon icon="email" size="is-small"> </b-icon>
-                Email: AdoPetMe@adopet.me
-              </p>
-            </div>
-          </div>
-
-          <div class="column is-one-third">
-            <div class="content has-text-centered">
-              <p>
-                <strong>SIGA-NOS</strong>
-              </p>
-              <div
-                class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
-              >
-                <figure class="image adopetme-social-media">
-                  <div class="columns">
-                    <div class="column">
-                      <a href="https://www.facebook.com/">
-                        <img
-                          src="../src/assets/AdoPetMe_Facebook.png"
-                          alt=""
-                          srcset=""
-                        />
-                      </a>
-                    </div>
-                    <div class="column">
-                      <a href="https://www.twitter.com/">
-                        <img
-                          src="../src/assets/AdoPetMe_Twitter.png"
-                          alt=""
-                          srcset=""
-                        />
-                      </a>
-                    </div>
-                    <div class="column">
-                      <a href="https://www.instagram.com/">
-                        <img
-                          src="../src/assets/AdoPetMe_Instagram.png"
-                          alt=""
-                          srcset=""
-                        />
-                      </a>
-                    </div>
-                    <div class="column">
-                      <a href="https://www.youtube.com/">
-                        <img
-                          src="../src/assets/AdoPetMe_Youtube.png"
-                          alt=""
-                          srcset=""
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <hr
-          style="height:2px;border-width:0;color:gray;background-color:gray;margin:1.5rem 0 0.5rem 0.5rem"
-        />
-        <span class="logo-adopetme ">Adopetme</span>
-      </footer>
+      <page-footer></page-footer>
       <!-- 
       <img onclick="topFunction()" id="myBtn" src="../src/assets/AdoPetMe_Youtube.png" alt="" srcset=""/>
        -->
@@ -213,7 +112,9 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import PageFooter from "./components/PageFooter.vue";
 export default {
+  components: { PageFooter },
   computed: {
     ...mapState(["user"]),
   },
