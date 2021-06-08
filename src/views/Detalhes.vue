@@ -101,7 +101,10 @@
         </div>
 
         <div class="Lowmargin">
-          <viewer :initialValue="petData.detailedDescription" />
+          <div
+            class="is-size-7 is-uppercase left"
+            v-html="petData.detailedDescription"
+          ></div>
         </div>
 
         <div>
@@ -150,7 +153,6 @@
 <script>
 import moment from "moment";
 import "moment/locale/pt-br";
-import { Viewer } from "@toast-ui/vue-editor";
 import { getPet } from "../services/api";
 //import { getUser } from "../services/api";
 export default {
@@ -167,9 +169,7 @@ export default {
         this.$router.push("/adote-pet");
       });
   },
-  components: {
-    Viewer,
-  },
+  components: {},
   data() {
     return {
       progress: false,
@@ -182,6 +182,7 @@ export default {
   },
   methods: {
     processPetsLink(link) {
+      if (!link) return "";
       //http://google.com/mathaus.png
       //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
       if (link.startsWith("http")) {
