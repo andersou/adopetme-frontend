@@ -85,7 +85,7 @@ const routes = [
         /* webpackChunkName: "SolicitacoesEnviadas" */ "../views/SolicitacoesEnviadas.vue"
       ),
   },
-   {
+  {
     path: "/request-received",
     name: "SoliciticoesRecebidas",
     component: () =>
@@ -93,22 +93,19 @@ const routes = [
         /* webpackChunkName: "SolicitacoesRecebidas" */ "../views/SolicitacoesRecebidas.vue"
       ),
   },
-   {
+  {
     path: "/my-pets",
     name: "MeusPets",
     component: () =>
-      import(
-        /* webpackChunkName: "MeusPets" */ "../views/MeusPets.vue"
-      ),
+      import(/* webpackChunkName: "MeusPets" */ "../views/MeusPets.vue"),
   },
   {
-    path: "/detalhes",
+    path: "/detalhes/:petId",
     name: "detalhes",
+    props: true,
     component: () =>
-      import(
-        /* webpackChunkName: "Solicitacoes" */ "../views/Detalhes.vue"
-      ),
-  }
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/Detalhes.vue"),
+  },
 ];
 
 const router = new VueRouter({

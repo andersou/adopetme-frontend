@@ -19,7 +19,7 @@ function getUser() {
   return api.get("/users");
 }
 
-function requestedAdoptions(){
+function requestedAdoptions() {
   return api.get("/adoption/adopter/requests");
 }
 
@@ -38,5 +38,16 @@ function getPets(page = 1, filters, sort, limit = 15) {
   });
 }
 
-export { registerUser, loginUser, getUser, registerPet, getPets, requestedAdoptions };
+function getPet(petId) {
+  return api.get(`/pets/${petId}`);
+}
+export {
+  getPet,
+  registerUser,
+  loginUser,
+  getUser,
+  registerPet,
+  getPets,
+  requestedAdoptions,
+};
 export default api;

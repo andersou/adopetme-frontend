@@ -18,11 +18,13 @@
         <!-- Pet-card (separar em componente) -->
         <div class="card">
           <div class="card-image">
-            <b-image
-              :src="getPetPhoto(pet)"
-              src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
-              ratio="4by3"
-            ></b-image>
+            <router-link :to="'/detalhes/' + pet.id">
+              <b-image
+                :src="getPetPhoto(pet)"
+                src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                ratio="4by3"
+              ></b-image>
+            </router-link>
           </div>
           <div class="card-content">
             <div class="media">
