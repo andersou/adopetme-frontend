@@ -7,11 +7,7 @@
           <b-navbar-item v-if="!user.id" tag="router-link" :to="{ path: '/' }">
             <span class="logo-adopetme">Adopetme</span>
           </b-navbar-item>
-          <b-navbar-item
-            v-else
-            tag="router-link"
-            :to="{ path: '/dashboard' }"
-          >
+          <b-navbar-item v-else tag="router-link" :to="{ path: '/dashboard' }">
             <span class="logo-adopetme">Adopetme</span>
           </b-navbar-item>
         </template>
@@ -82,8 +78,8 @@
             <hr class="dropdown-divider" />
             <b-dropdown-item has-link aria-role="menuitem">
               <router-link to="/request-sent">
-                <b-icon icon="paw" class="pr-5 pl-3"> </b-icon
-                >Solicitações Enviadas
+                <b-icon icon="paw" class="pr-5 pl-3"> </b-icon>Solicitações
+                Enviadas
               </router-link>
             </b-dropdown-item>
 
@@ -94,10 +90,7 @@
               </router-link>
             </b-dropdown-item>
           </b-dropdown>
-          <b-navbar-item
-           v-else
-           tag="router-link" 
-           :to="{ path: '/registro' }">
+          <b-navbar-item v-else tag="router-link" :to="{ path: '/registro' }">
             <div class="buttons">
               <a class="button is-primary">
                 <strong>Registrar</strong>
@@ -118,24 +111,21 @@
               <p>
                 <strong>MAPA DO SITE</strong>
               </p>
-              <router-link to="/about">
-                Sobre
-              </router-link>
-              <p></p>
+
               <p>
-                <a
-                  v-if="!user.id"
-                  tag="router-link"
-                  :to="{ path: '/registro' }"
-                >
+                <router-link to="/about">
+                  Sobre
+                </router-link>
+              </p>
+
+              <p>
+                <router-link :to="{ path: '/adote-pet' }">
                   Adotar um Pet
-                </a>
-                <a
-                  v-else
-                  tag="router-link"
-                  :to="{ path: '/adote-pet' }"
-                >
-                  Adotar um Pet
+                </router-link>
+              </p>
+              <p>
+                <a :to="{ path: '/adote-pet' }">
+                  Adotar um Pet erro
                 </a>
               </p>
             </div>
