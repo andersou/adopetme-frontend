@@ -242,7 +242,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .is-active .al img {
   filter: grayscale(0%);
 }
