@@ -96,7 +96,7 @@ export default {
         return link;
       } else {
         if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/pets/users${link}`;
+        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
       }
     },
     getPetPhoto(pet) {
