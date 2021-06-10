@@ -45,42 +45,30 @@
       <div class="column is-one-third">
         <div class="content has-text-centered">
           <p>
-            <strong>SIGA-NOS</strong>
+            <strong>Links úteis</strong>
           </p>
-          <div
-            class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
-          >
-            <figure class="image adopetme-social-media">
-              <div class="columns">
-                <div class="column">
-                  <a href="https://www.facebook.com/">
-                    <img src="~assets/AdoPetMe_Facebook.png" alt="" srcset="" />
-                  </a>
-                </div>
-                <div class="column">
-                  <a href="https://www.twitter.com/">
-                    <img src="~assets/AdoPetMe_Twitter.png" alt="" srcset="" />
-                  </a>
-                </div>
-                <div class="column">
-                  <a href="https://www.instagram.com/">
-                    <img
-                      src="~assets/AdoPetMe_Instagram.png"
-                      alt=""
-                      srcset=""
-                    />
-                  </a>
-                </div>
-                <div class="column">
-                  <a href="https://www.youtube.com/">
-                    <img src="~assets/AdoPetMe_Youtube.png" alt="" srcset="" />
-                  </a>
-                </div>
-              </div>
-            </figure>
-          </div>
+    
+          <p>
+            <router-link :to="{ path: '/comousarsite' }">
+              Como usar o site
+            </router-link>
+          </p>
+
+          <p>
+            <router-link to="/adocaoresponsavel">
+              Adoção responsável
+            </router-link>
+          </p>
+
+          <p>
+            <router-link :to="{ path: '/dicasecuidados' }">
+              Dicas e cuidados
+            </router-link>
+          </p>
+
         </div>
       </div>
+
     </div>
 
     <hr
@@ -94,4 +82,6 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+
+</style>

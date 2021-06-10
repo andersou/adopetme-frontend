@@ -111,6 +111,27 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/Detalhes.vue"),
   },
+  {
+    path: "/adocaoresponsavel",
+    name: "adocaoResponsavel",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/LUAdopt.vue"),
+  },
+  {
+  path: "/dicasecuidados",
+  name: "dicasCuidados",
+  props: true,
+  component: () =>
+    import(/* webpackChunkName: "Solicitacoes" */ "../views/LUDicas.vue"),
+  },
+  {
+  path: "/comousarsite",
+  name: "ComoUsarSite",
+  props: true,
+  component: () =>
+    import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
+  },
 ];
 
 const router = new VueRouter({
