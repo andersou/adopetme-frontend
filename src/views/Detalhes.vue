@@ -107,13 +107,23 @@
           ></div>
         </div>
 
-        <div>
+        <div v-if="userData.id">
           <h2 class="Highmargin">
             <b-button
               label="Solicitar adoção"
               type="is-success"
               size="is-medium"
               @click="confirmCustom"
+            />
+          </h2>
+        </div>
+        <div v-if="!userData.id">
+          <h2 class="Highmargin">
+            <b-button
+              label="Solicitar adoção"
+              type="is-success"
+              size="is-medium"
+              @click="confirmError"
             />
           </h2>
         </div>
@@ -154,9 +164,10 @@
 import moment from "moment";
 import "moment/locale/pt-br";
 import { getPet } from "../services/api";
-//import { getUser } from "../services/api";
+import { getUser } from "../services/api";
+import router from "vue-router";
 export default {
-  props: ["petId"],
+  props: ["petId","userId"],
   mounted() {
     // console.log(this.petId + " ");
     // console.log(this.$route.params);
@@ -168,6 +179,10 @@ export default {
       .catch(() => {
         this.$router.push("/adote-pet");
       });
+     getUser(this.userId)
+      .then((res) => {
+        this.userData = res.data;
+      })
   },
   components: {},
   data() {
@@ -177,6 +192,9 @@ export default {
 
       petData: {
         petPhotos: [],
+      },
+      userData: {
+        users: [],
       },
     };
   },
@@ -238,11 +256,21 @@ export default {
           this.$buefy.toast.open("Solicitação feita com sucesso!"),
       });
     },
+    confirmError() {
+                this.$buefy.dialog.confirm({
+                    title: 'Você não está logado',
+                    message: 'Faça um <b>registro</b> e crie uma conta, ou efetue login no sistema!',
+                    confirmText: 'Criar conta',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => router.push({ path: '/registro' })
+                });
+            },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .is-active .al img {
   filter: grayscale(0%);
 }
@@ -287,7 +315,9 @@ h3 {
   padding-left: 0px;
 }
 #content {
-  background-color: rgb(110, 16, 197);
+  background: url(../assets/capa.png), url(../assets/ruido.png),
+    linear-gradient(110deg, #573589, #F37CFA);
+  background-attachment: fixed;
   height: 100%;
   color: white;
 }

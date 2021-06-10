@@ -237,11 +237,17 @@
 </template>
 <style lang="scss" scoped>
 #content {
-  background-color: rgb(110, 16, 197);
+  background: linear-gradient(110deg, rgb(110, 16, 197), #ad3a9e);
   width: 100%;
   color: white;
+  @include desktop{
   border-top-style: dashed;
-  border-bottom-style: dashed;
+  border-bottom-style:dashed;
+  border-bottom-width: 10px;
+  border-top-width: 10px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  }
 }
 #devs .card {
   width: fit-content;
