@@ -66,24 +66,6 @@
             </router-link>
           </p>
 
-            <strong>LINKS ÚTEIS</strong>
-          </p>
-          <p>
-            <router-link to="/">
-              Adoção Responsável
-            </router-link>
-          </p>
-
-          <p>
-            <router-link :to="{ path: '/' }">
-              Dicas e Cuidados
-            </router-link>
-          </p>
-           <p>
-            <router-link :to="{ path: '/' }">
-              Como Usar o Site
-            </router-link>
-          </p>
         </div>
       </div>
 
