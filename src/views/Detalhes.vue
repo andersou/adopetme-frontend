@@ -165,7 +165,6 @@ import moment from "moment";
 import "moment/locale/pt-br";
 import { getPet } from "../services/api";
 import { getUser } from "../services/api";
-import router from "vue-router";
 export default {
   props: ["petId","userId"],
   mounted() {
@@ -210,25 +209,6 @@ export default {
         return `${process.env.VUE_APP_API_URL}/image/pets${link}`;
       }
     },
-    // getPetPhoto(pet) {
-    //   if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
-    //     return this.processPetsLink(pet.petPhotos[0].photoUri);
-
-    //   return "";
-    // },
-    // loadPets() {
-    //   console.log(this.sort);
-    //   getPets(this.currentPage, this.filters, this.sort)
-    //     .then((r) => {
-    //       this.petsData = r.data;
-    //     })
-    //     .catch(() => {
-    //       this.petsData = {};
-    //     });
-    // },
-    // loadUser() {
-    //   return getUser();
-    // },
     petSizeTransform(petSize) {
       let sizes = {
         "0": "Bem Pequeno",
@@ -259,11 +239,11 @@ export default {
     confirmError() {
                 this.$buefy.dialog.confirm({
                     title: 'Você não está logado',
-                    message: 'Faça um <b>registro</b> e crie uma conta, ou efetue login no sistema!',
+                    message: 'Você precisa estar logado para solicitar uma adoção, <b>crie uma conta</b> ou efetue login no sistema!',
                     confirmText: 'Criar conta',
                     type: 'is-danger',
                     hasIcon: true,
-                    onConfirm: () => router.push({ path: '/registro' })
+                    onConfirm: () => this.$router.push({ path: '/registro' })
                 });
             },
   },
@@ -316,7 +296,7 @@ h3 {
 }
 #content {
   background: url(../assets/capa.png), url(../assets/ruido.png),
-    linear-gradient(110deg, #573589, #F37CFA);
+   linear-gradient(110deg, rgb(20, 16, 63), rgb(17, 81, 92));
   background-attachment: fixed;
   height: 100%;
   color: white;
@@ -328,5 +308,10 @@ h3 {
   border-top-style: dashed;
   border-left-style: inset;
   border-right-style: ridge;
+}
+.image{
+  max-width: 900px;
+  max-height: 700px;
+  justify-content: center;
 }
 </style>
