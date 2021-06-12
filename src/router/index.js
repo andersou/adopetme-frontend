@@ -132,6 +132,13 @@ const routes = [
   component: () =>
     import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
   },
+  {
+  path: "/Confirmar-Email",
+  name: "ConfirmarEmail",
+  props: true,
+  component: () =>
+    import(/* webpackChunkName: "ConfirmarEmail" */ "../views/confirmEmail.vue"),
+  },
 ];
 
 const router = new VueRouter({
