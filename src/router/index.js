@@ -132,6 +132,20 @@ const routes = [
   component: () =>
     import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
   },
+  {
+    path: "/Error",
+    name: "Erro",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/Erro.vue"),
+    },
+    {
+      path: "/EmailConfirmation",
+      name: "EmailConfirmation",
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "Solicitacoes" */ "../views/EmailConfirmation.vue"),
+      }
 ];
 
 const router = new VueRouter({

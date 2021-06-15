@@ -76,7 +76,7 @@
 
         </div>
 
-        <div class="column imageVertical">
+        <div class="column vertical">
             <figure class="image adopetme-figure">
                 <img src="../assets/Quality time in nature-amico.svg" alt="" srcset="" />
              </figure>
@@ -88,8 +88,8 @@
      <section class="container mt-3">
       <div class="columns mx-0">
 
-        <div class="column ">
-            <figure class="image adopetme-figure">
+        <div class="column vertical">
+            <figure class="image adopetme-figure vertical">
                 <img src="../assets/Cautious dog-pana.svg" alt="" srcset="" />
              </figure>
         </div>
@@ -169,7 +169,7 @@
           </p>
 
         </div>
-        <div class="column">
+        <div class="column vertical">
             <figure class="image adopetme-figure">
                 <img src="../assets/Dog walking-pana.svg" alt="" srcset="" />
              </figure>
@@ -190,6 +190,13 @@
 #devs .card {
   width: fit-content;
   margin: 0 auto;
+}
+
+.vertical{
+    display: block;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 // #devs {
 //   /*background-color: $primary;*/
