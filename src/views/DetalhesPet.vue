@@ -140,13 +140,10 @@
         >
           <div class="box mx-2 has-text-centered">
             <h2 class="is-size-3">{{ petData.protector.firstName }}</h2>
-            <div class="is-flex" style="flex-direction: column">
-              <span>Redes sociais</span>
-              <a :href="petData.protector.facebookProfile"
-                ><b-icon icon="facebook" size="is-medium"> </b-icon
-              ></a>
+            <div>
+             <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p>
             </div>
-            <article class="media is-justify-content-center">
+            <article class="media is-justify-content-center mt-2 mb-2">
               <figure
                 v-if="petData.protector.photoUri"
                 class="image is-128x128 media-center"
@@ -157,6 +154,12 @@
                 />
               </figure>
             </article>
+            <div class="is-flex" style="flex-direction: column">     
+              <h1>Perfil do Facebook</h1>
+              <a :href="petData.protector.facebookProfile"
+                ><b-icon icon="facebook" size="is-medium"> </b-icon
+              ></a>
+            </div>
           </div>
         </div>
       </div>
