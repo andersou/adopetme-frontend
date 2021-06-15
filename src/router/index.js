@@ -119,18 +119,27 @@ const routes = [
       import(/* webpackChunkName: "Solicitacoes" */ "../views/LUAdopt.vue"),
   },
   {
-  path: "/dicasecuidados",
-  name: "dicasCuidados",
-  props: true,
-  component: () =>
-    import(/* webpackChunkName: "Solicitacoes" */ "../views/LUDicas.vue"),
+    path: "/dicasecuidados",
+    name: "dicasCuidados",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/LUDicas.vue"),
   },
   {
-  path: "/comousarsite",
-  name: "ComoUsarSite",
-  props: true,
-  component: () =>
-    import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
+    path: "/comousarsite",
+    name: "ComoUsarSite",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
+  },
+  {
+    path: "/Confirmar-Email",
+    name: "ConfirmarEmail",
+    props: true,
+    component: () =>
+      import(
+        /* webpackChunkName: "ConfirmarEmail" */ "../views/ConfirmEmail.vue"
+      ),
   },
   {
     path: "/Error",
@@ -150,9 +159,9 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  scrollBehavior (){
-    return { x: 0, y: 0 }
-  }
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
 });
 
 export default router;

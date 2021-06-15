@@ -10,9 +10,9 @@
             Aqui estão todos os seus pets!
           </h1>
 
-          <div v-if="petsData.data" class="columns is-multiline tuble">
-            <div v-for="pet in petsData.data" class="column is-half" :key="pet.id">
-              <div v-if="pet.protectorId == user.id">
+          <div v-if="petsData" class="columns is-multiline tuble">
+            <div v-for="pet in petsData" class="column is-half" :key="pet.id">
+              <div v-if="pet.protectorId == 7">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
                 <div class="card-image">
@@ -81,7 +81,7 @@
             </div><!-- Fim laço for -->
           </div><!-- Fim if primário -->
 
-          <div v-if="petsData.data.protectorId != user.id">
+          <div v-if="petsData.protectorId != user.id">
             <section class="hero">
               <div class="container has-text-centered">
                 <h1 class="is-size-4">
@@ -114,41 +114,60 @@ import "moment/locale/pt-br";
 import { getPets } from "../services/api";
 import { mapState } from "vuex";
 export default {
-  mounted() {
-    this.loadPets();
+  props: ["petId"],
+  computed: {
+    ...mapState(["user"]),
   },
+  mounted() {
+    // console.log(this.petId + " ");
+    // console.log(this.$route.params);
+    // this.loadPets();
+    getPets(this.petId)
+      .then((res) => {
+        this.petsData = res.data;
+      });
+  },
+  components: {},
   data() {
     return {
+      progress: false,
+      progressType: "is-primary",
+
       petsData: {},
+      userData: {},
     };
   },
-  computed: mapState(["filters", "sort", "user"]),
   methods: {
     processPetsLink(link) {
+      if (!link) return "";
+      //http://google.com/mathaus.png
+      //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
       if (link.startsWith("http")) {
         return link;
       } else {
         if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/pets/users${link}`;
+        return `${process.env.VUE_APP_API_URL}/image/pets${link}`;
       }
     },
-    getPetPhoto(pet) {
-      if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
-        return this.processPetsLink(pet.petPhotos[0].photoUri);
+    // getPetPhoto(pet) {
+    //   if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
+    //     return this.processPetsLink(pet.petPhotos[0].photoUri);
 
-      return "";
-    },
-    loadPets() {
-      console.log(this.sort);
-      getPets(this.currentPage, this.filters, this.sort)
-        .then((r) => {
-          this.petsData = r.data;
-        })
-        .catch(() => {
-          this.petsData = {};
-        });
-    },
-
+    //   return "";
+    // },
+    // loadPets() {
+    //   console.log(this.sort);
+    //   getPets(this.currentPage, this.filters, this.sort)
+    //     .then((r) => {
+    //       this.petsData = r.data;
+    //     })
+    //     .catch(() => {
+    //       this.petsData = {};
+    //     });
+    // },
+    // loadUser() {
+    //   return getUser();
+    // },
     petSizeTransform(petSize) {
       let sizes = {
         "0": "Bem Pequeno",
@@ -162,13 +181,8 @@ export default {
     },
     calculateAge(birthdayDate) {
       return moment(birthdayDate).fromNow(true);
-    },
-  },
-  watch: {
-    filters() {
-      this.loadPets();
-    },
-  },
+    } 
+  }
 };
 </script>
 

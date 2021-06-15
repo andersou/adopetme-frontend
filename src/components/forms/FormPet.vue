@@ -276,7 +276,8 @@ export default {
     doRegister() {
       let formData = new FormData();
       for (let prop in this.register) {
-        if (this.register[prop]) formData.set(prop, this.register[prop]);
+        if (this.register[prop] != null)
+          formData.set(prop, this.register[prop]);
       }
       formData.set("photos", this.avatar);
       formData.set(
