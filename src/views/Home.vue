@@ -23,13 +23,12 @@
               </b-input>
             </b-field>
             <b-button @click="login" type="is-primary">Entrar</b-button>
-            <!-- <b-button
+            <b-button
+                @click="confirmCustom"
                 class="ml-4"
-                tag="router-link"
-                :to="{ path: '/registro' }"
-                type="is-primary"
-                >Criar conta</b-button
-              > -->
+                type="is-primary-outline"
+                >Entrar com Facebook <b-icon icon="facebook" class="ml-1 content has-text-centered" type="is-primary"> </b-icon></b-button
+              >
           </div>
         </div>
       </div>
