@@ -154,6 +154,13 @@ const routes = [
       props: true,
       component: () =>
         import(/* webpackChunkName: "Solicitacoes" */ "../views/EmailConfirmation.vue"),
+      },
+     {
+      path: "/LoginFacebook",
+      name: "LoginFacebook",
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "Solicitacoes" */ "../views/NetworkLogin.vue"),
       }
 ];
 
