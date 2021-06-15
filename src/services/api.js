@@ -19,8 +19,17 @@ function getUser() {
   return api.get("/users");
 }
 
-function requestedAdoptions() {
-  return api.get("/adoption/adopter/requests");
+function requestedAdopterAdoptions() {
+  return api.get("/adoptions/adopter/requests");
+}
+function requestedProtectorAdoptions() {
+  return api.get("/adoptions/protector/requests");
+}
+function getAdopterAdoptions() {
+  return api.get("/adoptions/adopter");
+}
+function getProtectorAdoptions() {
+  return api.get("/adoptions/protector");
 }
 
 function getPets(page = 1, filters, sort, limit = 15) {
@@ -41,6 +50,17 @@ function getPets(page = 1, filters, sort, limit = 15) {
 function getPet(petId) {
   return api.get(`/pets/${petId}`);
 }
+
+function getMyPets() {
+  return api.get("/pets/my");
+}
+
+function approveAdoption(adoptionId) {
+  return api.post(`/adoptions/${adoptionId}/approve`);
+}
+function rejectAdoption(adoptionId) {
+  return api.post(`/adoptions/${adoptionId}/reject`);
+}
 export {
   getPet,
   registerUser,
@@ -48,6 +68,12 @@ export {
   getUser,
   registerPet,
   getPets,
-  requestedAdoptions,
+  requestedAdopterAdoptions,
+  requestedProtectorAdoptions,
+  getMyPets,
+  approveAdoption,
+  rejectAdoption,
+  getAdopterAdoptions,
+  getProtectorAdoptions,
 };
 export default api;
