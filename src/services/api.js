@@ -61,6 +61,9 @@ function approveAdoption(adoptionId) {
 function rejectAdoption(adoptionId) {
   return api.post(`/adoptions/${adoptionId}/reject`);
 }
+function createAdoption(petId) {
+  return api.post(`/adoptions`, { petId });
+}
 export {
   getPet,
   registerUser,
@@ -75,5 +78,6 @@ export {
   rejectAdoption,
   getAdopterAdoptions,
   getProtectorAdoptions,
+  createAdoption,
 };
 export default api;

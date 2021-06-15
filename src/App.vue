@@ -90,13 +90,22 @@
               </router-link>
             </b-dropdown-item>
           </b-dropdown>
-          <b-navbar-item v-else tag="router-link" :to="{ path: '/registro' }">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Registrar</strong>
-              </a>
-            </div>
-          </b-navbar-item>
+          <template v-else>
+            <b-navbar-item tag="router-link" :to="{ path: '/registro' }">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Registrar</strong>
+                </a>
+              </div>
+            </b-navbar-item>
+            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+              <div class="buttons">
+                <a class=" mx-2 is-primary">
+                  <strong>Entrar</strong>
+                </a>
+              </div>
+            </b-navbar-item>
+          </template>
         </template>
       </b-navbar>
       <router-view />
@@ -111,14 +120,21 @@
   </main>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import PageFooter from "./components/PageFooter.vue";
 export default {
+  created() {
+    if (!this.user.id) {
+      let token = window.sessionStorage.getItem("token");
+      if (token) this.loginUserByToken(token);
+    }
+  },
   components: { PageFooter },
   computed: {
     ...mapState(["user"]),
   },
   methods: {
+    ...mapActions(["loginUserByToken"]),
     processLink(link) {
       if (link.startsWith("http")) {
         return link;

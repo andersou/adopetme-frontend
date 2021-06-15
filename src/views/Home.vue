@@ -22,16 +22,14 @@
               >
               </b-input>
             </b-field>
-            <b-button @click="login" type="is-primary is-light"
-              >Entrar</b-button
-            >
-            <b-button
+            <b-button @click="login" type="is-primary">Entrar</b-button>
+            <!-- <b-button
                 class="ml-4"
                 tag="router-link"
                 :to="{ path: '/registro' }"
                 type="is-primary"
                 >Criar conta</b-button
-              >
+              > -->
           </div>
         </div>
       </div>

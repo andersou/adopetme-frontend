@@ -107,23 +107,21 @@
           ></div>
         </div>
 
-        <div v-if="userData.id">
+        <div>
           <h2 class="Highmargin">
             <b-button
+              v-if="!petData.hasRequested"
               label="Solicitar adoção"
               type="is-success"
               size="is-medium"
-              @click="confirmCustom"
+              @click="doAdoption"
             />
-          </h2>
-        </div>
-        <div v-if="!userData.id">
-          <h2 class="Highmargin">
             <b-button
-              label="Solicitar adoção"
+              v-else
+              label="Solicitação encaminhada"
               type="is-success"
               size="is-medium"
-              @click="confirmError"
+              disabled
             />
           </h2>
         </div>
@@ -131,31 +129,37 @@
     </div>
 
     <section id="content">
-      <h1 class="is-size-4 is-uppercase has-text-weight-bold mt-4">
-        <div class="column">
-          <h1 class="is-size-4 is-uppercase has-text-weight-bold mt-4">
-            Informações sobre o protetor
-          </h1>
+      <div class="column">
+        <h1 class="is-size-4 has-text-weight-bold mt-4">
+          Informações sobre o protetor
+        </h1>
 
-          <div
-            class="is-flex is-flex-wrap-wrap is-justify-content-center Lowmargin"
-          >
-            <div class="box mx-2 ">
-              <h2>Nome Usuário</h2>
-              <h3>Nota</h3>
-              <h3>Rede social</h3>
-              <article class="media">
-                <div class="media-center">
-                  <figure class="image is-128x128">
-                    <img src="../assets/hp-image.png" />
-                  </figure>
-                </div>
-                <div class="media-content"></div>
-              </article>
+        <div
+          class="is-flex is-flex-wrap-wrap is-justify-content-center Lowmargin"
+          v-if="petData.protector"
+        >
+          <div class="box mx-2 has-text-centered">
+            <h2 class="is-size-3">{{ petData.protector.firstName }}</h2>
+            <div class="is-flex" style="flex-direction: column">
+              <span>Redes sociais</span>
+              <a :href="petData.protector.facebookProfile"
+                ><b-icon icon="facebook" size="is-medium"> </b-icon
+              ></a>
             </div>
+            <article class="media is-justify-content-center">
+              <figure
+                v-if="petData.protector.photoUri"
+                class="image is-128x128 media-center"
+              >
+                <img
+                  class="is-rounded"
+                  :src="processLink(petData.protector.photoUri)"
+                />
+              </figure>
+            </article>
           </div>
         </div>
-      </h1>
+      </div>
     </section>
   </main>
 </template>
@@ -163,25 +167,15 @@
 <script>
 import moment from "moment";
 import "moment/locale/pt-br";
-import { getPet } from "../services/api";
-import { getUser } from "../services/api";
+import { mapState } from "vuex";
+import { createAdoption, getPet } from "../services/api";
 export default {
-  props: ["petId","userId"],
+  props: ["petId", "userId"],
   mounted() {
     // console.log(this.petId + " ");
     // console.log(this.$route.params);
     // this.loadPets();
-    getPet(this.petId)
-      .then((res) => {
-        this.petData = res.data;
-      })
-      .catch(() => {
-        this.$router.push("/adote-pet");
-      });
-     getUser(this.userId)
-      .then((res) => {
-        this.userData = res.data;
-      })
+    this.loadPet();
   },
   components: {},
   data() {
@@ -197,6 +191,9 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState(["user"]),
+  },
   methods: {
     processPetsLink(link) {
       if (!link) return "";
@@ -209,6 +206,7 @@ export default {
         return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
       }
     },
+
     petSizeTransform(petSize) {
       let sizes = {
         "0": "Bem Pequeno",
@@ -223,7 +221,14 @@ export default {
     calculateAge(birthdayDate) {
       return moment(birthdayDate).fromNow(true);
     },
-    confirmCustom() {
+    doAdoption() {
+      if (this.user.id) {
+        this.confirmAdoption();
+      } else {
+        this.createAccount();
+      }
+    },
+    confirmAdoption() {
       this.$buefy.dialog.confirm({
         title: "Confirmação da solicitação de adoção",
         message: `Ao confirmar a solicitação você afirma interesse na adoção do Pet.
@@ -232,21 +237,55 @@ export default {
         cancelText: "Vou pensar mais um pouco.",
         confirmText: "Quero adotar!",
         type: "is-success",
-        onConfirm: () =>
-          this.$buefy.toast.open("Solicitação feita com sucesso!"),
+        onConfirm: () => {
+          createAdoption(this.petId)
+            .then(() => {
+              this.$buefy.toast.open("Solicitação feita com sucesso!");
+              this.petData.hasRequested = true;
+            })
+            .catch(() => {
+              this.$buefy.toast.open({
+                message: "Um erro aconteceu, recarregue a página!",
+                type: "is-danger",
+              });
+            });
+        },
       });
     },
-    confirmError() {
-                this.$buefy.dialog.confirm({
-                    title: 'Você não está logado',
-                    message: 'Você precisa estar logado para solicitar uma adoção, <b>crie uma conta</b> ou efetue login no sistema!',
-                    confirmText: 'Criar conta',
-                    cancelText: 'Cancelar',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    onConfirm: () => this.$router.push({ path: '/registro' })
-                });
-            },
+    processLink(link) {
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/images/users${link}`;
+      }
+    },
+    createAccount() {
+      this.$buefy.dialog.confirm({
+        title: "Você não está logado",
+        message:
+          "Você precisa estar logado para solicitar uma adoção, <b>crie uma conta</b> ou efetue login no sistema!",
+        confirmText: "Criar conta",
+        cancelText: "Cancelar",
+        type: "is-danger",
+        hasIcon: true,
+        onConfirm: () => this.$router.push({ path: "/registro" }),
+      });
+    },
+    loadPet() {
+      return getPet(this.petId)
+        .then((res) => {
+          this.petData = res.data;
+        })
+        .catch(() => {
+          this.$router.push("/adote-pet");
+        });
+    },
+  },
+  watch: {
+    user() {
+      this.loadPet;
+    },
   },
 };
 </script>
@@ -297,7 +336,7 @@ h3 {
 }
 #content {
   background: url(../assets/capa.png), url(../assets/ruido.png),
-   linear-gradient(110deg, rgb(20, 16, 63), rgb(17, 81, 92));
+    linear-gradient(110deg, rgb(20, 16, 63), rgb(17, 81, 92));
   background-attachment: fixed;
   height: 100%;
   color: white;
@@ -310,7 +349,7 @@ h3 {
   border-left-style: inset;
   border-right-style: ridge;
 }
-.image{
+.image {
   max-width: 900px;
   max-height: 700px;
   justify-content: center;

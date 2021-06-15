@@ -106,7 +106,6 @@ export default {
       return "";
     },
     loadPets() {
-      console.log(this.sort);
       getPets(this.currentPage, this.filters, this.sort)
         .then((r) => {
           this.petsData = r.data;

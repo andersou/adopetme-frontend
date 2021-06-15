@@ -106,10 +106,10 @@ const routes = [
   },
   {
     path: "/detalhes/:petId",
-    name: "detalhes",
+    name: "detalhesPet",
     props: true,
     component: () =>
-      import(/* webpackChunkName: "Solicitacoes" */ "../views/Detalhes.vue"),
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/DetalhesPet.vue"),
   },
   {
     path: "/adocaoresponsavel",
