@@ -241,6 +241,7 @@ export default {
                     title: 'Você não está logado',
                     message: 'Você precisa estar logado para solicitar uma adoção, <b>crie uma conta</b> ou efetue login no sistema!',
                     confirmText: 'Criar conta',
+                    cancelText: 'Cancelar',
                     type: 'is-danger',
                     hasIcon: true,
                     onConfirm: () => this.$router.push({ path: '/registro' })
