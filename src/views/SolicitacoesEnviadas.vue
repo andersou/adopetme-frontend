@@ -12,28 +12,78 @@
                     Estes são todos os pets que você demonstrou interesse em adotar!
                     </h1>
 
+                  <!--
+                <ul v-if="requestsData.length">
+                        
+                        <li v-for="request in requestsData" :key="request.id">
+                            {{ request.petData }}
 
-          <div v-if="requestsData.length" class="columns is-multiline tuble">
+                        </li>
+                    </ul>
+                    -->
+
+          <div v-if="requestsData.length" class="columns is-multiline tuble mt-6">
             <div v-for="request in requestsData" class="column is-half" :key="request.id">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
+
+                <router-link :to="'/detalhes/' + request.petData.id">
+                <div class="card-image">
+                  <b-image
+                    class="image"
+                    :src="processPetsLink()"
+                    src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                    ratio="4by3">
+                  </b-image>
+                </div>
+                </router-link>
+
+
+
+
                  <div class="card-content">
                   <div class="media">
-                      <div class="media-left is-relative">
 
+                      <div class="media-left is-relative">
+                        <b-icon
+                          :icon="{ 0: 'paw', 1: 'dog', 2: 'cat' }[request.petData._specie]"
+                          pack="fas"
+                          size="is-large">
+                        </b-icon>
+                        <b-icon
+                          :icon="{ M: 'mars', F: 'venus', N: 'genderless' }[request.petData.sex]"
+                          :class="{
+                            'sex-icon': true,
+                            'sex-icon-male': !!(request.petData.sex == 'M'),
+                            'sex-icon-female': !!(request.petData.sex == 'F'),
+                          }"
+                          pack="fas"
+                          size="is-large">
+                        </b-icon>
                       </div>
+
+
+   
                     <div class="media-content">
                       <p class="title is-4">
-                        {{ request.petId }}
+                        {{ request.petData.name }}
+                        <span class="is-size-6 is-italic has-text-weight-light">{{
+                          calculateAge(request.petData._birthdayDate)
+                        }}</span>
+                      </p>
+                      <p class="subtitle is-6 mb-1">{{user.firstName}} {{user.lastName}}</p>
+                      <p class="subtitle is-6 mb-1 is-italic">
+                        {{ petSizeTransform(request.petData._size) }}
                       </p>
                     </div>
+            
                   </div>
 
                   <div class="content">
-                    (Deixar igual ao card meus pets)
+                    {{ request.petData.simpleDescription }}
                   </div>
 
-                  <div class="content">
+                  <div class="content center">
 
                     <b-button
                       tag="router-link"
@@ -47,7 +97,7 @@
                       tag="router-link"
                       :to="{ path: '' }"
                       type="is-danger is-uppercase"
-                      >Cancelar solicitação
+                      ><b-icon icon="close"></b-icon>
                     </b-button>
 
                   </div>
@@ -88,6 +138,8 @@
 </template>
 
 <script>
+import moment from "moment";
+import "moment/locale/pt-br";
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
 import { requestedAdopterAdoptions } from "../services/api";
@@ -112,9 +164,37 @@ export default {
 
   },
   methods: {
-      limparLista(){
-          this.requestsData = []
+        processPetsLink(link) {
+      if (!link) return "";
+      //http://google.com/mathaus.png
+      //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
       }
+    },
+     getPetPhoto(pet) {
+      if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
+        return this.processPetsLink(pet.petPhotos[0].photoUri);
+
+      return "";
+    },
+    petSizeTransform(petSize) {
+      let sizes = {
+        "0": "Bem Pequeno",
+        "1": "Pequeno",
+        "2": "Médio",
+        "3": "Grande",
+        "4": "Bem Grande",
+      };
+      //   return this.petsData.consts.sizes[petSize];
+      return sizes[petSize];
+    },
+    calculateAge(birthdayDate) {
+      return moment(birthdayDate).fromNow(true);
+    },
   }
 }
 </script>
@@ -127,4 +207,33 @@ export default {
         background-attachment: fixed;
         min-height: calc(100vh - 52px)
     }
+
+        .center{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .sex-icon {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+}
+.sex-icon-male {
+  color: #b0c7ed;
+}
+.sex-icon-female {
+  color: #e0caed;
+}
+  .tuble{
+    margin-top:-100px;
+  }
+  section{
+    margin-top: -100px;
+  }
+  @include mobile{
+     .tuble{
+    margin-top:-250px;
+  }
+  }
 </style>
