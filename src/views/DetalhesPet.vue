@@ -136,10 +136,10 @@
 
         <div
           class="is-flex is-flex-wrap-wrap is-justify-content-center Lowmargin"
-          v-if="petData.protector"
+          v-if="petData.protectorData"
         >
           <div class="box mx-2 has-text-centered">
-            <h2 class="is-size-3">{{ petData.protector.firstName }}</h2>
+            <h2 class="is-size-3">{{ petData.protectorData.firstName }}</h2>
             <div>
               <p>Nota do Usuário</p>
               <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
@@ -147,18 +147,18 @@
             </div>
             <article class="media is-justify-content-center mt-2 mb-2">
               <figure
-                v-if="petData.protector.photoUri"
+                v-if="petData.protectorData.photoUri"
                 class="image is-128x128 media-center"
               >
                 <img
                   class="is-rounded"
-                  :src="processLink(petData.protector.photoUri)"
+                  :src="processLink(petData.protectorData.photoUri)"
                 />
               </figure>
             </article>
             <div class="is-flex" style="flex-direction: column">     
               <h1>Perfil do Facebook</h1>
-              <a :href="petData.protector.facebookProfile"
+              <a :href="petData.protectorData.facebookProfile"
                 ><b-icon icon="facebook" size="is-medium"> </b-icon
               ></a>
             </div>
