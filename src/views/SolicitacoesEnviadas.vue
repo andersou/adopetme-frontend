@@ -9,9 +9,55 @@
                         {{user.firstName}}, 
                     </h1>
                     <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
-                    Estes são todos os usuários que desejam adotar um pet seu!
+                    Estes são todos os pets que você demonstrou interesse em adotar!
                     </h1>
-                   <section class="hero">
+
+
+          <div v-if="requestsData.length" class="columns is-multiline tuble">
+            <div v-for="request in requestsData" class="column is-half" :key="request.id">
+              <!-- Pet-card (separar em componente) -->
+              <div class="card">
+                 <div class="card-content">
+                  <div class="media">
+                      <div class="media-left is-relative">
+
+                      </div>
+                    <div class="media-content">
+                      <p class="title is-4">
+                        {{ request.petId }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    (Deixar igual ao card meus pets)
+                  </div>
+
+                  <div class="content">
+
+                    <b-button
+                      tag="router-link"
+                      :to="{ path: '' }"
+                      type="is-primary is-uppercase"
+                      >Abrir conversa
+                    </b-button>
+
+                    <b-button
+                    class="ml-2"
+                      tag="router-link"
+                      :to="{ path: '' }"
+                      type="is-danger is-uppercase"
+                      >Cancelar solicitação
+                    </b-button>
+
+                  </div>
+
+                  </div><!-- Fim conteúdo do card -->
+                </div><!-- Fim card secundário (pets) -->
+            </div><!-- Fim laço for -->
+          </div><!-- Fim if primário -->
+
+                   <section v-else class="hero">
                       <div class="container has-text-centered">
                         <h1 class="is-size-4">
                         Você ainda não solicitou nenhuma adoção!
@@ -30,6 +76,9 @@
                         </b-button>
                       </div>
                     </section>
+
+
+
                     </div>
                 </div>
             </div>
@@ -41,10 +90,31 @@
 <script>
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
+import { requestedAdopterAdoptions } from "../services/api";
 
 export default {
     computed: {
-    ...mapState(["user"]),
+        ...mapState(["user"])
+  },
+  mounted(){
+
+    requestedAdopterAdoptions()
+      .then((res) => {
+        this.requestsData = res.data;
+        //console.log(this.requestsData);
+      });
+
+  },
+  data(){
+      return{
+          requestsData: [],
+      };
+
+  },
+  methods: {
+      limparLista(){
+          this.requestsData = []
+      }
   }
 }
 </script>
