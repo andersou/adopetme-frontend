@@ -5,7 +5,7 @@ import store from "../store/index";
 
 Vue.use(VueRouter);
 
-let middlewareAuth = function(to, from, next) {
+let middlewareAuth = function (to, from, next) {
   if (store.state.user.id) {
     next();
   } else {
@@ -112,56 +112,47 @@ const routes = [
       import(/* webpackChunkName: "Solicitacoes" */ "../views/DetalhesPet.vue"),
   },
   {
-    path: "/adocaoresponsavel",
+    path: "/adocao-responsavel",
     name: "adocaoResponsavel",
     props: true,
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/LUAdopt.vue"),
   },
   {
-    path: "/dicasecuidados",
+    path: "/dicas-e-cuidados",
     name: "dicasCuidados",
     props: true,
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/LUDicas.vue"),
   },
   {
-    path: "/comousarsite",
+    path: "/como-o-usar-site",
     name: "ComoUsarSite",
     props: true,
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/LUHow.vue"),
   },
   {
-    path: "/Confirmar-Email",
-    name: "ConfirmarEmail",
-    props: true,
-    component: () =>
-      import(
-        /* webpackChunkName: "ConfirmarEmail" */ "../views/ConfirmEmail.vue"
-      ),
-  },
-  {
-    path: "/Error",
+    path: "/error",
     name: "Erro",
     props: true,
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/Erro.vue"),
-    },
-    {
-      path: "/EmailConfirmation",
-      name: "EmailConfirmation",
-      props: true,
-      component: () =>
-        import(/* webpackChunkName: "Solicitacoes" */ "../views/EmailConfirmation.vue"),
-      },
-     {
-      path: "/LoginFacebook",
-      name: "LoginFacebook",
-      props: true,
-      component: () =>
-        import(/* webpackChunkName: "Solicitacoes" */ "../views/NetworkLogin.vue"),
-      }
+  },
+  {
+    path: "/confirmar-email",
+    name: "EmailConfirmation",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/EmailConfirmation.vue"),
+  },
+  {
+    path: "/LoginFacebook",
+    name: "LoginFacebook",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/NetworkLogin.vue"),
+  }
 ];
 
 const router = new VueRouter({
