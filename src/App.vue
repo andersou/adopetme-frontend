@@ -28,7 +28,7 @@
           >
             Adotar um Pet
           </b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{ path: '/about' }">
+          <b-navbar-item tag="router-link" :to="{ path: '/sobre' }">
             Sobre o projeto
           </b-navbar-item>
         </template>
