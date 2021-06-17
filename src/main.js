@@ -9,7 +9,8 @@ import store from "./store";
 import "./styles/style.scss";
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-
+import fbInit from './services/facebook'
+fbInit()
 Vue.use(Buefy);
 Vue.use(VueMask);
 Vue.config.productionTip = false;

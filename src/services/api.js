@@ -14,7 +14,9 @@ function registerPet(formData) {
 function loginUser(email, password) {
   return api.post("login", { email, password });
 }
-
+function loginFacebook(access_token) {
+  return api.post("fb-login", { access_token });
+}
 function getUser() {
   return api.get("/users");
 }
@@ -79,5 +81,6 @@ export {
   getAdopterAdoptions,
   getProtectorAdoptions,
   createAdoption,
+  loginFacebook
 };
 export default api;

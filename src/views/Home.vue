@@ -24,11 +24,16 @@
             </b-field>
             <b-button @click="login" type="is-primary">Entrar</b-button>
             <b-button
-                class="ml-4"
-                tag="router-link"
-                :to="{ path: '/LoginFacebook' }"
-                type="is-primary-outline"
-                >Entrar com Facebook <b-icon icon="facebook" class="ml-1 content has-text-centered" type="is-primary"> </b-icon>
+              class="ml-4"
+              @click="loginFacebook"
+              type="is-primary-outline"
+              >Entrar com Facebook
+              <b-icon
+                icon="facebook"
+                class="ml-1 content has-text-centered"
+                type="is-primary"
+              >
+              </b-icon>
             </b-button>
           </div>
         </div>
@@ -39,6 +44,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { loginFacebook } from "../services/api";
 
 export default {
   name: "Home",
@@ -47,7 +53,7 @@ export default {
     return { email: "", password: "", error: false };
   },
   methods: {
-    ...mapActions(["loginUser"]),
+    ...mapActions(["loginUser", "loginUserByToken"]),
     login() {
       this.loginUser({
         email: this.email,
@@ -57,6 +63,25 @@ export default {
           this.$router.push("/dashboard");
         })
         .catch(() => (this.error = true));
+    },
+    loginFacebook() {
+      window.FB.login(
+        (response) => {
+          console.log(response);
+          if (response.status == "connected")
+            if (response.authResponse) {
+              loginFacebook(response.authResponse.accessToken).then((res) => {
+                this.loginUserByToken(res.data.token).then(() => {
+                  window.sessionStorage.setItem("token", res.data.token);
+                  this.$router.push("/dashboard");
+                });
+              });
+            } else {
+              console.log("User cancelled login or did not fully authorize.");
+            }
+        },
+        { scope: "email,public_profile" }
+      );
     },
   },
 };
