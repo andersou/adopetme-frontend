@@ -9,7 +9,7 @@
           </p>
 
           <p>
-            <router-link to="/about">
+            <router-link to="/sobre">
               Sobre
             </router-link>
           </p>
@@ -47,28 +47,26 @@
           <p>
             <strong>Links úteis</strong>
           </p>
-    
+
           <p>
-            <router-link :to="{ path: '/comousarsite' }">
+            <router-link to="/como-usar-o-site">
               Como usar o site
             </router-link>
           </p>
 
           <p>
-            <router-link to="/adocaoresponsavel">
+            <router-link to="/adocao-responsavel">
               Adoção responsável
             </router-link>
           </p>
 
           <p>
-            <router-link :to="{ path: '/dicasecuidados' }">
+            <router-link to="dicas-e-cuidados">
               Dicas e cuidados
             </router-link>
           </p>
-
         </div>
       </div>
-
     </div>
 
     <hr
@@ -82,6 +80,4 @@
 export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
