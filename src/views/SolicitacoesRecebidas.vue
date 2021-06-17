@@ -42,13 +42,13 @@
                   <div class="columns mt-1">
                     <div class="column">
                       <p class="title is-4">
-                        Bolotinha
+                        {{request.petData.name}}
                         <span class="is-size-6 is-italic has-text-weight-light">
-                          5 Meses
+                          {{calculateAge(request.petData._birthdayDate)}}
                         </span>
                         <span class="is-size-6 is-italic has-text-weight-light">
                             <p>
-                          Pequeno
+                          {{petSizeTransform(request.petData._size)}}
                             </p>
                         </span>
                       </p>
@@ -56,15 +56,26 @@
 
                     <div class="column">
                         <p class="title is-4">
-                        Carlos
-                        <span class="is-size-6 has-text-weight-light">
-                          Nota
-                        </span>
+                        {{request.adopterData.firstName}}
 
-                        <span class="is-size-6 is-italic has-text-weight-light">
-                            <p>
-                          Facebook.com
+                        <span class="">
+                          <b-image
+                          class="image is-128x128 content has-text-centered"
+                          :src="processPetsLink(request.adopterData.photoUri)"
+                        ></b-image>
+                        <b-rate :v-model="rateTransform(request.adopterData.adopterRating.average)" icon="paw" class="is-justify-content-center"></b-rate>
+                            <p class="title is-4">
+                              Perfil do Facebook:
+                          <a :href="request.adopterData.facebookProfile"
+                              ><b-icon icon="facebook" size="is-medium"> </b-icon
+                          ></a>
                             </p>
+                        </span>
+                      </p>
+                      <p class="title is-4">
+                        Recebida há: 
+                        <span class="is-size-6 has-text-weight-light">
+                          {{calculateAge(request.adopterData._createdAt)}}
                         </span>
                       </p>
                     </div>
@@ -141,6 +152,8 @@
 <script>
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
+import moment from "moment";
+import "moment/locale/pt-br";
 import { requestedProtectorAdoptions } from "../services/api";
 import { approveAdoption } from "../services/api";
 import { rejectAdoption } from "../services/api";
@@ -160,6 +173,37 @@ export default {
  
   },
   methods: {
+      processPetsLink(link) {
+      if (!link) return "";
+      //http://google.com/mathaus.png
+      //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
+      if (link.startsWith("http")) {
+        return link;
+      } else {
+        if (!link.startsWith("/")) link = "/" + link;
+        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
+        }
+      },
+      calculateAge(birthdayDate) {
+        return moment(birthdayDate).fromNow(true);
+      },
+      petSizeTransform(petSize) {
+      let sizes = {
+        "0": "Bem Pequeno",
+        "1": "Pequeno",
+        "2": "Médio",
+        "3": "Grande",
+        "4": "Bem Grande",
+      };
+      //   return this.petsData.consts.sizes[petSize];
+      return sizes[petSize];
+    },
+      rateTransform(rating){
+        if(rating == null){
+          rating = 0.0
+        }
+        return rating;
+      },
       approve(id){
           approveAdoption(id).then(() => {
               this.$buefy.toast.open({
