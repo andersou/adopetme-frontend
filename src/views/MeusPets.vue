@@ -53,6 +53,10 @@
                         {{ petSizeTransform(pet._size) }}
                       </p>
                     </div>
+                    <div class="is-justify-content-right mx-4">
+                      <p>Avalie a adoção:</p>
+                      <b-rate v-model="rate" icon="paw" size="is-medium" class="is-justify-content-center"></b-rate>
+                    </div>
                   </div>
 
                   <div class="content">

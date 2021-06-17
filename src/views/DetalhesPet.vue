@@ -141,7 +141,9 @@
           <div class="box mx-2 has-text-centered">
             <h2 class="is-size-3">{{ petData.protector.firstName }}</h2>
             <div>
-             <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p>
+              <p>Nota do Usuário</p>
+              <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
+              <b-rate v-model="rate" icon="paw" disabled=false class="is-justify-content-center"></b-rate>
             </div>
             <article class="media is-justify-content-center mt-2 mb-2">
               <figure
@@ -183,6 +185,8 @@ export default {
   components: {},
   data() {
     return {
+      rate: 4.6, //Esse valor eh a nota armazenada no bd do user
+
       progress: false,
       progressType: "is-primary",
 

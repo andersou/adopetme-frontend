@@ -80,14 +80,14 @@
                       class="ml-2"
                       @click="approve(request.id)"
                       type="is-primary">
-                      <b-icon icon="trash-can-outline"></b-icon>
+                      <b-icon icon="check"></b-icon>
                     </b-button>
 
                     <b-button
                       class="ml-2"
                       @click="rejection(request.id)"
                       type="is-danger">
-                      <b-icon icon="trash-can-outline"></b-icon>
+                      <b-icon icon="close"></b-icon>
                     </b-button>
 
                   </div>
