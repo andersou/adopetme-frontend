@@ -5,12 +5,6 @@
         <div class="column is-10 is-offset-1">
           <div class="card ">
             <div class="card-content">
-              <h1 class="is-size-3 is-uppercase has-text-weight-light">
-                Olá, {{user.firstName}}
-              </h1>
-              <h1 class="is-size-6 is-uppercase has-text-weight-light pb-2">
-                Edite as informações do seu perfil.
-              </h1>
               <div class="container">
                 <div
                   class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
@@ -22,11 +16,7 @@
                       :src="imageData"
                       alt=""
                     />
-                    <img
-                      v-else
-                      class="is-rounded img-avatar"
-                      :src="processLink(user.photoUri)"
-                    />
+                    <img v-else class="img-avatar" src="~assets/avatar.svg" />
                   </figure>
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
@@ -49,32 +39,67 @@
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Nome *" disabled>
+                  <b-field
+                    label="Nome *"
+                    :type="{ 'is-danger': isError('firstName') }"
+                    :message="getErrorMessage('firstName')"
+                  >
                     <b-input
-                      placeholder="Não é possível editar essa informação"
-                      :value="user.firstName"
-                      disabled ></b-input>
+                      placeholder="Nome"
+                      type="text"
+                      v-model="register.firstName"
+                      validation-message="Entre com um nome válido"
+                      pattern="[A-ZA-z çâêîôûáéíóúàèìòùãẽĩõũ]*"
+                      minlength="3"
+                      maxlength="255"
+                    ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Sobrenome *">
+                  <b-field
+                    label="Sobrenome *"
+                    :type="{ 'is-danger': isError('lastName') }"
+                    :message="getErrorMessage('lastName')"
+                  >
                     <b-input
-                      :value="user.lastName"
-                      disabled></b-input>
+                      type="text"
+                      placeholder="Sobrenome"
+                      v-model="register.lastName"
+                      validation-message="Entre com um sobrenome válido"
+                      pattern="[A-ZA-z çâêîôûáéíóúàèìòùãẽĩõũ]*"
+                      minlength="3"
+                      maxlength="255"
+                    ></b-input>
                   </b-field>
                 </div>
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="CPF *">
+                  <b-field
+                    label="CPF *"
+                    :type="{ 'is-danger': isError('document') }"
+                    :message="getErrorMessage('document')"
+                  >
                     <b-input
-                      :value="user.document"
-                      disabled></b-input>
+                      type="text"
+                      placeholder="CPF"
+                      validation-message="Entre com um documento válido"
+                      v-model="register.document"
+                      v-mask.raw="['###.###.###-##']"
+                    ></b-input>
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Gênero *" v-model="register.sex">
-                    <b-select placeholder="Selecione o gênero" expanded>
+                  <b-field
+                    label="Gênero *"
+                    :type="{ 'is-danger': isError('sex') }"
+                    :message="getErrorMessage('sex')"
+                  >
+                    <b-select
+                      v-model="register.sex"
+                      placeholder="Selecione o gênero"
+                      expanded
+                    >
                       <option value="M">Masculino</option>
                       <option value="F">Feminino</option>
                       <option value="B">Não binário</option>
@@ -84,7 +109,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Email *">
+                  <b-field
+                    label="Email *"
+                    :type="{ 'is-danger': isError('email') }"
+                    :message="getErrorMessage('email')"
+                  >
                     <b-input
                       v-model="register.email"
                       placeholder="Email"
@@ -95,7 +124,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Perfil do Facebook">
+                  <b-field
+                    label="Perfil do Facebook"
+                    :type="{ 'is-danger': isError('facebookProfile') }"
+                    :message="getErrorMessage('facebookProfile')"
+                  >
                     <b-input
                       v-model="register.facebookProfile"
                       placeholder="URL"
@@ -107,29 +140,36 @@
 
               <div class="columns">
                 <div class="column">
-                  <b-field label="Data de nascimento *">
+                  <b-field
+                    label="Data de nascimento *"
+                    :type="{ 'is-danger': isError('birthdayDate') }"
+                    :message="getErrorMessage('birthdayDate')"
+                  >
                     <b-datepicker
                       ref="datepicker"
                       expanded
                       placeholder="Select a date"
+                      v-model="register.birthdayDate"
                     >
                     </b-datepicker>
                     <b-button
                       @click="$refs.datepicker.toggle()"
                       icon-left="calendar-today"
                       type="is-primary"
-                      v-model="register.birthdayDate"
                     />
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Telefone">
+                  <b-field
+                    label="Telefone"
+                    :type="{ 'is-danger': isError('phone') }"
+                    :message="getErrorMessage('phone')"
+                  >
                     <b-input
                       type="text"
                       placeholder="Fone"
                       validation-message="Entre com um telefone válido"
                       v-model="register.phone"
-                      
                       v-mask.raw="['+55 (##) # ####-####']"
                     >
                     </b-input>
@@ -138,7 +178,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="CEP">
+                  <b-field
+                    label="CEP"
+                    :type="{ 'is-danger': isError('zipcode') }"
+                    :message="getErrorMessage('zipcode')"
+                  >
                     <b-input
                       type="text"
                       placeholder="CEP"
@@ -150,7 +194,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Bairro">
+                  <b-field
+                    label="Bairro"
+                    :type="{ 'is-danger': isError('neighborhood') }"
+                    :message="getErrorMessage('neighborhood')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -164,7 +212,11 @@
               </div>
               <div class="columns">
                 <div class="column is-6">
-                  <b-field label="Rua">
+                  <b-field
+                    label="Rua"
+                    :type="{ 'is-danger': isError('address') }"
+                    :message="getErrorMessage('address')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -176,7 +228,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Número">
+                  <b-field
+                    label="Número"
+                    :type="{ 'is-danger': isError('number') }"
+                    :message="getErrorMessage('number')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -190,7 +246,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Complemento">
+                  <b-field
+                    label="Complemento"
+                    :type="{ 'is-danger': isError('complement') }"
+                    :message="getErrorMessage('complement')"
+                  >
                     <b-input
                       type="text"
                       maxlength="64"
@@ -204,7 +264,11 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Estado">
+                  <b-field
+                    label="Estado"
+                    :type="{ 'is-danger': isError('state') }"
+                    :message="getErrorMessage('state')"
+                  >
                     <b-select
                       placeholder="Selecione o estado"
                       @input="loadMunicipios"
@@ -221,7 +285,11 @@
                   </b-field>
                 </div>
                 <div class="column">
-                  <b-field label="Municipio">
+                  <b-field
+                    label="Municipio"
+                    :type="{ 'is-danger': isError('city') }"
+                    :message="getErrorMessage('city')"
+                  >
                     <b-select
                       placeholder="Selecione o municipio"
                       v-model="register.city"
@@ -244,7 +312,12 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <b-field label="Senha" class="">
+                  <b-field
+                    label="Senha"
+                    class=""
+                    :type="{ 'is-danger': isError('password') }"
+                    :message="getErrorMessage('password')"
+                  >
                     <password
                       v-model="register.password"
                       maxlength="60"
@@ -276,7 +349,11 @@
               <div class="columns">
                 <div class="column">
                   <div class="buttons">
-                    <b-button type="is-primary" @click="doRegister" outlined
+                    <b-button
+                      type="is-primary"
+                      @click="doRegister"
+                      outlined
+                      :loading="isRegistering"
                       >Registrar</b-button
                     >
                   </div>
@@ -287,35 +364,53 @@
         </div>
       </div>
     </div>
+    <b-modal
+      v-model="isModalRegisterSuccessActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      @close="$router.replace('/')"
+    >
+      <div class="card">
+        <div class="card-content">
+          <div class="is-flex is-align-items-center">
+            <b-icon icon="check-circle" size="is-large" type="is-success">
+            </b-icon>
+            <h1 class="pl-3">
+              Registro realizado com sucesso!
+            </h1>
+          </div>
+        </div>
+      </div>
+    </b-modal>
   </main>
 </template>
 
 <script>
 import Password from "vue-password-strength-meter";
-import { getEstados, getMunicipios } from "../services/ibge";
-import { registerUser } from "../services/api";
-import {mask} from 'vue-the-mask';
-import { mapState } from "vuex";
+import { getEstados, getMunicipios } from "../../services/ibge";
+import { registerUser } from "../../services/api";
+import { mask } from "vue-the-mask";
 export default {
   name: "Registro",
   components: { Password },
-  computed: {
-    ...mapState(["user"]),
-  },
   directives: {
     mask(el, binding) {
-      binding.value ? mask(el, binding) : (el.oninput = null)
-    }
+      binding.value ? mask(el, binding) : (el.oninput = null);
+    },
   },
 
   data() {
     return {
+      formErrors: [],
       avatar: null,
       imageData: null,
       passwordConfirm: "",
       errors: {
         passwordConfirmed: true,
       },
+      isModalRegisterSuccessActive: false,
+      isRegistering: false,
       estados: [],
       municipios: [],
       register: {
@@ -345,16 +440,19 @@ export default {
   },
 
   methods: {
-    processLink(link) {
-      if (link.startsWith("http")) {
-        return link;
-      } else {
-        if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/images/users${link}`;
+    isError(field) {
+      return !!this.getErrorMessage(field);
+    },
+    getErrorMessage(field) {
+      if (!this.formErrors) return "";
+      let result = this.formErrors.find((error) => error.param == field);
+
+      if (result) {
+        return result.msg;
       }
+      return "";
     },
     loadMunicipios() {
-      console.log("Pegando cidades");
       if (this.register.state) {
         return getMunicipios(this.register.state).then(
           (resp) => (this.municipios = resp.data)
@@ -372,6 +470,7 @@ export default {
         });
         return;
       }
+      this.isRegistering = true;
       let formData = new FormData();
       for (let prop in this.register) {
         if (this.register[prop]) formData.set(prop, this.register[prop]);
@@ -384,16 +483,23 @@ export default {
           .split("T")[0]
           .replaceAll("-", "/")
       );
-      console.log(formData);
+      formData.set("document", this.register.document.replace(/[.-]/g, ""));
+      if (this.register.phone)
+        formData.set("phone", this.register.phone.replace(/[ ()-]/g, ""));
+      this.formErrors = [];
       registerUser(formData)
         .then(() => {
-          this.$router.replace("/dashboard");
+          this.isModalRegisterSuccessActive = true;
         })
-        .catch(() => {
+        .catch((error) => {
+          this.formErrors = error.response.data.errors;
           this.$buefy.toast.open({
             message: "Ocorreu um erro ao efetuar o registro.",
             type: "is-danger",
           });
+        })
+        .finally(() => {
+          this.isRegistering = false;
         });
       //instanciar formdata
       //preencher formdata
@@ -430,18 +536,20 @@ export default {
 
 <style lang="scss" scoped>
 .img-avatar {
-  width: 240px;
-  height: 240px;
+  max-width: 280px;
 }
 @include tablet {
   .img-avatar {
     margin-right: 3rem;
   }
 }
+// main {
+//   background: url(../assets/capa.png), url(../assets/ruido.png),
+//     linear-gradient(110deg, rgb(20, 16, 63), rgb(17, 81, 92));
+//   background-attachment: fixed;
+//   min-height: calc(100vh - #{$adopetme-navbar-height});
+// }
 main {
-  background: url(../assets/capa.png), url(../assets/ruido.png),
-    linear-gradient(110deg, $adopetme-logo-color, $primary);
-  background-attachment: fixed;
-  min-height: calc(100vh - #{$adopetme-navbar-height});
+  @include adopetme-background;
 }
 </style>

@@ -46,9 +46,9 @@ const routes = [
   },
   {
     path: "/registro",
-    name: "Registro",
+    name: "RegistroUser",
     component: () =>
-      import(/* webpackChunkName: "Registro" */ "../views/Registro.vue"),
+      import(/* webpackChunkName: "Registro" */ "../views/RegistroUser.vue"),
   },
   {
     path: "/dashboard",
@@ -72,11 +72,11 @@ const routes = [
   },
   {
     path: "/atualizar-perfil",
-    name: "AtualizarPerfil",
+    name: "EditarUser",
     beforeEnter: middlewareAuth,
     component: () =>
       import(
-        /* webpackChunkName: "AtualizarPerfil" */ "../views/AtualizarPerfil.vue"
+        /* webpackChunkName: "AtualizarPerfil" */ "../views/EditarUser.vue"
       ),
   },
   {
