@@ -79,6 +79,10 @@
             
                   </div>
 
+                  <div class="content">
+                    {{ request.petData.simpleDescription }}
+                  </div>
+
                   <div class="content center">
 
                     <b-button
