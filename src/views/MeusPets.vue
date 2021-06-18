@@ -17,7 +17,7 @@
                 <div class="card-image">
                   <b-image
                     class="image"
-                    :src="processPetsLink()"
+                    :src="getPetPhoto(pet)"
                     src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
                     ratio="4by3">
                   </b-image>
@@ -132,9 +132,7 @@ export default {
       progress: false,
       progressType: "is-primary",
 
-      myPetsData: {
-        petPhotos: [],
-      },
+      myPetsData: [],
     };
   },
   methods: {
