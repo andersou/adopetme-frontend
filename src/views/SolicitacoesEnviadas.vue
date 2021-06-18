@@ -157,8 +157,6 @@
 </template>
 
 <script>
-import moment from "moment";
-import "moment/locale/pt-br";
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
 import { requestedAdopterAdoptions } from "../services/api";

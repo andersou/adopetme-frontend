@@ -72,8 +72,6 @@
 </template>
 
 <script>
-import moment from "moment";
-import "moment/locale/pt-br";
 import { getPets } from "../../services/api";
 import { mapState } from "vuex";
 import petHelpersMixin from "../../mixins/petHelpers";
