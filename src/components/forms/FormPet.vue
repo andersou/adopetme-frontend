@@ -221,9 +221,11 @@ import "@toast-ui/editor/dist/i18n/pt-br";
 import { deletePetPhoto, registerPet, updatePet } from "../../services/api";
 import { mapState } from "vuex";
 import moment from "moment";
+import petHelpersMixin from "../../mixins/petHelpers";
 export default {
   name: "FormPet",
   props: ["pet"],
+  mixins: [petHelpersMixin],
   components: { Editor },
   created() {
     // console.log(this.pet);
@@ -415,8 +417,9 @@ export default {
         this.register.detailedDescription
       );
 
-      this.imageData =
-        newPet.petPhotos && newPet.petPhotos[0] && newPet.petPhotos[0].photoUri;
+      this.imageData = this.processPetsLink(
+        newPet.petPhotos && newPet.petPhotos[0] && newPet.petPhotos[0].photoUri
+      );
     },
   },
   watch: {
