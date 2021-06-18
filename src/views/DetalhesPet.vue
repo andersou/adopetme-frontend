@@ -57,9 +57,10 @@
         </div>
       </div>
 
-      <div class="card">
+      
+      <div class="column is-three-fifths">
+        <div class="card">
         <div class="card-content">
-      <div class="column">
         <div class="columns ">
           <div class="column">
             <h1 class="is-size-7 is-uppercase mt-4 Minmargin">
@@ -237,7 +238,7 @@ export default {
             })
             .catch(() => {
               this.$buefy.toast.open({
-                message: "Um erro aconteceu, recarregue a página!",
+                message: "Você não pode adotar um pet que é seu!",
                 type: "is-danger",
               });
             });
