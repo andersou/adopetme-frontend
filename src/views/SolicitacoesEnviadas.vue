@@ -152,7 +152,7 @@ export default {
         ...mapState(["user"])
   },
   mounted(){
-
+    
     requestedAdopterAdoptions()
       .then((res) => {
         this.requestsData = res.data;
@@ -167,6 +167,7 @@ export default {
 
   },
   methods: {
+    
         processPetsLink(link) {
       if (!link) return "";
       //http://google.com/mathaus.png
