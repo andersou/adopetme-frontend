@@ -42,6 +42,12 @@ export default {
 
             return "";
         },
+        getPetSpecieIcon(specie) {
+            return { 0: 'paw', 1: 'dog', 2: 'cat' }[specie]
+        },
+        getPetSexIcon(sex) {
+            return { M: 'mars', F: 'venus', N: 'genderless' }[sex]
+        }
     }
 }
 

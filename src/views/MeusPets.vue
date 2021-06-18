@@ -27,15 +27,13 @@
                   <div class="media">
                     <div class="media-left is-relative">
                       <b-icon
-                        :icon="{ 0: 'paw', 1: 'dog', 2: 'cat' }[pet._specie]"
+                        :icon="getPetSpecieIcon(pet._specie)"
                         pack="fas"
                         size="is-large"
                       >
                       </b-icon>
                       <b-icon
-                        :icon="
-                          { M: 'mars', F: 'venus', N: 'genderless' }[pet.sex]
-                        "
+                        :icon="getPetSexIcon(pet.sex)"
                         :class="{
                           'sex-icon': true,
                           'sex-icon-male': !!(pet.sex == 'M'),
