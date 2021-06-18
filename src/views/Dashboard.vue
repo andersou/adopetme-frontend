@@ -91,8 +91,8 @@ export default {
     padding-right: 3rem;
     padding-left: 3rem;
   }
-  .content{
-  margin-bottom: 240px;
-  }
+  // .content{
+  // margin-bottom: 240px;
+  // }
 }
 </style>
