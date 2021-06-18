@@ -1,22 +1,64 @@
 <template>
   <main>
+    <div class="card tubble">
+      <div class="card-content">
     <div class="columns">
-      <div class="column is-half f1">
-        <div class="">
+      <div class="column is-two-fifths f1">
           <b-carousel :progress="progress" :progress-type="progressType">
             <b-carousel-item
               v-for="petPhoto in petData.petPhotos"
               :key="petPhoto.id"
+              class="bordas"
             >
               <b-image
                 class="image"
                 :src="processPetsLink(petPhoto.photoUri)"
               ></b-image>
             </b-carousel-item>
-          </b-carousel>
+          </b-carousel>         
+           <div class="column ">
+          <div class="box mx-2">
+            <div class="columns">
+              <div class="column">
+            <p class="is-size-3 center">{{ petData.protectorData.firstName }}</p>
+            <article class="media is-justify-content-center mt-2 mb-2">
+              <figure
+                v-if="petData.protectorData.photoUri"
+                class="image media-center"
+              >
+                <img
+                  class="is-rounded"
+                  :src="processUserLink(petData.protectorData.photoUri)"
+                />
+              </figure>
+            </article>
+              </div>
+              <div class="column mt-4">
+              <div class="center">
+              <h1 class="center is-size-5">Perfil do Facebook</h1>
+              <a :href="petData.protectorData.facebookProfile"
+                class="is-justify-content-center"><b-icon icon="facebook" class="is-justify-content-center" size="is-medium"> </b-icon
+              ></a>
+              </div>
+              <div class="mt-2 center">
+               <p class="is-size-5">Nota do Usuário
+              <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
+              <b-rate
+                v-model="rate"
+                icon="paw"
+                disabled
+                class="is-justify-content-center"
+              ></b-rate>
+              </p>
+              </div>
+          </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <div class="card">
+        <div class="card-content">
       <div class="column">
         <div class="columns ">
           <div class="column">
@@ -125,52 +167,15 @@
             />
           </h2>
         </div>
+        
+      </div>
+       
+    </div>
+      </div>
+
       </div>
     </div>
-
-    <section id="content">
-      <div class="column">
-        <h1 class="is-size-4 has-text-weight-bold mt-4">
-          Informações sobre o protetor
-        </h1>
-
-        <div
-          class="is-flex is-flex-wrap-wrap is-justify-content-center Lowmargin"
-          v-if="petData.protectorData"
-        >
-          <div class="box mx-2 has-text-centered">
-            <h2 class="is-size-3">{{ petData.protectorData.firstName }}</h2>
-            <div>
-              <p>Nota do Usuário</p>
-              <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
-              <b-rate
-                v-model="rate"
-                icon="paw"
-                disabled="false"
-                class="is-justify-content-center"
-              ></b-rate>
-            </div>
-            <article class="media is-justify-content-center mt-2 mb-2">
-              <figure
-                v-if="petData.protectorData.photoUri"
-                class="image is-128x128 media-center"
-              >
-                <img
-                  class="is-rounded"
-                  :src="processUserLink(petData.protectorData.photoUri)"
-                />
-              </figure>
-            </article>
-            <div class="is-flex" style="flex-direction: column">
-              <h1>Perfil do Facebook</h1>
-              <a :href="petData.protectorData.facebookProfile"
-                ><b-icon icon="facebook" size="is-medium"> </b-icon
-              ></a>
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
   </main>
 </template>
 
@@ -315,11 +320,7 @@ h3 {
   padding-left: 0px;
 }
 #content {
-  background: url(../assets/capa.png), url(../assets/ruido.png),
-    linear-gradient(110deg, rgb(20, 16, 63), rgb(17, 81, 92));
-  background-attachment: fixed;
-  height: 100%;
-  color: white;
+  margin-top: 50px;
 }
 .FullHeight {
   height: 100%;
@@ -334,4 +335,18 @@ h3 {
   max-height: 700px;
   justify-content: center;
 }
+.tubble{
+  background: linear-gradient(110deg, $primary, $adopetme-logo-color);
+  height: 100%;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.box{
+  background-color: rgb(54, 54, 54);
+  color:white;
+}
+
 </style>
