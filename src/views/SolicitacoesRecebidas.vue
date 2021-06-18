@@ -13,7 +13,7 @@
                     </h1>
 
 
-          <div v-if="requestsData.length" class="columns is-multiline tuble">
+          <div v-if="requestsData.length" class="columns is-multiline">
             <div v-for="request in requestsData" class="column is-half" :key="request.id">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
@@ -55,15 +55,15 @@
                     </div>
 
                     <div class="column">
-                        <p class="title is-4">
-                        {{request.adopterData.firstName}}
+                        <p class="title is-4 center">
+                        {{request.adopterData.firstName}} {{request.adopterData.lastName}}
 
                         <span class="">
                           <b-image
-                          class="image is-128x128 content has-text-centered"
+                          class="image is-128x128 content has-text-centered center mt-2"
                           :src="processPetsLink(request.adopterData.photoUri)"
                         ></b-image>
-                        <b-rate :v-model="rateTransform(request.adopterData.adopterRating.average)" icon="paw" class="is-justify-content-center"></b-rate>
+                        <b-rate v-model="request.adopterData.adopterRating.average" disabled icon="paw" class="is-justify-content-center"></b-rate>
                             <p class="title is-4">
                               Perfil do Facebook:
                           <a :href="request.adopterData.facebookProfile"
@@ -207,14 +207,14 @@ export default {
       approve(id){
           approveAdoption(id).then(() => {
               this.$buefy.toast.open({
-                    message: 'Something happened correctly!',
+                    message: 'Adoção aprovada com sucesso!',
                     type: 'is-success'
                 })
 
                 this.updateRequests();
           }).catch(() => {
             this.$buefy.toast.open({
-                    message: "Something's not good, also I'm on <b>bottom</b>",
+                    message: "Essa adoção já foi aprovada, você ainda pode cancelar essa ação!",
                     type: 'is-danger'
             })
         });
@@ -222,14 +222,13 @@ export default {
       rejection(id){
         rejectAdoption(id).then(() => {
                 this.$buefy.toast.open({
-                    message: 'Something happened correctly!',
-                    type: 'is-success'
+                    message: 'Pedido de adoção rejeitado!',
                 })
 
                 this.updateRequests();
         }).catch(() => {
             this.$buefy.toast.open({
-                    message: "Something's not good, also I'm on <b>bottom</b>",
+                    message: "Essa adoção já foi reprovada, você ainda pode cancelar essa ação",
                     type: 'is-danger'
             })
         });

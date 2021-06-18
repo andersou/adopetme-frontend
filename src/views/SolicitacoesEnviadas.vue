@@ -71,9 +71,9 @@
                           calculateAge(request.petData._birthdayDate)
                         }}</span>
                       </p>
-                      <p class="subtitle is-6 mb-1">{{user.firstName}} {{user.lastName}}</p>
+                      <p class="subtitle is-6 mb-1">{{request.protectorData.firstName}} {{request.protectorData.lastName}}</p>
                       <p class="subtitle is-6 mb-1 is-italic">
-                        {{ petSizeTransform(request.petData._size) }}
+                        {{ petSizeTransform(request.petData._size)}}
                       </p>
                     </div>
             
@@ -100,6 +100,9 @@
                       ><b-icon icon="close"></b-icon>
                     </b-button>
 
+                   <p class="mt-3">
+                     Enviado há: {{calculateAge(request._createdAt)}}
+                   </p>
                   </div>
 
                   </div><!-- Fim conteúdo do card -->
