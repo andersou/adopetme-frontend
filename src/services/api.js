@@ -10,7 +10,13 @@ function registerUser(formData) {
 function registerPet(formData) {
   return api.post("/pets", formData);
 }
+function updatePet(petId, formData) {
+  return api.put("/pets/" + petId, formData);
+}
 
+function deletePetPhoto(petPhotoId) {
+  return api.delete("/pets/photo/" + petPhotoId);
+}
 function loginUser(email, password) {
   return api.post("login", { email, password });
 }
@@ -81,6 +87,8 @@ export {
   getAdopterAdoptions,
   getProtectorAdoptions,
   createAdoption,
-  loginFacebook
+  loginFacebook,
+  updatePet,
+  deletePetPhoto
 };
 export default api;

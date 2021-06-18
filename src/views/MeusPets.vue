@@ -74,7 +74,7 @@
                   <div class="content">
                     <b-button
                       tag="router-link"
-                      :to="{ path: '/editar-pet' }"
+                      :to="'/editar-pet/' + pet.id"
                       type="is-primary is-uppercase"
                       >Editar Pet
                     </b-button>
