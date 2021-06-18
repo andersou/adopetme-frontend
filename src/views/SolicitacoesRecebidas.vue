@@ -75,7 +75,7 @@
                       <p class="title is-4">
                         Recebida há: 
                         <span class="is-size-6 has-text-weight-light">
-                          {{calculateAge(request.adopterData._createdAt)}}
+                          {{calculateAge(request._createdAt)}}
                         </span>
                       </p>
                     </div>
@@ -206,12 +206,21 @@ export default {
       },
       approve(id){
           approveAdoption(id).then(() => {
-              this.$buefy.toast.open({
-                    message: 'Adoção aprovada com sucesso!',
-                    type: 'is-success'
+              this.$buefy.dialog.confirm({
+                    title: 'Confirmar adoção',
+                    message: `Você tem certeza que deseja confirmar a adoção? 
+                              Esteja ciente de todas as informações referentes ao adotante,
+                              ao confirmar você concorda com todos os termos firmados durante o processo de adoção
+                              do seu pet.`,
+                    cancelText: 'Cancelar',
+                    confirmText: 'Confirmar adoção',
+                    type: 'is-success',
+                    onConfirm: () => {
+                      this.$buefy.toast.open('Adoção aprovada com sucesso!')
+                      this.updateRequests();
+                    }
                 })
-
-                this.updateRequests();
+                  
           }).catch(() => {
             this.$buefy.toast.open({
                     message: "Essa adoção já foi aprovada, você ainda pode cancelar essa ação!",
@@ -221,11 +230,21 @@ export default {
       },
       rejection(id){
         rejectAdoption(id).then(() => {
-                this.$buefy.toast.open({
-                    message: 'Pedido de adoção rejeitado!',
+                this.$buefy.dialog.confirm({
+                    title: 'Rejeitar pedido de adoção',
+                    message: `Você tem certeza que deseja rejeitar a adoção? 
+                              Esteja ciente de todas as informações referentes ao adotante,
+                              ao rejeitar você está de acordo que este adotante não é o mais apto à cuidar do seu amiguinho
+                              neste momento`,
+                    cancelText: 'Cancelar',
+                    confirmText: 'Rejeitar adoção',
+                    type: 'is-danger',
+                    onConfirm: () => {
+                      this.$buefy.toast.open('Adoção rejeitada com sucesso!')
+                      this.updateRequests();
+                    }
                 })
 
-                this.updateRequests();
         }).catch(() => {
             this.$buefy.toast.open({
                     message: "Essa adoção já foi reprovada, você ainda pode cancelar essa ação",
