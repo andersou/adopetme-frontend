@@ -11,21 +11,45 @@
               <h1
                 class="is-size-6 is-uppercase has-text-weight-light pb-2 ml-6"
               >
-                Adicione seu peludinho para adoção.
+                {{
+                  isEdit
+                    ? "Confira as informações do seu amiguinho"
+                    : "Adicione seu peludinho para adoção."
+                }}
               </h1>
               <div class="container">
                 <div
                   class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
                 >
-                  <figure class="image ">
-                    <img
-                      class="img-avatar is-rounded"
-                      v-if="imageData"
-                      :src="imageData"
-                      alt=""
-                    />
-                    <img v-else class="img-avatar" src="../../assets/pet.png" />
-                  </figure>
+                  <div class="is-relative">
+                    <div
+                      style="position: absolute;
+    z-index: 1;"
+                    >
+                      <b-button
+                        type="is-danger"
+                        @click="removePhoto"
+                        v-if="imageData"
+                      >
+                        <b-icon icon="close"
+                      /></b-button>
+                    </div>
+
+                    <figure class="image ">
+                      <img
+                        class="img-avatar is-rounded"
+                        v-if="imageData"
+                        :src="imageData"
+                        alt=""
+                      />
+                      <img
+                        v-else
+                        class="img-avatar"
+                        src="../../assets/pet.png"
+                      />
+                    </figure>
+                  </div>
+
                   <b-field label="Foto" class=" has-text-centered">
                     <b-upload
                       v-model="avatar"
@@ -176,9 +200,9 @@
               </div>
 
               <div class="buttons">
-                <b-button type="is-primary" @click="doRegister" outlined
-                  >Enviar</b-button
-                >
+                <b-button type="is-primary" @click="doRegister" outlined>{{
+                  isEdit ? "Salvar Alterações" : "Adicionar"
+                }}</b-button>
               </div>
             </div>
           </div>
@@ -194,7 +218,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 
 import { Editor } from "@toast-ui/vue-editor";
 import "@toast-ui/editor/dist/i18n/pt-br";
-import { registerPet } from "../../services/api";
+import { deletePetPhoto, registerPet, updatePet } from "../../services/api";
 import { mapState } from "vuex";
 import moment from "moment";
 export default {
@@ -207,6 +231,9 @@ export default {
   },
   computed: {
     ...mapState(["user"]),
+    isEdit() {
+      return !!(this.pet && this.pet.id);
+    },
   },
 
   data() {
@@ -297,28 +324,68 @@ export default {
       let html = this.$refs.toastuiEditor.invoke("getHtml");
       formData.set("detailedDescription", html);
       this.formErrors = [];
-      registerPet(formData)
-        .then(() => {
-          this.$router.replace("/dashboard");
-          this.$buefy.toast.open({
-            message: "Seu pet foi cadastrado com sucesso!.",
-            type: "is-primary",
+      if (this.isEdit) {
+        updatePet(this.pet.id, formData)
+          .then(() => {
+            // this.$router.replace("/dashboard");
+            this.$buefy.toast.open({
+              message: "Seu pet foi atualizado com sucesso!.",
+              type: "is-primary",
+            });
+          })
+          .catch((error) => {
+            this.formErrors = error.response.data.errors;
+            this.$buefy.toast.open({
+              message: "Ocorreu um erro ao atualizar o pet.",
+              type: "is-danger",
+            });
           });
-        })
-        .catch((error) => {
-          this.formErrors = error.response.data.errors;
-          this.$buefy.toast.open({
-            message: "Ocorreu um erro ao cadastrar o pet.",
-            type: "is-danger",
+      } else {
+        registerPet(formData)
+          .then(() => {
+            this.$router.replace("/dashboard");
+            this.$buefy.toast.open({
+              message: "Seu pet foi cadastrado com sucesso!.",
+              type: "is-primary",
+            });
+          })
+          .catch((error) => {
+            this.formErrors = error.response.data.errors;
+            this.$buefy.toast.open({
+              message: "Ocorreu um erro ao cadastrar o pet.",
+              type: "is-danger",
+            });
           });
-        });
+      }
       //instanciar formdata
       //preencher formdata
       //colocar a imagem
       //enviar
     },
-    deleteDropFile() {
-      this.avatar = null;
+
+    removePhoto() {
+      if (this.isEdit) {
+        return deletePetPhoto(this.pet.petPhotos[0].id)
+          .then(() => {
+            this.avatar = null;
+            this.imageData = "";
+            this.$buefy.toast.open({
+              message: "Foto removida com sucesso!.",
+              type: "is-primary",
+            });
+          })
+          .catch(() => {
+            this.$buefy.toast.open({
+              message: "Ocorreu um erro ao remover a foto.",
+              type: "is-danger",
+            });
+            return Promise.reject();
+          });
+      } else {
+        this.avatar = null;
+        this.imageData = "";
+        return Promise.resolve();
+      }
     },
     previewImage: function() {
       if (this.avatar) {
@@ -347,13 +414,24 @@ export default {
         "setHtml",
         this.register.detailedDescription
       );
-      
-      this.imageData = newPet.petPhotos && newPet.petPhotos[0] && newPet.petPhotos[0].photoUri;
+
+      this.imageData =
+        newPet.petPhotos && newPet.petPhotos[0] && newPet.petPhotos[0].photoUri;
     },
   },
   watch: {
-    avatar(newAvatar) {
-      if (newAvatar) {
+    avatar(newAvatar, oldAvatar) {
+      if (this.isEdit) {
+        if (oldAvatar) {
+          this.removePhoto().then(() => {
+            if (newAvatar) {
+              this.previewImage();
+            }
+          });
+        } else {
+          this.previewImage();
+        }
+      } else if (newAvatar) {
         this.previewImage();
       }
     },
