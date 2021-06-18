@@ -76,7 +76,9 @@ import moment from "moment";
 import "moment/locale/pt-br";
 import { getPets } from "../../services/api";
 import { mapState } from "vuex";
+import petHelpersMixin from "../../mixins/petHelpers";
 export default {
+  mixins: [petHelpersMixin],
   mounted() {
     this.loadPets();
   },
@@ -91,20 +93,6 @@ export default {
   },
   computed: mapState(["filters", "sort"]),
   methods: {
-    processPetsLink(link) {
-      if (link.startsWith("http")) {
-        return link;
-      } else {
-        if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
-      }
-    },
-    getPetPhoto(pet) {
-      if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
-        return this.processPetsLink(pet.petPhotos[0].photoUri);
-
-      return "";
-    },
     loadPets() {
       getPets(this.currentPage, this.filters, this.sort)
         .then((r) => {
@@ -113,21 +101,6 @@ export default {
         .catch(() => {
           this.petsData = {};
         });
-    },
-
-    petSizeTransform(petSize) {
-      let sizes = {
-        "0": "Bem Pequeno",
-        "1": "Pequeno",
-        "2": "Médio",
-        "3": "Grande",
-        "4": "Bem Grande",
-      };
-      //   return this.petsData.consts.sizes[petSize];
-      return sizes[petSize];
-    },
-    calculateAge(birthdayDate) {
-      return moment(birthdayDate).fromNow(true);
     },
   },
   watch: {

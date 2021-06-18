@@ -143,7 +143,12 @@
             <div>
               <p>Nota do Usuário</p>
               <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
-              <b-rate v-model="rate" icon="paw" disabled=false class="is-justify-content-center"></b-rate>
+              <b-rate
+                v-model="rate"
+                icon="paw"
+                disabled="false"
+                class="is-justify-content-center"
+              ></b-rate>
             </div>
             <article class="media is-justify-content-center mt-2 mb-2">
               <figure
@@ -152,11 +157,11 @@
               >
                 <img
                   class="is-rounded"
-                  :src="processLink(petData.protectorData.photoUri)"
+                  :src="processUserLink(petData.protectorData.photoUri)"
                 />
               </figure>
             </article>
-            <div class="is-flex" style="flex-direction: column">     
+            <div class="is-flex" style="flex-direction: column">
               <h1>Perfil do Facebook</h1>
               <a :href="petData.protectorData.facebookProfile"
                 ><b-icon icon="facebook" size="is-medium"> </b-icon
@@ -170,12 +175,13 @@
 </template>
 
 <script>
-import moment from "moment";
 import "moment/locale/pt-br";
 import { mapState } from "vuex";
 import { createAdoption, getPet } from "../services/api";
+import petHelperMixin from "../mixins/petHelpers";
 export default {
   props: ["petId", "userId"],
+  mixins: [petHelperMixin],
   mounted() {
     // console.log(this.petId + " ");
     // console.log(this.$route.params);
@@ -202,32 +208,6 @@ export default {
     ...mapState(["user"]),
   },
   methods: {
-    processPetsLink(link) {
-      if (!link) return "";
-      //http://google.com/mathaus.png
-      //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
-      if (link.startsWith("http")) {
-        return link;
-      } else {
-        if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
-      }
-    },
-
-    petSizeTransform(petSize) {
-      let sizes = {
-        "0": "Bem Pequeno",
-        "1": "Pequeno",
-        "2": "Médio",
-        "3": "Grande",
-        "4": "Bem Grande",
-      };
-      //   return this.petsData.consts.sizes[petSize];
-      return sizes[petSize];
-    },
-    calculateAge(birthdayDate) {
-      return moment(birthdayDate).fromNow(true);
-    },
     doAdoption() {
       if (this.user.id) {
         this.confirmAdoption();
@@ -259,14 +239,7 @@ export default {
         },
       });
     },
-    processLink(link) {
-      if (link.startsWith("http")) {
-        return link;
-      } else {
-        if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/images/users${link}`;
-      }
-    },
+
     createAccount() {
       this.$buefy.dialog.confirm({
         title: "Você não está logado",

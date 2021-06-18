@@ -196,9 +196,15 @@ import { Editor } from "@toast-ui/vue-editor";
 import "@toast-ui/editor/dist/i18n/pt-br";
 import { registerPet } from "../../services/api";
 import { mapState } from "vuex";
+import moment from "moment";
 export default {
-  name: "Cadastro",
+  name: "FormPet",
+  props: ["pet"],
   components: { Editor },
+  created() {
+    // console.log(this.pet);
+    // this.populateRegisterPet(this.pet);
+  },
   computed: {
     ...mapState(["user"]),
   },
@@ -328,12 +334,32 @@ export default {
         reader.readAsDataURL(this.avatar);
       }
     },
+    populateRegisterPet(newPet) {
+      if (newPet && newPet.id)
+        for (let key in newPet) {
+          if (["_createdAt", "_birthdayDate"].includes(key)) {
+            newPet[key] = moment(newPet[key]).toDate();
+          }
+          this.register[key.startsWith("_") ? key.substring(1) : key] =
+            newPet[key];
+        }
+      this.$refs.toastuiEditor.invoke(
+        "setHtml",
+        this.register.detailedDescription
+      );
+      
+      this.imageData = newPet.petPhotos && newPet.petPhotos[0] && newPet.petPhotos[0].photoUri;
+    },
   },
   watch: {
     avatar(newAvatar) {
       if (newAvatar) {
         this.previewImage();
       }
+    },
+    pet(newPet) {
+      console.log("mudou pet");
+      this.populateRegisterPet(newPet);
     },
   },
 };

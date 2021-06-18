@@ -64,8 +64,9 @@ const routes = [
       import(/* webpackChunkName: "AdotePet" */ "../views/AdotePet.vue"),
   },
   {
-    path: "/editar-pet",
+    path: "/editar-pet/:petId",
     name: "EditarPet",
+    props: true,
     beforeEnter: middlewareAuth,
     component: () =>
       import(/* webpackChunkName: "EditarPet" */ "../views/EditarPet.vue"),

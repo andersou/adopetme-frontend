@@ -1,18 +1,18 @@
 <template>
-<main>
+  <main>
     <div class="container pt-6 pb-4">
-        <div class="columns">
-            <div class="column">
-                <div class="card ">
-                    <div class="card-content">
-                    <h1 class="is-size-3 is-uppercase has-text-weight-light">
-                        {{user.firstName}}, 
-                    </h1>
-                    <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
-                    Estes são todos os pets que você demonstrou interesse em adotar!
-                    </h1>
+      <div class="columns">
+        <div class="column">
+          <div class="card ">
+            <div class="card-content">
+              <h1 class="is-size-3 is-uppercase has-text-weight-light">
+                {{ user.firstName }},
+              </h1>
+              <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
+                Estes são todos os pets que você demonstrou interesse em adotar!
+              </h1>
 
-                  <!--
+              <!--
                 <ul v-if="requestsData.length">
                         
                         <li v-for="request in requestsData" :key="request.id">
@@ -22,122 +22,138 @@
                     </ul>
                     -->
 
-          <div v-if="requestsData.length" class="columns is-multiline tuble mt-6">
-            <div v-for="request in requestsData" class="column is-half" :key="request.id">
-              <!-- Pet-card (separar em componente) -->
-              <div class="card">
+              <div
+                v-if="requestsData.length"
+                class="columns is-multiline tuble mt-6"
+              >
+                <div
+                  v-for="request in requestsData"
+                  class="column is-half"
+                  :key="request.id"
+                >
+                  <!-- Pet-card (separar em componente) -->
+                  <div class="card">
+                    <router-link :to="'/detalhes/' + request.petData.id">
+                      <div class="card-image">
+                        <b-image
+                          class="image"
+                          :src="processPetsLink()"
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                        </b-image>
+                      </div>
+                    </router-link>
 
-                <router-link :to="'/detalhes/' + request.petData.id">
-                <div class="card-image">
-                  <b-image
-                    class="image"
-                    :src="processPetsLink()"
-                    src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
-                    ratio="4by3">
-                  </b-image>
-                </div>
-                </router-link>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-left is-relative">
+                          <b-icon
+                            :icon="
+                              { 0: 'paw', 1: 'dog', 2: 'cat' }[
+                                request.petData._specie
+                              ]
+                            "
+                            pack="fas"
+                            size="is-large"
+                          >
+                          </b-icon>
+                          <b-icon
+                            :icon="
+                              { M: 'mars', F: 'venus', N: 'genderless' }[
+                                request.petData.sex
+                              ]
+                            "
+                            :class="{
+                              'sex-icon': true,
+                              'sex-icon-male': !!(request.petData.sex == 'M'),
+                              'sex-icon-female': !!(request.petData.sex == 'F'),
+                            }"
+                            pack="fas"
+                            size="is-large"
+                          >
+                          </b-icon>
+                        </div>
 
-
-
-
-                 <div class="card-content">
-                  <div class="media">
-
-                      <div class="media-left is-relative">
-                        <b-icon
-                          :icon="{ 0: 'paw', 1: 'dog', 2: 'cat' }[request.petData._specie]"
-                          pack="fas"
-                          size="is-large">
-                        </b-icon>
-                        <b-icon
-                          :icon="{ M: 'mars', F: 'venus', N: 'genderless' }[request.petData.sex]"
-                          :class="{
-                            'sex-icon': true,
-                            'sex-icon-male': !!(request.petData.sex == 'M'),
-                            'sex-icon-female': !!(request.petData.sex == 'F'),
-                          }"
-                          pack="fas"
-                          size="is-large">
-                        </b-icon>
+                        <div class="media-content">
+                          <p class="title is-4">
+                            {{ request.petData.name }}
+                            <span
+                              class="is-size-6 is-italic has-text-weight-light"
+                              >{{
+                                calculateAge(request.petData._birthdayDate)
+                              }}</span
+                            >
+                          </p>
+                          <p class="subtitle is-6 mb-1">
+                            {{ request.protectorData.firstName }}
+                            {{ request.protectorData.lastName }}
+                          </p>
+                          <p class="subtitle is-6 mb-1 is-italic">
+                            {{ petSizeTransform(request.petData._size) }}
+                          </p>
+                        </div>
                       </div>
 
+                      <div class="content">
+                        {{ request.petData.simpleDescription }}
+                      </div>
 
-   
-                    <div class="media-content">
-                      <p class="title is-4">
-                        {{ request.petData.name }}
-                        <span class="is-size-6 is-italic has-text-weight-light">{{
-                          calculateAge(request.petData._birthdayDate)
-                        }}</span>
-                      </p>
-                      <p class="subtitle is-6 mb-1">{{request.protectorData.firstName}} {{request.protectorData.lastName}}</p>
-                      <p class="subtitle is-6 mb-1 is-italic">
-                        {{ petSizeTransform(request.petData._size)}}
-                      </p>
-                    </div>
-            
-                  </div>
-
-                  <div class="content">
-                    {{ request.petData.simpleDescription }}
-                  </div>
-
-                  <div class="content center">
-
-                    <b-button
-                      tag="router-link"
-                      :to="{ path: '' }"
-                      type="is-primary is-uppercase"
-                      >Abrir conversa
-                    </b-button>
-
-                    <b-button
-                    class="ml-2"
-                      tag="router-link"
-                      :to="{ path: '' }"
-                      type="is-danger is-uppercase"
-                      ><b-icon icon="close"></b-icon>
-                    </b-button>
-
-                   <p class="mt-3">
-                     Enviado há: {{calculateAge(request._createdAt)}}
-                   </p>
-                  </div>
-
-                  </div><!-- Fim conteúdo do card -->
-                </div><!-- Fim card secundário (pets) -->
-            </div><!-- Fim laço for -->
-          </div><!-- Fim if primário -->
-
-                   <section v-else class="hero">
-                      <div class="container has-text-centered">
-                        <h1 class="is-size-4">
-                        Você ainda não solicitou nenhuma adoção!
-                        </h1>
-                        <img
-                            src="../../src/assets/no-adoptions-sent.svg"
-                            alt=""
-                            srcset=""
-                        />  
+                      <div class="content center">
                         <b-button
-                        class="mr-4"
-                        tag="router-link"
-                        :to="{ path: '/adote-pet' }"
-                        type="is-primary">
-                        Encontre seu novo amiguinho!
+                          tag="router-link"
+                          :to="{ path: '' }"
+                          type="is-primary is-uppercase"
+                          >Abrir conversa
                         </b-button>
+
+                        <b-button
+                          class="ml-2"
+                          tag="router-link"
+                          :to="{ path: '' }"
+                          type="is-danger is-uppercase"
+                          ><b-icon icon="close"></b-icon>
+                        </b-button>
+
+                        <p class="mt-3">
+                          Enviado há: {{ calculateAge(request._createdAt) }}
+                        </p>
                       </div>
-                    </section>
-
-
-
                     </div>
+                    <!-- Fim conteúdo do card -->
+                  </div>
+                  <!-- Fim card secundário (pets) -->
                 </div>
+                <!-- Fim laço for -->
+              </div>
+              <!-- Fim if primário -->
+
+              <section v-else class="hero">
+                <div class="container has-text-centered">
+                  <h1 class="is-size-4">
+                    Você ainda não solicitou nenhuma adoção!
+                  </h1>
+                  <img
+                    src="../../src/assets/no-adoptions-sent.svg"
+                    alt=""
+                    srcset=""
+                  />
+                  <b-button
+                    class="mr-4"
+                    tag="router-link"
+                    :to="{ path: '/adote-pet' }"
+                    type="is-primary"
+                  >
+                    Encontre seu novo amiguinho!
+                  </b-button>
+                </div>
+              </section>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</main>
+  </main>
 </template>
 
 <script>
@@ -146,79 +162,43 @@ import "moment/locale/pt-br";
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
 import { requestedAdopterAdoptions } from "../services/api";
+import petHelpersMixin from "../mixins/petHelpers";
 
 export default {
-    computed: {
-        ...mapState(["user"])
+  mixins: [petHelpersMixin],
+  computed: {
+    ...mapState(["user"]),
   },
-  mounted(){
-    
-    requestedAdopterAdoptions()
-      .then((res) => {
-        this.requestsData = res.data;
-        //console.log(this.requestsData);
-      });
-
+  mounted() {
+    requestedAdopterAdoptions().then((res) => {
+      this.requestsData = res.data;
+      //console.log(this.requestsData);
+    });
   },
-  data(){
-      return{
-          requestsData: [],
-      };
-
+  data() {
+    return {
+      requestsData: [],
+    };
   },
-  methods: {
-    
-        processPetsLink(link) {
-      if (!link) return "";
-      //http://google.com/mathaus.png
-      //Mathaus.png ~> http://localhost:3000/image/pets/mathaus.png
-      if (link.startsWith("http")) {
-        return link;
-      } else {
-        if (!link.startsWith("/")) link = "/" + link;
-        return `${process.env.VUE_APP_API_URL}/images/pets${link}`;
-      }
-    },
-     getPetPhoto(pet) {
-      if (pet.petPhotos[0] && pet.petPhotos[0].photoUri)
-        return this.processPetsLink(pet.petPhotos[0].photoUri);
-
-      return "";
-    },
-    petSizeTransform(petSize) {
-      let sizes = {
-        "0": "Bem Pequeno",
-        "1": "Pequeno",
-        "2": "Médio",
-        "3": "Grande",
-        "4": "Bem Grande",
-      };
-      //   return this.petsData.consts.sizes[petSize];
-      return sizes[petSize];
-    },
-    calculateAge(birthdayDate) {
-      return moment(birthdayDate).fromNow(true);
-    },
-  }
-}
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
-    main{
-        background:   url(../assets/capa.png),
-                      url(../assets/ruido.png),
-                      linear-gradient(110deg, $adopetme-logo-color, $primary);
-        background-attachment: fixed;
-        min-height: calc(100vh - 52px)
-    }
+main {
+  background: url(../assets/capa.png), url(../assets/ruido.png),
+    linear-gradient(110deg, $adopetme-logo-color, $primary);
+  background-attachment: fixed;
+  min-height: calc(100vh - 52px);
+}
 
-        .center{
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
-    .sex-icon {
+.sex-icon {
   position: absolute;
   top: 1.5rem;
   left: 1rem;
@@ -229,15 +209,15 @@ export default {
 .sex-icon-female {
   color: #e0caed;
 }
-  .tuble{
-    margin-top:-100px;
+.tuble {
+  margin-top: -100px;
+}
+section {
+  margin-top: -100px;
+}
+@include mobile {
+  .tuble {
+    margin-top: -250px;
   }
-  section{
-    margin-top: -100px;
-  }
-  @include mobile{
-     .tuble{
-    margin-top:-250px;
-  }
-  }
+}
 </style>
