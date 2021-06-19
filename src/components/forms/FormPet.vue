@@ -198,11 +198,20 @@
                   </b-field>
                 </div>
               </div>
-
-              <div class="buttons">
-                <b-button type="is-primary" @click="doRegister" outlined>{{
-                  isEdit ? "Salvar Alterações" : "Adicionar"
-                }}</b-button>
+              <div class="columns">
+                <div class="column is-offset-2 is-4">
+                  <div class="buttons">
+                    <b-button
+                      :loading="isRegistering"
+                      type="is-primary"
+                      @click="doRegister"
+                      outlined
+                      >{{
+                        isEdit ? "Salvar Alterações" : "Adicionar"
+                      }}</b-button
+                    >
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -244,6 +253,7 @@ export default {
       formErrors: [],
       avatar: null,
       imageData: null,
+      isRegistering: false,
       register: {
         name: "",
         birthdayDate: new Date(),
@@ -308,6 +318,7 @@ export default {
       return "";
     },
     doRegister() {
+      this.isRegistering = true;
       let formData = new FormData();
       for (let prop in this.register) {
         if (this.register[prop] != null)
@@ -340,6 +351,9 @@ export default {
               message: "Ocorreu um erro ao atualizar o pet.",
               type: "is-danger",
             });
+          })
+          .finally(() => {
+            this.isRegistering = false;
           });
       } else {
         registerPet(formData)
@@ -356,6 +370,9 @@ export default {
               message: "Ocorreu um erro ao cadastrar o pet.",
               type: "is-danger",
             });
+          })
+          .finally(() => {
+            this.isRegistering = false;
           });
       }
       //instanciar formdata
