@@ -38,7 +38,7 @@
             v-if="user.photoUri"
             class="image is-32x32 is-align-self-center"
           >
-            <img class="is-rounded" :src="processLink(user.photoUri)" />
+            <img class="is-rounded response-mobile" :src="processLink(user.photoUri)" />
           </figure>
           <b-dropdown
             v-if="user.id"
@@ -164,6 +164,11 @@ export default {
 }
 .adopetme-social-media {
   width: 800px; //se largura eh 800px, pq ele vai mudando com redimensionamento?
+}
+@include mobile{
+  .response-mobile{
+    margin-left: 20px;
+  }
 }
 // #myBtn {
 //   display: none; /* Hidden by default */
