@@ -1,8 +1,20 @@
 import moment from "moment";
 import "moment/locale/pt-br";
+function momentPlugin() {
+    return {
+        install(Vue) {
+            Vue.prototype.$moment = moment;
+        }
+    }
+}
+export {
+    momentPlugin
+};
 export default {
+
     methods: {
         processUserLink(link) {
+            if (!link) return ""
             if (link.startsWith("http")) {
                 return link;
             } else {
@@ -50,4 +62,5 @@ export default {
         }
     }
 }
+
 

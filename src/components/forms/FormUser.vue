@@ -9,15 +9,30 @@
                 <div
                   class="is-flex is-flex-wrap-wrap is-justify-content-center mt-6 mb-6"
                 >
-                  <figure class="image ">
-                    <img
-                      class="img-avatar is-rounded"
-                      v-if="imageData"
-                      :src="imageData"
-                      alt=""
-                    />
-                    <img v-else class="img-avatar" src="~assets/avatar.svg" />
-                  </figure>
+                  <div class="is-relative">
+                    <div
+                      style="position: absolute;
+    z-index: 1;"
+                    >
+                      <b-button
+                        type="is-danger"
+                        @click="removePhoto"
+                        v-if="imageData"
+                      >
+                        <b-icon icon="close"
+                      /></b-button>
+                    </div>
+                    <figure class="image ">
+                      <img
+                        class="img-avatar is-rounded"
+                        v-if="imageData"
+                        :src="imageData"
+                        alt=""
+                      />
+                      <img v-else class="img-avatar" src="~assets/avatar.svg" />
+                    </figure>
+                  </div>
+
                   <b-field label="Foto Pessoal" class=" has-text-centered">
                     <b-upload
                       v-model="avatar"
@@ -354,7 +369,7 @@
                       @click="doRegister"
                       outlined
                       :loading="isRegistering"
-                      >Registrar</b-button
+                      >{{ isEdit ? "Atualizar" : "Registrar" }}</b-button
                     >
                   </div>
                 </div>
@@ -389,10 +404,13 @@
 <script>
 import Password from "vue-password-strength-meter";
 import { getEstados, getMunicipios } from "../../services/ibge";
-import { registerUser } from "../../services/api";
+import { deleteUserPhoto, registerUser, updateUser } from "../../services/api";
 import { mask } from "vue-the-mask";
+import petHelpersMixin from "../../mixins/petHelpers";
 export default {
   name: "Registro",
+  props: ["user"],
+  mixins: [petHelpersMixin],
   components: { Password },
   directives: {
     mask(el, binding) {
@@ -436,10 +454,54 @@ export default {
   mounted() {
     getEstados().then((resp) => {
       this.estados = resp.data;
+      console.log("carregou estados");
     });
   },
 
   methods: {
+    removePhoto() {
+      if (this.isEdit) {
+        if (this.imageData && this.imageData.startsWith("http")) {
+          return deleteUserPhoto()
+            .then(() => {
+              this.avatar = null;
+              this.imageData = "";
+              this.$buefy.toast.open({
+                message: "Foto removida com sucesso!.",
+                type: "is-primary",
+              });
+            })
+            .catch(() => {
+              this.$buefy.toast.open({
+                message: "Ocorreu um erro ao remover a foto.",
+                type: "is-danger",
+              });
+              return Promise.reject();
+            });
+        } else {
+          this.avatar = null;
+          this.imageData = "";
+          return Promise.resolve;
+        }
+      } else {
+        this.avatar = null;
+        this.imageData = "";
+        return Promise.resolve();
+      }
+    },
+    populateRegisterUser(newUser) {
+      if (newUser && newUser.id)
+        for (let key in newUser) {
+          if (["_createdAt", "_birthdayDate"].includes(key)) {
+            newUser[key] = this.$moment(newUser[key]).toDate();
+          }
+          this.register[key.startsWith("_") ? key.substring(1) : key] =
+            newUser[key];
+        }
+
+      this.imageData = this.processUserLink(newUser.photoUri);
+      if (newUser.state) this.loadMunicipios();
+    },
     isError(field) {
       return !!this.getErrorMessage(field);
     },
@@ -463,13 +525,14 @@ export default {
       // erro.passwordConfirmed = this.;
     },
     doRegister() {
-      if (this.register.password != this.passwordConfirm) {
-        this.$buefy.toast.open({
-          message: "Senha não confere!",
-          type: "is-danger",
-        });
-        return;
-      }
+      if (!!this.isEdit || (this.isEdit && this.register.password))
+        if (this.register.password != this.passwordConfirm) {
+          this.$buefy.toast.open({
+            message: "Senha não confere!",
+            type: "is-danger",
+          });
+          return;
+        }
       this.isRegistering = true;
       let formData = new FormData();
       for (let prop in this.register) {
@@ -487,20 +550,39 @@ export default {
       if (this.register.phone)
         formData.set("phone", this.register.phone.replace(/[ ()-]/g, ""));
       this.formErrors = [];
-      registerUser(formData)
-        .then(() => {
-          this.isModalRegisterSuccessActive = true;
-        })
-        .catch((error) => {
-          this.formErrors = error.response.data.errors;
-          this.$buefy.toast.open({
-            message: "Ocorreu um erro ao efetuar o registro.",
-            type: "is-danger",
+      if (this.isEdit) {
+        updateUser(formData)
+          .then(() => {
+            this.$buefy.toast.open({
+              message: "Dados atualizados com sucesso.",
+              type: "is-success",
+            });
+          })
+          .catch((error) => {
+            this.formErrors = error.response.data.errors;
+            this.$buefy.toast.open({
+              message: "Ocorreu um erro ao atualizar o registro.",
+              type: "is-danger",
+            });
+          })
+          .finally(() => {
+            this.isRegistering = false;
           });
-        })
-        .finally(() => {
-          this.isRegistering = false;
-        });
+      } else
+        registerUser(formData)
+          .then(() => {
+            this.isModalRegisterSuccessActive = true;
+          })
+          .catch((error) => {
+            this.formErrors = error.response.data.errors;
+            this.$buefy.toast.open({
+              message: "Ocorreu um erro ao efetuar o registro.",
+              type: "is-danger",
+            });
+          })
+          .finally(() => {
+            this.isRegistering = false;
+          });
       //instanciar formdata
       //preencher formdata
       //colocar a imagem
@@ -524,11 +606,20 @@ export default {
       }
     },
   },
+  computed: {
+    isEdit() {
+      return !!(this.user && this.user.id);
+    },
+  },
   watch: {
     avatar(newAvatar) {
       if (newAvatar) {
         this.previewImage();
       }
+    },
+    user(newUser) {
+      console.log("mudou user");
+      this.populateRegisterUser(newUser);
     },
   },
 };

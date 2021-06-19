@@ -6,7 +6,12 @@ const api = axios.create({
 function registerUser(formData) {
   return api.post("/register", formData);
 }
-
+function updateUser(formData) {
+  return api.put("/users", formData);
+}
+function deleteUserPhoto() {
+  return api.delete("/users/photo");
+}
 function registerPet(formData) {
   return api.post("/pets", formData);
 }
@@ -89,6 +94,8 @@ export {
   createAdoption,
   loginFacebook,
   updatePet,
-  deletePetPhoto
+  deletePetPhoto,
+  deleteUserPhoto,
+  updateUser
 };
 export default api;

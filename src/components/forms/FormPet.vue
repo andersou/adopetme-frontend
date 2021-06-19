@@ -220,7 +220,6 @@ import { Editor } from "@toast-ui/vue-editor";
 import "@toast-ui/editor/dist/i18n/pt-br";
 import { deletePetPhoto, registerPet, updatePet } from "../../services/api";
 import { mapState } from "vuex";
-import moment from "moment";
 import petHelpersMixin from "../../mixins/petHelpers";
 export default {
   name: "FormPet",
@@ -367,22 +366,28 @@ export default {
 
     removePhoto() {
       if (this.isEdit) {
-        return deletePetPhoto(this.pet.petPhotos[0].id)
-          .then(() => {
-            this.avatar = null;
-            this.imageData = "";
-            this.$buefy.toast.open({
-              message: "Foto removida com sucesso!.",
-              type: "is-primary",
+        if (this.imageData && this.imageData.startsWith("http")) {
+          return deletePetPhoto(this.pet.petPhotos[0].id)
+            .then(() => {
+              this.avatar = null;
+              this.imageData = "";
+              this.$buefy.toast.open({
+                message: "Foto removida com sucesso!.",
+                type: "is-primary",
+              });
+            })
+            .catch(() => {
+              this.$buefy.toast.open({
+                message: "Ocorreu um erro ao remover a foto.",
+                type: "is-danger",
+              });
+              return Promise.reject();
             });
-          })
-          .catch(() => {
-            this.$buefy.toast.open({
-              message: "Ocorreu um erro ao remover a foto.",
-              type: "is-danger",
-            });
-            return Promise.reject();
-          });
+        } else {
+          this.avatar = null;
+          this.imageData = "";
+          return Promise.resolve;
+        }
       } else {
         this.avatar = null;
         this.imageData = "";
@@ -407,7 +412,7 @@ export default {
       if (newPet && newPet.id)
         for (let key in newPet) {
           if (["_createdAt", "_birthdayDate"].includes(key)) {
-            newPet[key] = moment(newPet[key]).toDate();
+            newPet[key] = this.$moment(newPet[key]).toDate();
           }
           this.register[key.startsWith("_") ? key.substring(1) : key] =
             newPet[key];
