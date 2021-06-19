@@ -123,7 +123,7 @@
               <!-- Fim if primário -->
 
               <section v-else class="hero">
-                <div class="container has-text-centered">
+                <div class="container has-text-centered hero-body spacing">
                   <h1 class="is-size-4">
                     Você ainda não solicitou nenhuma adoção!
                   </h1>
@@ -211,5 +211,8 @@ section {
   .tuble {
     margin-top: -250px;
   }
+}
+.spacing{
+  margin-top:70px;
 }
 </style>

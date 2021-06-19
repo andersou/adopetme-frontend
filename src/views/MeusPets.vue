@@ -96,9 +96,9 @@
           </div>
           <!-- Fim if primário -->
 
-          <div v-if="myPetsData == ''" class="mt-5">
+          <div v-if="myPetsData == ''">
             <section class="hero">
-              <div class="container has-text-centered">
+              <div class="container has-text-centered hero-body spacing">
                 <h1 class="is-size-4">
                   Você ainda não tem nenhum Pet!
                 </h1>
@@ -181,5 +181,8 @@ section {
   .tuble {
     margin-top: -250px;
   }
+}
+.spacing{
+  margin-top:70px;
 }
 </style>
