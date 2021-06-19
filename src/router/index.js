@@ -153,7 +153,14 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "Solicitacoes" */ "../views/NetworkLogin.vue"),
-  }
+  },
+  {
+    path: "/my-pets-adp",
+    name: "MeusPetsAdotados",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "Solicitacoes" */ "../views/MeusPetsAdotados.vue"),
+  },
 ];
 
 const router = new VueRouter({

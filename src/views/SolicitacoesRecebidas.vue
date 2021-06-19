@@ -12,9 +12,24 @@
                 Estes são todos os usuários que desejam adotar um pet seu!
               </h1>
 
-              <div v-if="requestsData.length" class="columns is-multiline">
+
+
+              <div  v-if="requestsData.length" class="center mt-1">
+
+                  <b-field>
+                      <b-switch v-model="showCancelled">
+                          {{ isSwitched }}                  Mostrar solicitações canceladas
+                      </b-switch>
+                  </b-field>
+
+              </div>
+
+
+
+
+              <div v-if="requestsData.length" class="columns is-multiline mt-2">
                 <div
-                  v-for="request in requestsData"
+                  v-for="request in requests"
                   class="column is-half"
                   :key="request.id"
                 >
@@ -64,12 +79,37 @@
                               </p>
                             </span>
                           </p>
+
+                          <div class="card">
+                            <router-link :to="'/detalhes/' + request.petData.id">
+                              <div class="card-image">
+                                <b-image
+                                  class="image"
+                                  :src="getPetPhoto(request.petData)"
+                                  src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                                  ratio="5by3"
+                                >
+                                </b-image>
+                              </div>
+                            </router-link>
+                          </div>
+
+                          <div class="mt-5">{{ request.petData.simpleDescription }}</div>
                         </div>
 
                         <div class="column">
                           <p class="title is-4 center">
                             {{ request.adopterData.firstName }}
                             {{ request.adopterData.lastName }}
+
+                            <span>
+                              <p class="title is-4">
+                                <a :href="request.adopterData.facebookProfile"
+                                  ><b-icon icon="facebook" size="is-medium">
+                                  </b-icon
+                                ></a>
+                              </p>
+                            </span>
 
                             <span class="">
                               <b-image
@@ -86,13 +126,6 @@
                                 icon="paw"
                                 class="is-justify-content-center"
                               ></b-rate>
-                              <p class="title is-4">
-                                Perfil do Facebook:
-                                <a :href="request.adopterData.facebookProfile"
-                                  ><b-icon icon="facebook" size="is-medium">
-                                  </b-icon
-                                ></a>
-                              </p>
                             </span>
                           </p>
                           <p class="title is-4">
@@ -104,7 +137,7 @@
                         </div>
                       </div>
 
-                      <div class="content">
+                      <div class="content center">
                         <b-button type="is-primary is-uppercase"
                           >Abrir conversa
                         </b-button>
@@ -184,10 +217,20 @@ export default {
   mixins: [petHelpersMixin],
   computed: {
     ...mapState(["user"]),
+    requests(){
+      let requests = this.requestsData;
+      if(!this.showCancelled){
+          requests = requests.filter((req) => 
+            !req.cancelledAt
+          );
+      }
+      return requests;
+    },
   },
   data() {
     return {
       requestsData: [],
+      showCancelled: false,
     };
   },
   mounted() {
@@ -274,5 +317,9 @@ main {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.p-1 {
+  padding: 1em;
 }
 </style>
