@@ -64,7 +64,10 @@
                                 v-model="
                                   rate
                                 "
-                                disabled
+
+                                @click="rating(pet.id, rate, '')"
+
+                                enabled
                                 icon="paw"
                                 class="is-justify-content-center"
                               ></b-rate>
@@ -84,8 +87,7 @@
                   <div class="content center">
                     <b-button
                       class="ml-2"
-                      tag="router-link"
-                      :to="{ path: '/adote-pet' }"
+                      @click="deleteAdocao(pet.id)"
                       type="is-danger"
                     >
                       Cancelar adoção
@@ -125,6 +127,7 @@
 </template>
 
 <script>
+import {rateAdoption} from "../services/api";
 import {getAdopterAdoptions} from "../services/api";
 import { mapState } from "vuex";
 import petHelpersMixin from "../mixins/petHelpers";
@@ -143,14 +146,28 @@ export default {
       progressType: "is-primary",
 
       myPetsAdoptData: [],
+      rate: 0,
     };
   },
   methods: {
     loadMyAdoptPets() {
       return getAdopterAdoptions().then((res) => {
         this.myPetsAdoptData = res.data;
+        this.rate = this.myPetsAdoptData.rating;
       });
     },
+
+  rating(adoptionId, score, message){
+      rateAdoption(adoptionId, score, message) .then((req) => {
+        req.data(adoptionId, score, message);
+      })
+    },
+
+  deleteAdocao(idPet){
+    //para cancelar a adocao quando o pet ja foi adotado
+    console.log(idPet);
+  },
+
 
   },
 };

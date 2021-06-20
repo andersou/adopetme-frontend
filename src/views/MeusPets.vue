@@ -10,10 +10,11 @@
             Aqui estão todos os seus pets!
           </h1>
 
-          <div v-if="myPetsData" class="columns is-multiline tuble mt-4">
+          <div v-if="myPetsData.length" class="columns is-multiline tuble mt-4">
             <div v-for="pet in myPetsData" class="column is-half" :key="pet.id">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
+                 <router-link :to="'/detalhes/' + pet.id">
                 <div class="card-image">
                   <b-image
                     class="image"
@@ -23,6 +24,7 @@
                   >
                   </b-image>
                 </div>
+                                            </router-link>
                 <div class="card-content">
                   <div class="media">
                     <div class="media-left is-relative">
@@ -80,11 +82,10 @@
                     </b-button>
                     <b-button
                       class="ml-2"
-                      tag="router-link"
-                      :to="{ path: '/adote-pet' }"
+                      @click="petDelete(pet.id)"
                       type="is-danger"
                     >
-                      <b-icon icon="trash-can-outline"></b-icon>
+                      <b-icon icon="close"></b-icon>
                     </b-button>
                   </div>
                 </div>
@@ -122,12 +123,14 @@
 
 <script>
 import { getMyPets } from "../services/api";
+import { deletePet } from "../services/api";
 import { mapState } from "vuex";
 import petHelpersMixin from "../mixins/petHelpers";
 export default {
   mixins: [petHelpersMixin],
   computed: {
     ...mapState(["user"]),
+    
   },
   mounted() {
     this.loadMyPets();
@@ -147,7 +150,14 @@ export default {
         this.myPetsData = res.data;
       });
     },
+
+      petDelete(id){
+        deletePet(id);
+        this.loadMyPets();
+    }
+
   },
+  
 };
 </script>
 

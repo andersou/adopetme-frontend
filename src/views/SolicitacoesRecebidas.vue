@@ -122,10 +122,23 @@
                                 :rounded="true"
                               ></b-image>
                               <b-rate
+                              v-if="request.approvedAt == null"
                                 v-model="
                                   request.adopterData.adopterRating.average
                                 "
                                 disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+
+                              <b-rate
+                              v-else
+                                v-model="
+                                  rate
+                                "
+                                @click="rating(request.id, rate, '')"
+
+                                enable
                                 icon="paw"
                                 class="is-justify-content-center"
                               ></b-rate>
@@ -211,6 +224,7 @@
 <script>
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
+import { rateAdoption } from "../services/api";
 import { requestedProtectorAdoptions } from "../services/api";
 import { approveAdoption } from "../services/api";
 import { rejectAdoption } from "../services/api";
@@ -228,12 +242,13 @@ export default {
           );
       }
       return requests;
-    },
+    }
   },
   data() {
     return {
       requestsData: [],
       showCancelled: false,
+      rate: 0,
     };
   },
   mounted() {
@@ -304,6 +319,11 @@ export default {
         console.log(this.requestsData);
       });
     },
+    rating(adoptionId, score, message){
+      rateAdoption(adoptionId, score, message) .then((req) => {
+        req.data(adoptionId, score, message);
+      })
+    }
   },
 };
 </script>
