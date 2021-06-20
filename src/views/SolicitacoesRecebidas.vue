@@ -64,6 +64,18 @@
                               </p>
                             </span>
                           </p>
+                          <!-- Imagem do pet aqui -->
+                          <router-link :to="'/detalhes/' + request.petData.id">
+                            <div class="card-image">
+                              <b-image
+                                class="image"
+                                :src="processPetsLink()"
+                                src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                                ratio="4by3"
+                              >
+                              </b-image>
+                            </div>
+                          </router-link>
                         </div>
 
                         <div class="column">
@@ -75,7 +87,7 @@
                               <b-image
                                 class="image is-128x128 content has-text-centered center mt-2"
                                 :src="
-                                  processPetsLink(request.adopterData.photoUri)
+                                  processUserLink(request.adopterData.photoUri)
                                 "
                               ></b-image>
                               <b-rate

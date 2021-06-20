@@ -49,6 +49,7 @@
                 disabled
                 class="is-justify-content-center"
               ></b-rate>
+              <!-- Substituir para receber nota do db? -->
               </p>
               </div>
           </div>
