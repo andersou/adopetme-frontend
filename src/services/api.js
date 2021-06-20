@@ -84,6 +84,10 @@ function rejectAdoption(adoptionId) {
 function createAdoption(petId) {
   return api.post(`/adoptions`, { petId });
 }
+
+function rateAdoption(adoptionId, score, message) {
+  return api.post(`/adoptions/${adoptionId}/rate`, { score, message });
+}
 export {
   getPet,
   registerUser,
@@ -105,6 +109,7 @@ export {
   deleteUserPhoto,
   updateUser,
   deletePet,
-  deleteAdoptionRequest
+  deleteAdoptionRequest,
+  rateAdoption
 };
 export default api;
