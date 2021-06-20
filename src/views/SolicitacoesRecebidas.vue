@@ -89,6 +89,7 @@
                                 :src="
                                   processUserLink(request.adopterData.photoUri)
                                 "
+                                :rounded="true"
                               ></b-image>
                               <b-rate
                                 v-model="
