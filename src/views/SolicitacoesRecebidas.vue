@@ -33,6 +33,8 @@
                   class="column is-half"
                   :key="request.id"
                 >
+
+                <!--{{request}}-->
                   <!-- Pet-card (separar em componente) -->
                   <div class="card">
                     <div class="card-content">
