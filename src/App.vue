@@ -80,7 +80,7 @@
             </b-dropdown-item>
             <hr class="dropdown-divider" />
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/my-pets">
+              <router-link to="/my-pets-adp">
                 <b-icon icon="cat" class="pr-5 pl-3"> </b-icon>Meus Pets
                 Adotados
               </router-link>

@@ -7,17 +7,17 @@
             {{ user.firstName }},
           </h1>
           <h1 class="is-size-6 has-text-weight-light mb-4 is-uppercase">
-            Aqui estão todos os seus pets!
+            Aqui estão todos os seus pets adotados!
           </h1>
 
-          <div v-if="myPetsData" class="columns is-multiline tuble mt-4">
-            <div v-for="pet in myPetsData" class="column is-half" :key="pet.id">
+          <div v-if="myPetsAdoptData.length" class="columns is-multiline tuble mt-4">
+            <div v-for="pet in myPetsAdoptData" class="column is-half" :key="pet.id">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
                 <div class="card-image">
                   <b-image
                     class="image"
-                    :src="getPetPhoto(pet)"
+                    :src="getPetPhoto(pet.petData)"
                     src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
                     ratio="4by3"
                   >
@@ -27,17 +27,17 @@
                   <div class="media">
                     <div class="media-left is-relative">
                       <b-icon
-                        :icon="getPetSpecieIcon(pet._specie)"
+                        :icon="getPetSpecieIcon(pet.petData._specie)"
                         pack="fas"
                         size="is-large"
                       >
                       </b-icon>
                       <b-icon
-                        :icon="getPetSexIcon(pet.sex)"
+                        :icon="getPetSexIcon(pet.petData.sex)"
                         :class="{
                           'sex-icon': true,
-                          'sex-icon-male': !!(pet.sex == 'M'),
-                          'sex-icon-female': !!(pet.sex == 'F'),
+                          'sex-icon-male': !!(pet.petData.sex == 'M'),
+                          'sex-icon-female': !!(pet.petData.sex == 'F'),
                         }"
                         pack="fas"
                         size="is-large"
@@ -46,19 +46,29 @@
                     </div>
                     <div class="media-content">
                       <p class="title is-4">
-                        {{ pet.name }}
+                        {{ pet.petData.name }}
                         <span
                           class="is-size-6 is-italic has-text-weight-light"
-                          >{{ calculateAge(pet._birthdayDate) }}</span
+                          >{{ calculateAge(pet.petData._birthdayDate) }}</span
                         >
                       </p>
                       <p class="subtitle is-6 mb-1">
                         {{ user.firstName }} {{ user.lastName }}
                       </p>
                       <p class="subtitle is-6 mb-1">
-                        {{ petSizeTransform(pet._size) }}
+                        {{ petSizeTransform(pet.petData._size) }}
                       </p>
                     </div>
+                    
+                                <b-rate
+                                v-model="
+                                  rate
+                                "
+                                disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+
                     <!-- Essa é a pagina dos pets que o usuário colocou para a adoção
                    como ele vai avaliar uma adoção que é dele?????
                     <div class="is-justify-content-right mx-4">
@@ -68,23 +78,17 @@
                   </div>
 
                   <div class="content">
-                    {{ pet.simpleDescription }}
+                    {{ pet.petData.simpleDescription }}
                   </div>
 
                   <div class="content center">
-                    <b-button
-                      tag="router-link"
-                      :to="'/editar-pet/' + pet.id"
-                      type="is-primary is-uppercase"
-                      >Editar Pet
-                    </b-button>
                     <b-button
                       class="ml-2"
                       tag="router-link"
                       :to="{ path: '/adote-pet' }"
                       type="is-danger"
                     >
-                      <b-icon icon="trash-can-outline"></b-icon>
+                      Cancelar adoção
                     </b-button>
                   </div>
                 </div>
@@ -96,7 +100,7 @@
           </div>
           <!-- Fim if primário -->
 
-          <div v-if="myPetsData == ''">
+          <div v-if="myPetsAdoptData == ''">
             <section class="hero">
               <div class="container has-text-centered hero-body spacing">
                 <h1 class="is-size-4">
@@ -121,7 +125,7 @@
 </template>
 
 <script>
-import { getMyPets } from "../services/api";
+import {getAdopterAdoptions} from "../services/api";
 import { mapState } from "vuex";
 import petHelpersMixin from "../mixins/petHelpers";
 export default {
@@ -130,7 +134,7 @@ export default {
     ...mapState(["user"]),
   },
   mounted() {
-    this.loadMyPets();
+    this.loadMyAdoptPets();
   },
   components: {},
   data() {
@@ -138,15 +142,16 @@ export default {
       progress: false,
       progressType: "is-primary",
 
-      myPetsData: [],
+      myPetsAdoptData: [],
     };
   },
   methods: {
-    loadMyPets() {
-      return getMyPets().then((res) => {
-        this.myPetsData = res.data;
+    loadMyAdoptPets() {
+      return getAdopterAdoptions().then((res) => {
+        this.myPetsAdoptData = res.data;
       });
     },
+
   },
 };
 </script>
