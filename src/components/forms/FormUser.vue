@@ -525,7 +525,7 @@ export default {
       // erro.passwordConfirmed = this.;
     },
     doRegister() {
-      if (!!this.isEdit || (this.isEdit && this.register.password))
+      if (!this.isEdit || (this.isEdit && this.register.password))
         if (this.register.password != this.passwordConfirm) {
           this.$buefy.toast.open({
             message: "Senha não confere!",
