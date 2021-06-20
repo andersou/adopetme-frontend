@@ -38,7 +38,10 @@
             v-if="user.photoUri"
             class="image is-32x32 is-align-self-center"
           >
-            <img class="is-rounded response-mobile" :src="processLink(user.photoUri)" />
+            <img
+              class="is-rounded response-mobile"
+              :src="processLink(user.photoUri)"
+            />
           </figure>
           <b-dropdown
             v-if="user.id"
@@ -76,6 +79,12 @@
               </router-link>
             </b-dropdown-item>
             <hr class="dropdown-divider" />
+            <b-dropdown-item has-link aria-role="menuitem">
+              <router-link to="/my-pets">
+                <b-icon icon="cat" class="pr-5 pl-3"> </b-icon>Meus Pets
+                Adotados
+              </router-link>
+            </b-dropdown-item>
             <b-dropdown-item has-link aria-role="menuitem">
               <router-link to="/request-sent">
                 <b-icon icon="paw" class="pr-5 pl-3"> </b-icon>Solicitações
@@ -165,8 +174,8 @@ export default {
 .adopetme-social-media {
   width: 800px; //se largura eh 800px, pq ele vai mudando com redimensionamento?
 }
-@include mobile{
-  .response-mobile{
+@include mobile {
+  .response-mobile {
     margin-left: 20px;
   }
 }
