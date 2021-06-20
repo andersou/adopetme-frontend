@@ -73,16 +73,15 @@
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/request-received">
-                <b-icon icon="dog-service" class="pr-5 pl-3"> </b-icon
-                >Solicitações Recebidas
+              <router-link to="/my-pets-adp">
+                <b-icon icon="cat" class="pr-5 pl-3"> </b-icon>Adotados
               </router-link>
             </b-dropdown-item>
             <hr class="dropdown-divider" />
             <b-dropdown-item has-link aria-role="menuitem">
-              <router-link to="/my-pets-adp">
-                <b-icon icon="cat" class="pr-5 pl-3"> </b-icon>Meus Pets
-                Adotados
+              <router-link to="/request-received">
+                <b-icon icon="dog-service" class="pr-5 pl-3"> </b-icon
+                >Solicitações Recebidas
               </router-link>
             </b-dropdown-item>
             <b-dropdown-item has-link aria-role="menuitem">
