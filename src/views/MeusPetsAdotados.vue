@@ -64,10 +64,10 @@
                                 v-model="
                                   rate
                                 "
-                                disabled
+                                enabled
                                 icon="paw"
                                 class="is-justify-content-center"
-                              ></b-rate>
+                              > {{rating(pet.id, rate, "")}} </b-rate>
 
                     <!-- Essa é a pagina dos pets que o usuário colocou para a adoção
                    como ele vai avaliar uma adoção que é dele?????
@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import {rateAdoption} from "../services/api";
 import {getAdopterAdoptions} from "../services/api";
 import { mapState } from "vuex";
 import petHelpersMixin from "../mixins/petHelpers";
@@ -143,6 +144,7 @@ export default {
       progressType: "is-primary",
 
       myPetsAdoptData: [],
+      rate: 0,
     };
   },
   methods: {
@@ -151,6 +153,12 @@ export default {
         this.myPetsAdoptData = res.data;
       });
     },
+
+  rating(adoptionId, score, message){
+      rateAdoption(adoptionId, score, message) .then((req) => {
+        req.data(adoptionId, score, message);
+      })
+    }
 
   },
 };

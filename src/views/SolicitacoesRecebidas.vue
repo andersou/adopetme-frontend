@@ -211,6 +211,7 @@
 <script>
 import { mapState } from "vuex";
 //import { requestedAdoptions } from "../services.api";
+import { rateAdoption } from "../services/api";
 import { requestedProtectorAdoptions } from "../services/api";
 import { approveAdoption } from "../services/api";
 import { rejectAdoption } from "../services/api";
@@ -228,7 +229,7 @@ export default {
           );
       }
       return requests;
-    },
+    }
   },
   data() {
     return {
@@ -304,6 +305,11 @@ export default {
         console.log(this.requestsData);
       });
     },
+    rating(adoptionId, score, message){
+      rateAdoption(adoptionId, score, message) .then((req) => {
+        req.data(adoptionId, score, message);
+      })
+    }
   },
 };
 </script>
