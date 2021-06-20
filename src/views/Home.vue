@@ -19,6 +19,7 @@
                 type="password"
                 placeholder="********"
                 v-model="password"
+                @keyup.enter="login"
               >
               </b-input>
             </b-field>
@@ -43,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { loginFacebook } from "../services/api";
 
 export default {
@@ -82,6 +83,12 @@ export default {
         },
         { scope: "email,public_profile" }
       );
+    },
+  },
+  computed: { ...mapState(["user"]) },
+  watch: {
+    user(newUser) {
+      if (newUser.id) this.$router.push("/dashboard");
     },
   },
 };
