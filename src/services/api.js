@@ -12,6 +12,9 @@ function updateUser(formData) {
 function deleteUserPhoto() {
   return api.delete("/users/photo");
 }
+function deletePet(petId) {
+  return api.delete("/pets/" + petId);
+}
 function registerPet(formData) {
   return api.post("/pets", formData);
 }
@@ -34,6 +37,10 @@ function getUser() {
 
 function requestedAdopterAdoptions() {
   return api.get("/adoptions/adopter/requests");
+}
+
+function deleteAdoptionRequest(adoptionId) {
+  return api.delete("/adoptions/" + adoptionId);
 }
 function requestedProtectorAdoptions() {
   return api.get("/adoptions/protector/requests");
@@ -96,6 +103,8 @@ export {
   updatePet,
   deletePetPhoto,
   deleteUserPhoto,
-  updateUser
+  updateUser,
+  deletePet,
+  deleteAdoptionRequest
 };
 export default api;
