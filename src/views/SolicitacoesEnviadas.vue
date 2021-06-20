@@ -95,10 +95,9 @@
 
                       <div class="content center">
                         <b-button
-                          tag="router-link"
-                          :to="{ path: '' }"
                           type="is-primary is-uppercase"
-                          >Abrir conversa
+                          @click="isCardModalActive = true"
+                          >Dados do Protetor
                         </b-button>
 
                         <b-button
@@ -114,9 +113,76 @@
                         </p>
                       </div>
                     </div>
+          <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+                         <figure class="image">
+                                <b-image
+                          class="image"
+                          :src="
+                                  processUserLink(request.protectorData.photoUri)
+                                "
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                                </b-image>
+                    </figure>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <b-image
+                          class="image"
+                          :src="
+                                  processUserLink(request.protectorData.photoUri)
+                                "
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                                </b-image>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{ request.protectorData.firstName }}
+                            {{ request.protectorData.lastName }}</p>
+                            <p class="subtitle is-6">{{ request.protectorData.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Idade</h1>
+                          <p> {{calculateAge(request.protectorData._birthdayDate)}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Telefone</h1>
+                          <p> {{request.protectorData.phone}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Nota</h1>
+                          <b-rate
+                                v-model="
+                                  request.protectorData.protectorRating.average
+                                "
+                                disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Endereço</h1>
+                          <p> {{request.protectorData.address}}</p>
+                        </div>
+                      </div>
+                      <small>Data de registro do Pet: {{calculateAge(request.protectorData._createdAt)}}</small>
+                    </div>
+                </div>
+            </div>
+        </b-modal>
                     <!-- Fim conteúdo do card -->
                   </div>
                   <!-- Fim card secundário (pets) -->
+                  
                 </div>
                 <!-- Fim laço for -->
               </div>
@@ -170,6 +236,7 @@ export default {
   data() {
     return {
       requestsData: [],
+      isCardModalActive: false
     };
   },
   methods: {},
