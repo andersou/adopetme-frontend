@@ -149,11 +149,32 @@
                     </div>
 
                     <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                        <a>#css</a> <a>#responsive</a>
-                        <br>
-                        <small>11:09 PM - 1 Jan 2016</small>
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Idade</h1>
+                          <p> {{calculateAge(request.protectorData._birthdayDate)}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Telefone</h1>
+                          <p> {{request.protectorData.phone}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Nota</h1>
+                          <b-rate
+                                v-model="
+                                  request.protectorData.protectorRating.average
+                                "
+                                disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Endereço</h1>
+                          <p> {{request.protectorData.address}}</p>
+                        </div>
+                      </div>
+                      <small>Data de registro do Pet: {{calculateAge(request.protectorData._createdAt)}}</small>
                     </div>
                 </div>
             </div>
