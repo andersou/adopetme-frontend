@@ -91,6 +91,12 @@
                 Enviadas
               </router-link>
             </b-dropdown-item>
+            <b-dropdown-item has-link aria-role="menuitem">
+              <router-link to="/request-sent">
+                <b-icon icon="cat" class="pr-5 pl-3"> </b-icon>Meus Pets Adotados
+              </router-link>
+            </b-dropdown-item>
+            
 
             <hr class="dropdown-divider" aria-role="menuitem" />
             <b-dropdown-item value="logout" aria-role="menuitem">
