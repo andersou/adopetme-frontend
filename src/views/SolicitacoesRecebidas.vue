@@ -115,8 +115,9 @@
                               <b-image
                                 class="image is-128x128 content has-text-centered center mt-2"
                                 :src="
-                                  processPetsLink(request.adopterData.photoUri)
+                                  processUserLink(request.adopterData.photoUri)
                                 "
+                                :rounded="true"
                               ></b-image>
                               <b-rate
                                 v-model="

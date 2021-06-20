@@ -117,7 +117,7 @@
                     >
                       <option value="M">Masculino</option>
                       <option value="F">Feminino</option>
-                      <option value="B">Não binário</option>
+                      <option value="N">Outro</option>
                     </b-select>
                   </b-field>
                 </div>
