@@ -52,6 +52,11 @@ export default new Vuex.Store({
       let resp = await getUser();
       commit("setUser", resp.data);
     },
+    async logout({ commit }) {
+      delete api.defaults.headers.common["X-ACCESS-TOKEN"];
+      sessionStorage.removeItem("token");
+      commit("setUser", {});
+    },
   },
   modules: {},
 });
