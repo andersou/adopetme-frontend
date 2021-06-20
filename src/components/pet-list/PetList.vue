@@ -54,7 +54,7 @@
                     calculateAge(pet._birthdayDate)
                   }}</span>
                 </p>
-                <p class="subtitle is-6 mb-1">@nome do protetor</p>
+                <p class="subtitle is-6 mb-1">{{pet.protectorData.firstName}} {{pet.protectorData.lastName}}</p>
                 <p class="subtitle is-6 mb-1">
                   {{ petSizeTransform(pet._size) }}
                 </p>
