@@ -64,10 +64,13 @@
                                 v-model="
                                   rate
                                 "
+
+                                @click="rating(pet.id, rate, '')"
+
                                 enabled
                                 icon="paw"
                                 class="is-justify-content-center"
-                              > {{rating(pet.id, rate, "")}} </b-rate>
+                              ></b-rate>
 
                     <!-- Essa é a pagina dos pets que o usuário colocou para a adoção
                    como ele vai avaliar uma adoção que é dele?????
@@ -84,8 +87,7 @@
                   <div class="content center">
                     <b-button
                       class="ml-2"
-                      tag="router-link"
-                      :to="{ path: '/adote-pet' }"
+                      @click="deleteAdocao(pet.id)"
                       type="is-danger"
                     >
                       Cancelar adoção
@@ -151,6 +153,7 @@ export default {
     loadMyAdoptPets() {
       return getAdopterAdoptions().then((res) => {
         this.myPetsAdoptData = res.data;
+        this.rate = this.myPetsAdoptData.rating;
       });
     },
 
@@ -158,7 +161,13 @@ export default {
       rateAdoption(adoptionId, score, message) .then((req) => {
         req.data(adoptionId, score, message);
       })
-    }
+    },
+
+  deleteAdocao(idPet){
+    //para cancelar a adocao quando o pet ja foi adotado
+    console.log(idPet);
+  },
+
 
   },
 };

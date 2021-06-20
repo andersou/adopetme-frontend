@@ -22,6 +22,7 @@
                     </ul>
                     -->
 
+
               <div
                 v-if="requestsData.length"
                 class="columns is-multiline tuble mt-6"
@@ -31,6 +32,7 @@
                   class="column is-half"
                   :key="request.id"
                 >
+
                   <!-- Pet-card (separar em componente) -->
                   <div class="card">
                     <router-link :to="'/detalhes/' + request.petData.id">
@@ -102,8 +104,7 @@
 
                         <b-button
                           class="ml-2"
-                          tag="router-link"
-                          :to="{ path: '' }"
+                          @click="petDelete(request.id)"
                           type="is-danger is-uppercase"
                           ><b-icon icon="close"></b-icon>
                         </b-button>
@@ -218,6 +219,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { deleteAdoptionRequest } from "../services/api";
 //import { requestedAdoptions } from "../services.api";
 import { requestedAdopterAdoptions } from "../services/api";
 import petHelpersMixin from "../mixins/petHelpers";
@@ -239,7 +241,22 @@ export default {
       isCardModalActive: false
     };
   },
-  methods: {},
+  methods: {
+    petDelete(id){
+        deleteAdoptionRequest(id).then((req) => {
+          req.data(id);
+          this.Refresh();
+        });
+    },
+  Refresh(){
+    requestedAdopterAdoptions().then((res) => {
+      this.requestsData = res.data;
+      //console.log(this.requestsData);
+    });
+  }
+
+
+  },
 };
 </script>
 

@@ -122,10 +122,23 @@
                                 :rounded="true"
                               ></b-image>
                               <b-rate
+                              v-if="request.approvedAt == null"
                                 v-model="
                                   request.adopterData.adopterRating.average
                                 "
                                 disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+
+                              <b-rate
+                              v-else
+                                v-model="
+                                  rate
+                                "
+                                @click="rating(request.id, rate, '')"
+
+                                enable
                                 icon="paw"
                                 class="is-justify-content-center"
                               ></b-rate>
@@ -235,6 +248,7 @@ export default {
     return {
       requestsData: [],
       showCancelled: false,
+      rate: 0,
     };
   },
   mounted() {
