@@ -1,4 +1,4 @@
-# adopetme-frontend
+# adopetme-frontend (readme)
 
 ## Project setup
 ```
