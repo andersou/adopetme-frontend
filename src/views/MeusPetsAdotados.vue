@@ -139,44 +139,23 @@
                 v-model="modalProfile"
                 :width="640"
                 scroll="keep"
-                v-if="selectedRequest.adopterData"
               >
                 <div class="card">
                   <figure class="image">
-                    <b-image
-                      class="image"
-                      :src="
-                        processUserLink(selectedRequest.adopterData.photoUri)
-                      "
-                      src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
-                      ratio="4by3"
-                    >
-                    </b-image>
                   </figure>
                   <div class="card-content">
                     <div class="media">
                       <div class="media-left">
                         <figure class="image is-48x48">
-                          <b-image
-                            class="image"
-                            :src="
-                              processUserLink(
-                                selectedRequest.adopterData.photoUri
-                              )
-                            "
-                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
-                            ratio="4by3"
-                          >
-                          </b-image>
                         </figure>
                       </div>
                       <div class="media-content">
                         <p class="title is-4">
-                          {{ selectedRequest.adopterData.firstName }}
-                          {{ selectedRequest.adopterData.lastName }}
+                          Marcos
+                          Silva
                         </p>
                         <p class="subtitle is-6">
-                          {{ selectedRequest.adopterData.email }}
+                          marcos@gmail.com
                         </p>
                       </div>
                     </div>
@@ -188,18 +167,14 @@
                             Idade
                           </h1>
                           <p>
-                            {{
-                              calculateAge(
-                                selectedRequest.adopterData._birthdayDate
-                              )
-                            }}
+                            25 anos
                           </p>
                         </div>
                         <div class="column">
                           <h1 class="is-size-4 has-text-weight-bold">
                             Telefone
                           </h1>
-                          <p>{{ selectedRequest.adopterData.phone }}</p>
+                          <p>9999-9999</p>
                         </div>
                         <div class="column">
                           <h1 class="is-size-4 has-text-weight-bold">
@@ -207,7 +182,7 @@
                           </h1>
                           <b-rate
                             v-model="
-                              selectedRequest.adopterData.adopterRating.average
+                              rate
                             "
                             disabled
                             icon="paw"
@@ -218,14 +193,12 @@
                           <h1 class="is-size-4 has-text-weight-bold">
                             Endereço
                           </h1>
-                          <p>{{ selectedRequest.adopterData.address }}</p>
+                          <p>Rua barroso 13</p>
                         </div>
                       </div>
                       <small
                         >Usuário do app há:
-                        {{
-                          calculateAge(selectedRequest.adopterData._createdAt)
-                        }}</small
+                        2 Meses</small
                       >
                     </div>
                   </div>
@@ -235,7 +208,6 @@
 
             <!-- Modal da avaliacao-->
               <b-modal
-                v-if="selectedRequest.adopterData"
                 v-model="modalRate"
                 :width="640"
                 scroll="keep"
@@ -245,26 +217,15 @@
                     <div class="media">
                       <div class="media-left">
                         <figure class="image is-48x48">
-                          <b-image
-                            class="image"
-                            :src="
-                              processUserLink(
-                                selectedRequest.adopterData.photoUri
-                              )
-                            "
-                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
-                            ratio="4by3"
-                          >
-                          </b-image>
                         </figure>
                       </div>
                       <div class="media-content">
                         <p class="title is-4">
-                          {{ selectedRequest.adopterData.firstName }}
-                          {{ selectedRequest.adopterData.lastName }}
+                          Marcos
+                          Silva
                         </p>
                         <p class="subtitle is-6">
-                          {{ selectedRequest.adopterData.email }}
+                          marcos@gmail.com
                         </p>
                       </div>
                     </div>
@@ -285,9 +246,7 @@
                       </div>
                       <small
                         >Usuário do app há:
-                        {{
-                          calculateAge(selectedRequest.adopterData._createdAt)
-                        }}</small
+                        4 Meses</small
                       >
                     </div>
                   </div>
@@ -320,7 +279,7 @@ export default {
       progressType: "is-primary",
 
       myPetsAdoptData: [],
-      rate: 0,
+      rate: 4,
       modalProfile: false,
       modalRate: false,
       selectedRequest: {},
