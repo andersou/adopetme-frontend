@@ -34,7 +34,6 @@
                   :key="request.id"
                 >
 
-                <!--{{request}}-->
                   <!-- Pet-card (separar em componente) -->
                   <div class="card">
                     <div class="card-content">
@@ -339,8 +338,7 @@ export default {
       return rating;
     },
     approve(id) {
-      approveAdoption(id)
-        .then(() => {
+
           this.$buefy.dialog.confirm({
             title: "Confirmar adoção",
             message: `Você tem certeza que deseja confirmar a adoção? 
@@ -352,10 +350,10 @@ export default {
             type: "is-success",
             onConfirm: () => {
               this.$buefy.toast.open("Adoção aprovada com sucesso!");
+              approveAdoption(id).then(() => {        });
               this.updateRequests();
             },
-          });
-        })
+          })
         .catch(() => {
           this.$buefy.toast.open({
             message:
@@ -363,10 +361,9 @@ export default {
             type: "is-danger",
           });
         });
+
     },
     rejection(id) {
-      rejectAdoption(id)
-        .then(() => {
           this.$buefy.dialog.confirm({
             title: "Rejeitar pedido de adoção",
             message: `Você tem certeza que deseja rejeitar a adoção? 
@@ -378,10 +375,10 @@ export default {
             type: "is-danger",
             onConfirm: () => {
               this.$buefy.toast.open("Adoção rejeitada com sucesso!");
+              rejectAdoption(id).then(() => {        });
               this.updateRequests();
             },
-          });
-        })
+          })
         .catch(() => {
           this.$buefy.toast.open({
             message:
@@ -389,6 +386,7 @@ export default {
             type: "is-danger",
           });
         });
+        
     },
     updateRequests() {
       requestedProtectorAdoptions().then((res) => {
