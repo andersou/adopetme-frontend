@@ -12,7 +12,6 @@
 
           <div v-if="myPetsAdoptData.length" class="columns is-multiline tuble mt-4">
             <div v-for="pet in myPetsAdoptData" class="column is-half" :key="pet.id">
-              {{pet}}
               <!-- Pet-card (separar em componente) -->
               <div class="card">
                 <div class="card-image">
