@@ -121,8 +121,7 @@
                                 "
                                 :rounded="true"
                               ></b-image>
-                              <b-rate
-                              v-if="request.approvedAt == null"
+                              <b-rate 
                                 v-model="
                                   request.adopterData.adopterRating.average
                                 "
@@ -131,17 +130,6 @@
                                 class="is-justify-content-center"
                               ></b-rate>
 
-                              <b-rate
-                              v-else
-                                v-model="
-                                  rate
-                                "
-                                @click="rating(request.id, rate, '')"
-
-                                enable
-                                icon="paw"
-                                class="is-justify-content-center"
-                              ></b-rate>
                             </span>
                           </p>
                           <p class="title is-4">
@@ -152,29 +140,117 @@
                           </p>
                         </div>
                       </div>
-
                       <div class="content center">
                         <b-button type="is-primary is-uppercase"
-                          >Abrir conversa
+                        @click="isCardModalActive = true"
+                          >Dados do Adotante
                         </b-button>
-
+                        <b-button type="is-warning is-uppercase"
+                          v-if="request.approvedAt"
+                          class="ml-2"
+                          @click="isCardModalActive = true"
+                          >Avaliar
+                        </b-button>
                         <b-button
+                          v-if="!request.approvedAt && !request.cancelledAt"
                           class="ml-2"
                           @click="approve(request.id)"
                           type="is-primary"
                         >
                           <b-icon icon="check"></b-icon>
                         </b-button>
-
                         <b-button
+                          v-else
+                          class="ml-2"
+                          disabled
+                          type="is-primary"
+                        >
+                          <b-icon icon="check"></b-icon>
+                        </b-button>
+                        <b-button
+                          v-if="!request.approvedAt && !request.cancelledAt"
                           class="ml-2"
                           @click="rejection(request.id)"
                           type="is-danger"
                         >
                           <b-icon icon="close"></b-icon>
                         </b-button>
+                        <b-button
+                          v-else
+                          class="ml-2"
+                          disabled
+                          type="is-danger"
+                        >
+                          <b-icon icon="close"></b-icon>
+                        </b-button>
                       </div>
                     </div>
+                              <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+                         <figure class="image">
+                                <b-image
+                          class="image"
+                          :src="
+                                  processUserLink(request.adopterData.photoUri)
+                                "
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                                </b-image>
+                    </figure>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <b-image
+                          class="image"
+                          :src="
+                                  processUserLink(request.adopterData.photoUri)
+                                "
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                                </b-image>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{ request.adopterData.firstName }}
+                            {{ request.adopterData.lastName }}</p>
+                            <p class="subtitle is-6">{{ request.adopterData.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Idade</h1>
+                          <p> {{calculateAge(request.adopterData._birthdayDate)}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Telefone</h1>
+                          <p> {{request.adopterData.phone}}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Nota</h1>
+                          <b-rate
+                                v-model="
+                                  request.adopterData.adopterRating.average
+                                "
+                                disabled
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">Endereço</h1>
+                          <p> {{request.adopterData.address}}</p>
+                        </div>
+                      </div>
+                      <small>Usuário do app há: {{calculateAge(request.adopterData._createdAt)}}</small>
+                    </div>
+                </div>
+            </div>
+        </b-modal>
                     <!-- Fim conteúdo do card -->
                   </div>
                   <!-- Fim card secundário (pets) -->
@@ -247,6 +323,7 @@ export default {
   data() {
     return {
       requestsData: [],
+      isCardModalActive: false,
       showCancelled: false,
       rate: 0,
     };
