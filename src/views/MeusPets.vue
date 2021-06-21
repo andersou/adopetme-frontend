@@ -155,8 +155,9 @@ export default {
     },
 
       petDelete(id){
-        deletePet(id);
-        this.loadMyPets();
+        deletePet(id).then(() => {
+          this.loadMyPets();
+        });
     }
 
   },
