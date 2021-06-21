@@ -441,8 +441,7 @@ export default {
           type: "is-success",
           onConfirm: () => {
             this.$buefy.toast.open("Adoção aprovada com sucesso!");
-            approveAdoption(id).then(() => {});
-            this.updateRequests();
+            approveAdoption(id).then(() => {this.updateRequests();});
           },
         })
         .catch(() => {
@@ -466,8 +465,7 @@ export default {
           type: "is-danger",
           onConfirm: () => {
             this.$buefy.toast.open("Adoção rejeitada com sucesso!");
-            rejectAdoption(id).then(() => {});
-            this.updateRequests();
+            rejectAdoption(id).then(() => {this.updateRequests();});
           },
         })
         .catch(() => {
