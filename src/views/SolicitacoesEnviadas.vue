@@ -230,10 +230,7 @@ export default {
     ...mapState(["user"]),
   },
   mounted() {
-    requestedAdopterAdoptions().then((res) => {
-      this.requestsData = res.data;
-      //console.log(this.requestsData);
-    });
+    this.refresh()
   },
   data() {
     return {
@@ -243,12 +240,11 @@ export default {
   },
   methods: {
     petDelete(id){
-        deleteAdoptionRequest(id).then((req) => {
-          req.data(id);
-          this.Refresh();
+        deleteAdoptionRequest(id).then(() => {
+          this.refresh();
         });
     },
-  Refresh(){
+  refresh(){
     requestedAdopterAdoptions().then((res) => {
       this.requestsData = res.data;
       //console.log(this.requestsData);
