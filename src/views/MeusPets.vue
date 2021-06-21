@@ -10,8 +10,8 @@
             Aqui estão todos os seus pets!
           </h1>
 
-          <div v-if="myPetsData.length" class="columns is-multiline tuble mt-4">
-            <div v-for="pet in myPetsData" class="column is-half" :key="pet.id">
+          <div v-if="myPetsData.length" class="columns is-multiline tuble mt-4" >
+            <div v-for="pet in myPetsData" class="column is-half " :key="pet.id">
               <!-- Pet-card (separar em componente) -->
               <div class="card">
                  <router-link :to="'/detalhes/' + pet.id">
@@ -24,8 +24,9 @@
                   >
                   </b-image>
                 </div>
-                                            </router-link>
-                <div class="card-content">
+              </router-link>
+                <div class="card-content" >
+                   <b-tag v-if="pet.isAdopted" class="ml-1" type="is-success">Pet adotado</b-tag>
                   <div class="media">
                     <div class="media-left is-relative">
                       <b-icon
@@ -78,11 +79,13 @@
                       tag="router-link"
                       :to="'/editar-pet/' + pet.id"
                       type="is-primary is-uppercase"
+                      :disabled="pet.isAdopted"
                       >Editar Pet
                     </b-button>
                     <b-button
                       class="ml-2"
                       @click="petDelete(pet.id)"
+                      :disabled="pet.isAdopted"
                       type="is-danger"
                     >
                       <b-icon icon="close"></b-icon>
@@ -170,6 +173,7 @@ main {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
 .sex-icon {
   position: absolute;
   top: 1.5rem;
