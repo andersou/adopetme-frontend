@@ -108,7 +108,7 @@
                 <h1 class="is-size-4">
                   Você ainda não tem nenhum Pet!
                 </h1>
-                <img src="../../src/assets/no-pet.svg" alt="" srcset="" />
+                <img src="../../src/assets/no-mypet.svg" alt="" srcset="" />
                 <b-button
                   class="mr-4"
                   tag="router-link"
