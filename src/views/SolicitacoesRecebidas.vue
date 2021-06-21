@@ -144,7 +144,8 @@
                           >Dados do Adotante
                         </b-button>
                         <b-button
-                          type="is-warning is-uppercase has-text-white"
+                          v-if="request.approvedAt"
+                          type="is-warning is-uppercase"
                           :disabled="request.hasRated"
                           class="ml-2"
                           @click="
