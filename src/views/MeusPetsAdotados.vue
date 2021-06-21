@@ -77,7 +77,7 @@
                         <b-button
                           type="is-primary is-uppercase"
                           @click="
-                            selectedRequest = request;
+                            selectedRequest = pet;
                             modalProfile = true;
                           "
                           >Dados do Protetor
@@ -138,23 +138,44 @@
                 v-model="modalProfile"
                 :width="640"
                 scroll="keep"
+                v-if="selectedRequest.petData && selectedRequest.petData.protectorData"
               >
                 <div class="card">
                   <figure class="image">
+                                        <b-image
+                      class="image"
+                      :src="
+                        processUserLink(selectedRequest.petData.protectorData.photoUri)
+                      "
+                      src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                      ratio="4by3"
+                    >
+                    </b-image>
                   </figure>
                   <div class="card-content">
                     <div class="media">
                       <div class="media-left">
                         <figure class="image is-48x48">
+                           <b-image
+                            class="image"
+                            :src="
+                              processUserLink(
+                                selectedRequest.petData.protectorData.photoUri
+                              )
+                            "
+                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                            ratio="4by3"
+                          >
+                          </b-image>
                         </figure>
                       </div>
                       <div class="media-content">
                         <p class="title is-4">
-                          Marcos
-                          Silva
+                          {{selectedRequest.petData.protectorData.firstName}}
+                          {{selectedRequest.petData.protectorData.lastName}}
                         </p>
                         <p class="subtitle is-6">
-                          marcos@gmail.com
+                          {{selectedRequest.petData.protectorData.email}}
                         </p>
                       </div>
                     </div>
@@ -166,14 +187,16 @@
                             Idade
                           </h1>
                           <p>
-                            25 anos
+                            {{
+                                 calculateAge(selectedRequest.petData.protectorData._birthdayDate)
+                            }}
                           </p>
                         </div>
                         <div class="column">
                           <h1 class="is-size-4 has-text-weight-bold">
                             Telefone
                           </h1>
-                          <p>9999-9999</p>
+                          <p> {{selectedRequest.petData.protectorData.number}}</p>
                         </div>
                         <div class="column">
                           <h1 class="is-size-4 has-text-weight-bold">
@@ -181,7 +204,7 @@
                           </h1>
                           <b-rate
                             v-model="
-                              rate
+                              selectedRequest.petData.protectorData.protectorRating.average
                             "
                             disabled
                             icon="paw"
@@ -192,12 +215,12 @@
                           <h1 class="is-size-4 has-text-weight-bold">
                             Endereço
                           </h1>
-                          <p>Rua barroso 13</p>
+                          <p>{{selectedRequest.petData.protectorData.address}}</p>
                         </div>
                       </div>
                       <small
                         >Usuário do app há:
-                        2 Meses</small
+                        {{calculateAge(selectedRequest.petData.protectorData._createdAt)}}</small
                       >
                     </div>
                   </div>
@@ -210,21 +233,33 @@
                 v-model="modalRate"
                 :width="640"
                 scroll="keep"
+                v-if="selectedRequest.petData && selectedRequest.petData.protectorData"
               >
                 <div class="card">
                   <div class="card-content">
                     <div class="media">
                       <div class="media-left">
                         <figure class="image is-48x48">
+                          <b-image
+                            class="image"
+                            :src="
+                              processUserLink(
+                                selectedRequest.petData.protectorData.photoUri
+                              )
+                            "
+                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                            ratio="4by3"
+                          >
+                          </b-image>
                         </figure>
                       </div>
                       <div class="media-content">
                         <p class="title is-4">
-                          Marcos
-                          Silva
+                          {{selectedRequest.petData.protectorData.firstName}}
+                          {{selectedRequest.petData.protectorData.lastName}}
                         </p>
                         <p class="subtitle is-6">
-                          marcos@gmail.com
+                           {{selectedRequest.petData.protectorData.email}}
                         </p>
                       </div>
                     </div>
@@ -245,7 +280,7 @@
                       </div>
                       <small
                         >Usuário do app há:
-                        4 Meses</small
+                        {{calculateAge(selectedRequest.petData.protectorData._createdAt)}}</small
                       >
                     </div>
                   </div>
@@ -306,11 +341,6 @@ export default {
           });
         });
     },
-
-  deleteAdocao(idPet){
-    //para cancelar a adocao quando o pet ja foi adotado
-    console.log(idPet);
-  },
 
 
   },
