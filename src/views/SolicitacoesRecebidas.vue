@@ -147,7 +147,7 @@
                         <b-button type="is-warning is-uppercase"
                           v-if="request.approvedAt"
                           class="ml-2"
-                          @click="isCardModalActive = true"
+                          @click="isCardModal = true"
                           >Avaliar
                         </b-button>
                         <b-button
@@ -250,6 +250,48 @@
                 </div>
             </div>
         </b-modal>
+          <b-modal v-model="isCardModal" :width="640" scroll="keep">
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <b-image
+                          class="image"
+                          :src="
+                                  processUserLink(request.adopterData.photoUri)
+                                "
+                          src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                          ratio="4by3"
+                        >
+                                </b-image>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{ request.adopterData.firstName }}
+                            {{ request.adopterData.lastName }}</p>
+                            <p class="subtitle is-6">{{ request.adopterData.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold center">Nota</h1>
+                          <b-rate
+                                v-model="
+                                  request.adopterData.adopterRating.average
+                                "
+                                icon="paw"
+                                class="is-justify-content-center"
+                              ></b-rate>
+                        </div>
+                      </div>
+                      <small>Usuário do app há: {{calculateAge(request.adopterData._createdAt)}}</small>
+                    </div>
+                </div>
+            </div>
+        </b-modal>
                     <!-- Fim conteúdo do card -->
                   </div>
                   <!-- Fim card secundário (pets) -->
@@ -323,6 +365,7 @@ export default {
     return {
       requestsData: [],
       isCardModalActive: false,
+      isCardModal: false,
       showCancelled: false,
       rate: 0,
     };
@@ -331,12 +374,6 @@ export default {
     this.updateRequests();
   },
   methods: {
-    rateTransform(rating) {
-      if (rating == null) {
-        rating = 0.0;
-      }
-      return rating;
-    },
     approve(id) {
 
           this.$buefy.dialog.confirm({
