@@ -54,7 +54,10 @@
                     calculateAge(pet._birthdayDate)
                   }}</span>
                 </p>
-                <p class="subtitle is-6 mb-1">{{pet.protectorData.firstName}} {{pet.protectorData.lastName}}</p>
+                <p class="subtitle is-6 mb-1">
+                  {{ pet.protectorData.firstName }}
+                  {{ pet.protectorData.lastName }}
+                </p>
                 <p class="subtitle is-6 mb-1">
                   {{ petSizeTransform(pet._size) }}
                 </p>
@@ -67,6 +70,19 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container my-2 ">
+      <b-pagination
+        :total="petsData.itemsCount"
+        :per-page="itemsPerPage"
+        v-model="currentPage"
+        aria-next-label="Proxima pagina"
+        aria-previous-label="Pagina anterior"
+        aria-page-label="Pagina"
+        aria-current-label="Pagina atual"
+        @change="loadPets"
+      >
+      </b-pagination>
     </div>
   </div>
 </template>
