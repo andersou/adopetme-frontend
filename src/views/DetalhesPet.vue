@@ -44,7 +44,7 @@
                <p class="is-size-5">Nota do Usuário
               <!-- <p><b-icon icon="map-marker-outline" size="is-small"></b-icon> {{petData.protector.city}}</p> -->
               <b-rate
-                v-model="rate"
+                v-model="petData.protectorData.protectorRating.average"
                 icon="paw"
                 disabled
                 class="is-justify-content-center"
