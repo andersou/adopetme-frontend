@@ -110,7 +110,7 @@
                 <b-button
                   class="mr-4"
                   tag="router-link"
-                  :to="{ path: '/adote-pet' }"
+                  :to="{ path: '/cadastro-pet' }"
                   type="is-primary is-uppercase"
                 >
                   Adicionar Pet
