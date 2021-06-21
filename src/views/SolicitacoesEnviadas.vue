@@ -48,6 +48,7 @@
                     </router-link>
 
                     <div class="card-content">
+                      <b-tag v-if="request.approvedAt != null" class="ml-1" type="is-warning">Solicitação respondida</b-tag>
                       <div class="media">
                         <div class="media-left is-relative">
                           <b-icon
@@ -105,6 +106,7 @@
                         <b-button
                           class="ml-2"
                           @click="petDelete(request.id)"
+                          :disabled="request.approvedAt"
                           type="is-danger is-uppercase"
                           ><b-icon icon="close"></b-icon>
                         </b-button>
