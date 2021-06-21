@@ -12,6 +12,7 @@
 
           <div v-if="myPetsAdoptData.length" class="columns is-multiline tuble mt-4">
             <div v-for="pet in myPetsAdoptData" class="column is-half" :key="pet.id">
+              {{pet}}
               <!-- Pet-card (separar em componente) -->
               <div class="card">
                 <div class="card-image">
@@ -59,18 +60,6 @@
                         {{ petSizeTransform(pet.petData._size) }}
                       </p>
                     </div>
-                    
-                                <b-rate
-                                v-model="
-                                  rate
-                                "
-
-                                @click="rating(pet.id, rate, '')"
-
-                                enabled
-                                icon="paw"
-                                class="is-justify-content-center"
-                              ></b-rate>
 
                     <!-- Essa é a pagina dos pets que o usuário colocou para a adoção
                    como ele vai avaliar uma adoção que é dele?????
@@ -85,13 +74,38 @@
                   </div>
 
                   <div class="content center">
-                    <b-button
-                      class="ml-2"
-                      @click="deleteAdocao(pet.id)"
-                      type="is-danger"
-                    >
-                      Cancelar adoção
-                    </b-button>
+
+                        <b-button
+                          type="is-primary is-uppercase"
+                          @click="
+                            selectedRequest = request;
+                            modalProfile = true;
+                          "
+                          >Dados do Protetor
+                        </b-button>
+
+
+                        <b-button
+                          type="is-warning is-uppercase has-text-white"
+                          :disabled="pet.hasRated"
+                          class="ml-2"
+                          @click="
+                            selectedRequest = pet;
+                            modalRate = true;
+                          "
+                          :icon-left="pet.hasRated ? 'paw' : ''"
+                        >
+                          <span>
+                            {{
+                              pet.hasRated
+                                ? pet.hasRated.score
+                                : "Avaliar Adoção"
+                            }}
+                          </span>
+                        </b-button>
+
+
+
                   </div>
                 </div>
                 <!-- Fim conteúdo do card -->
@@ -120,6 +134,166 @@
               </div>
             </section>
           </div>
+            <!-- Modal dos dados -->
+              <b-modal
+                v-model="modalProfile"
+                :width="640"
+                scroll="keep"
+                v-if="selectedRequest.adopterData"
+              >
+                <div class="card">
+                  <figure class="image">
+                    <b-image
+                      class="image"
+                      :src="
+                        processUserLink(selectedRequest.adopterData.photoUri)
+                      "
+                      src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                      ratio="4by3"
+                    >
+                    </b-image>
+                  </figure>
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-48x48">
+                          <b-image
+                            class="image"
+                            :src="
+                              processUserLink(
+                                selectedRequest.adopterData.photoUri
+                              )
+                            "
+                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                            ratio="4by3"
+                          >
+                          </b-image>
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-4">
+                          {{ selectedRequest.adopterData.firstName }}
+                          {{ selectedRequest.adopterData.lastName }}
+                        </p>
+                        <p class="subtitle is-6">
+                          {{ selectedRequest.adopterData.email }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">
+                            Idade
+                          </h1>
+                          <p>
+                            {{
+                              calculateAge(
+                                selectedRequest.adopterData._birthdayDate
+                              )
+                            }}
+                          </p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">
+                            Telefone
+                          </h1>
+                          <p>{{ selectedRequest.adopterData.phone }}</p>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">
+                            Nota
+                          </h1>
+                          <b-rate
+                            v-model="
+                              selectedRequest.adopterData.adopterRating.average
+                            "
+                            disabled
+                            icon="paw"
+                            class="is-justify-content-center"
+                          ></b-rate>
+                        </div>
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold">
+                            Endereço
+                          </h1>
+                          <p>{{ selectedRequest.adopterData.address }}</p>
+                        </div>
+                      </div>
+                      <small
+                        >Usuário do app há:
+                        {{
+                          calculateAge(selectedRequest.adopterData._createdAt)
+                        }}</small
+                      >
+                    </div>
+                  </div>
+                </div>
+              </b-modal>
+
+
+            <!-- Modal da avaliacao-->
+              <b-modal
+                v-if="selectedRequest.adopterData"
+                v-model="modalRate"
+                :width="640"
+                scroll="keep"
+              >
+                <div class="card">
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-48x48">
+                          <b-image
+                            class="image"
+                            :src="
+                              processUserLink(
+                                selectedRequest.adopterData.photoUri
+                              )
+                            "
+                            src-fallback="https://via.placeholder.com/468x350?text=Foto+não+disponível"
+                            ratio="4by3"
+                          >
+                          </b-image>
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-4">
+                          {{ selectedRequest.adopterData.firstName }}
+                          {{ selectedRequest.adopterData.lastName }}
+                        </p>
+                        <p class="subtitle is-6">
+                          {{ selectedRequest.adopterData.email }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="columns">
+                        <div class="column">
+                          <h1 class="is-size-4 has-text-weight-bold center">
+                            Nota
+                          </h1>
+                          <b-rate
+                            v-model="rate"
+                            icon="paw"
+                            class="is-justify-content-center"
+                            @change="doRate"
+                          ></b-rate>
+                        </div>
+                      </div>
+                      <small
+                        >Usuário do app há:
+                        {{
+                          calculateAge(selectedRequest.adopterData._createdAt)
+                        }}</small
+                      >
+                    </div>
+                  </div>
+                </div>
+              </b-modal>
+
         </div>
       </div>
     </div>
@@ -147,6 +321,9 @@ export default {
 
       myPetsAdoptData: [],
       rate: 0,
+      modalProfile: false,
+      modalRate: false,
+      selectedRequest: {},
     };
   },
   methods: {
@@ -157,10 +334,19 @@ export default {
       });
     },
 
-  rating(adoptionId, score, message){
-      rateAdoption(adoptionId, score, message) .then((req) => {
-        req.data(adoptionId, score, message);
-      })
+    doRate(val) {
+      rateAdoption(this.selectedRequest.id, val, "")
+        .then(() => {
+          this.loadMyAdoptPets();
+          this.$buefy.toast.open("Avaliação recebida com sucesso!");
+          this.modalRate = false;
+        })
+        .catch(() => {
+          this.$buefy.toast.open({
+            message: "Erro ao processar avaliação",
+            type: "is-danger",
+          });
+        });
     },
 
   deleteAdocao(idPet){
