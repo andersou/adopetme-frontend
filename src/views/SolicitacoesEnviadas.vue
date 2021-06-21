@@ -48,10 +48,12 @@
                     </router-link>
 
                     <div class="card-content">
-                     
-                      <b-tag v-if="request.approvedAt != null || request.cancelledAt != null" class="ml-1" type="is-warning">
-                        Solicitação respondida: <b-icon v-if="request.approvedAt != null" icon="check"></b-icon> <b-icon v-else icon="close"></b-icon>
-                        </b-tag>
+                      <b-tag v-if="request.approvedAt == null && request.cancelledAt == null" class="ml-1" type="is-warning">
+                      Solicitação pendente</b-tag>
+                      <b-tag v-if="request.approvedAt != null && request.cancelledAt == null" class="ml-1" type="is-success">
+                      Solicitação aprovada</b-tag>
+                      <b-tag v-if="request.approvedAt == null && request.cancelledAt != null" class="ml-1" type="is-danger">
+                      Solicitação rejeitada</b-tag>
                       <div class="media">
                         <div class="media-left is-relative">
                           <b-icon
